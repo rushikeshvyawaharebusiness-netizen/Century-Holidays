@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import storyImage from '../assets/images/spiti.png';
+
+const values = [
+  {
+    icon: 'ph-map-trifold',
+    title: 'Locally Rooted',
+    description: 'Real on-ground partners across India and abroad, not just a booking engine.',
+  },
+  {
+    icon: 'ph-sliders-horizontal',
+    title: 'Fully Customized',
+    description: 'Every itinerary is shaped around your pace, budget, and travel style.',
+  },
+  {
+    icon: 'ph-headset',
+    title: 'End-to-End Support',
+    description: 'From the first enquiry to the ride home, one team stays accountable.',
+  },
+];
+---
+
+<BaseLayout
+  title="About Century Holidays - Your Trusted Travel Partner for Custom Tours"
+  description="Discover the story of Century Holidays. We are a premier travel agency dedicated to creating unforgettable travel memories through customized tours and adventurous treks."
+  path="/about.html"
+>
+  <main id="main-content">
+    <PageHero
+      title="About"
+      highlight="Us"
+      subtitle="Discover the passion behind Century Holidays and how we architect the adventures of a lifetime."
+    />
+
+    <section class="py-20 sm:py-24">
+      <div class="container-page grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div data-reveal class="relative">
+          <div class="aspect-[4/5] overflow-hidden rounded-3xl shadow-panel">
+            <Image
+              src={storyImage}
+              alt="Century Holidays travelers overlooking the Spiti valley"
+              class="h-full w-full object-cover"
+              widths={[480, 800]}
+              sizes="(min-width: 1024px) 480px, 90vw"
+            />
+          </div>
+          <div class="absolute -bottom-6 -right-6 hidden max-w-[220px] rounded-2xl border border-border bg-surface p-5 shadow-panel sm:block">
+            <p class="font-display text-lg leading-snug text-ink">
+              "We architect the adventures of a lifetime."
+            </p>
+          </div>
+        </div>
+
+        <div data-reveal>
+          <span class="mb-2 block text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Our Story</span>
+          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">
+            Your Journey, Our Passion
+          </h2>
+          <p class="mt-6 text-lg leading-relaxed text-text-muted">
+            At Century Holidays, we believe that travel isn't just about the destination—it's about the stories you
+            bring home. With a commitment to excellence and a passion for exploration, we specialize in crafting
+            seamless travel experiences across the diverse landscapes of India and the most iconic destinations
+            worldwide.
+          </p>
+          <p class="mt-4 text-lg leading-relaxed text-text-muted">
+            Whether you are looking for the camaraderie of a group tour, the intimacy of a curated honeymoon, or a
+            fully customized itinerary designed specifically for your pace, we handle the details so you can focus on
+            the memories.
+          </p>
+          <p class="mt-4 text-lg leading-relaxed text-text-muted">
+            Based out of Nashik, we've built a network of on-ground partners across Himachal, Uttarakhand, the
+            Northeast and international favorites like Dubai, Bali and Thailand — so every itinerary we hand you has
+            already been walked, tested and refined by someone on our team.
+          </p>
+
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a
+              href="/book.html"
+              class="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-base font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
+              Start Planning <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a
+              href="/contact.html"
+              class="inline-flex items-center gap-2 rounded-full border-2 border-border px-7 py-3.5 text-base font-bold text-ink transition-colors hover:border-brand hover:bg-brand"
+            >
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-border bg-surface-muted py-16 sm:py-20">
+      <div class="container-page">
+        <div data-reveal class="grid gap-10 sm:grid-cols-3">
+          {values.map((value, i) => (
+            <div class:list={['flex flex-col gap-4', i > 0 && 'sm:border-l sm:border-border sm:pl-10']}>
+              <i class={`ph-bold ${value.icon} text-3xl text-ink`} aria-hidden="true"></i>
+              <h3 class="font-display text-xl text-ink">{value.title}</h3>
+              <p class="text-text-muted">{value.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 sm:py-24">
+      <div class="container-page">
+        <div data-reveal class="mb-14 max-w-2xl">
+          <span class="mb-2 block text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">What We Do</span>
+          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl">What We Specialize In</h2>
+          <p class="mt-4 text-lg text-text-muted">
+            From snow-clad Himalayan passes to tropical honeymoons, almost every trip we run falls into one of three
+            journeys we know inside out.
+          </p>
+        </div>
+
+        <div data-reveal class="grid gap-10 sm:grid-cols-3">
+          <div class="flex flex-col gap-4">
+            <i class="ph-bold ph-mountains text-3xl text-ink" aria-hidden="true"></i>
+            <h3 class="font-display text-xl text-ink">Mountains &amp; Adventure</h3>
+            <p class="text-text-muted">
+              Spiti, Himachal and Meghalaya treks planned around real weather windows, safe altitudes and local
+              guides — not just pretty photos.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4 sm:border-l sm:border-border sm:pl-10">
+            <i class="ph-bold ph-flower-lotus text-3xl text-ink" aria-hidden="true"></i>
+            <h3 class="font-display text-xl text-ink">Spiritual Journeys</h3>
+            <p class="text-text-muted">
+              Char Dham and Do Dham yatras scheduled around darshan timings, road conditions and pilgrim comfort —
+              as much as convenience.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4 sm:border-l sm:border-border sm:pl-10">
+            <i class="ph-bold ph-airplane-tilt text-3xl text-ink" aria-hidden="true"></i>
+            <h3 class="font-display text-xl text-ink">International Getaways</h3>
+            <p class="text-text-muted">
+              Dubai, Bali and Thailand packages built for honeymooners, families and friend groups who want the
+              logistics handled and the experience elevated.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

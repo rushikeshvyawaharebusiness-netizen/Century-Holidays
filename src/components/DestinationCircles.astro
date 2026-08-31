@@ -1,0 +1,136 @@
+---
+import { Image } from 'astro:assets';
+
+// 16 Authentic Real Travel Photographs (0% AI)
+import imgSriLanka from '../assets/images/card-srilanka.jpg';
+import imgVietnam from '../assets/images/card-vietnam.jpg';
+import imgBali from '../assets/images/card-bali.jpg';
+import imgThailand from '../assets/images/card-thailand.jpg';
+import imgEurope from '../assets/images/circle-europe.jpg';
+import imgBhutan from '../assets/images/card-bhutan.jpg';
+import imgJapan from '../assets/images/circle-japan.jpg';
+import imgNepal from '../assets/images/circle-nepal.jpg';
+
+import imgMeghalaya from '../assets/images/circle-meghalaya.jpg';
+import imgSpiti from '../assets/images/circle-spiti.jpg';
+import imgLadakh from '../assets/images/circle-ladakh.jpg';
+import imgTawang from '../assets/images/circle-tawang.jpg';
+import imgAndaman from '../assets/images/circle-andaman.jpg';
+import imgHimachal from '../assets/images/speciality-mountains.jpg';
+import imgManali from '../assets/images/circle-manali.jpg';
+import imgKerala from '../assets/images/circle-kerala.jpg';
+
+const row1 = [
+  { name: 'Sri Lanka', image: imgSriLanka, link: '#destinations' },
+  { name: 'Vietnam', image: imgVietnam, link: '#destinations' },
+  { name: 'Bali', image: imgBali, link: '#destinations' },
+  { name: 'Thailand', image: imgThailand, link: '#destinations' },
+  { name: 'Europe', image: imgEurope, link: '#destinations' },
+  { name: 'Bhutan', image: imgBhutan, link: '#destinations' },
+  { name: 'Japan', image: imgJapan, link: '#destinations' },
+  { name: 'Nepal', image: imgNepal, link: '#destinations' },
+];
+
+const row2 = [
+  { name: 'Meghalaya', image: imgMeghalaya, link: '#destinations' },
+  { name: 'Spiti Valley', image: imgSpiti, link: '#destinations' },
+  { name: 'Ladakh', image: imgLadakh, link: '#destinations' },
+  { name: 'Tawang', image: imgTawang, link: '#destinations' },
+  { name: 'Andaman', image: imgAndaman, link: '#destinations' },
+  { name: 'Himachal Pradesh', image: imgHimachal, link: '#destinations' },
+  { name: 'Manali', image: imgManali, link: '#destinations' },
+  { name: 'Kerala', image: imgKerala, link: '#destinations' },
+];
+---
+
+<section
+  id="explore-quick-destinations"
+  class="relative overflow-hidden border-t border-border bg-surface py-12 sm:py-16 lg:py-20"
+  aria-label="Explore Destinations Quick Browse"
+>
+  <div class="container-page">
+    {/* 2-Row Horizontal Scroll / Grid Container with Large Circles Matching Demo Image */}
+    <div
+      class="dest-scroll-container overflow-x-auto pb-6 pt-2 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth"
+      tabindex="0"
+      aria-label="Scrollable destination list"
+    >
+      <div class="flex flex-col gap-8 sm:gap-10 md:gap-12 min-w-max mx-auto justify-center">
+        {/* Row 1: International & Cross-Border Escapes */}
+        <div class="flex items-center justify-center gap-6 sm:gap-8 md:gap-9 lg:gap-10">
+          {row1.map((item) => (
+            <a
+              href={item.link}
+              class="group flex flex-col items-center gap-3 shrink-0 focus-visible:outline-none"
+              aria-label={`Explore ${item.name} travel packages`}
+            >
+              {/* Large Circular Avatar Container */}
+              <div class="relative h-28 w-28 sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-[142px] lg:w-[142px] xl:h-[148px] xl:w-[148px] overflow-hidden rounded-full border-2 border-border/80 bg-surface-muted shadow-sm transition-all duration-300 ease-out group-hover:scale-108 group-hover:border-brand group-hover:shadow-card-hover">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  class="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-115"
+                  widths={[240, 360, 480]}
+                  sizes="(min-width: 1280px) 148px, (min-width: 1024px) 142px, (min-width: 768px) 144px, 128px"
+                  quality={92}
+                />
+                <div class="pointer-events-none absolute inset-0 rounded-full ring-1 ring-inset ring-black/10"></div>
+              </div>
+              {/* Destination Label */}
+              <span class="font-sans text-sm sm:text-base font-semibold text-ink transition-colors duration-200 group-hover:text-ink group-hover:font-bold tracking-tight text-center">
+                {item.name}
+              </span>
+            </a>
+          ))}
+        </div>
+
+        {/* Row 2: Domestic & Himalayan Adventures */}
+        <div class="flex items-center justify-center gap-6 sm:gap-8 md:gap-9 lg:gap-10">
+          {row2.map((item) => (
+            <a
+              href={item.link}
+              class="group flex flex-col items-center gap-3 shrink-0 focus-visible:outline-none"
+              aria-label={`Explore ${item.name} travel packages`}
+            >
+              {/* Large Circular Avatar Container */}
+              <div class="relative h-28 w-28 sm:h-32 sm:w-32 md:h-36 md:w-36 lg:h-[142px] lg:w-[142px] xl:h-[148px] xl:w-[148px] overflow-hidden rounded-full border-2 border-border/80 bg-surface-muted shadow-sm transition-all duration-300 ease-out group-hover:scale-108 group-hover:border-brand group-hover:shadow-card-hover">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  class="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-115"
+                  widths={[240, 360, 480]}
+                  sizes="(min-width: 1280px) 148px, (min-width: 1024px) 142px, (min-width: 768px) 144px, 128px"
+                  quality={92}
+                />
+                <div class="pointer-events-none absolute inset-0 rounded-full ring-1 ring-inset ring-black/10"></div>
+              </div>
+              {/* Destination Label */}
+              <span class="font-sans text-sm sm:text-base font-semibold text-ink transition-colors duration-200 group-hover:text-ink group-hover:font-bold tracking-tight text-center">
+                {item.name}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Centered scrollbar matching demo reference */
+  .dest-scroll-container::-webkit-scrollbar {
+    height: 5px;
+  }
+  .dest-scroll-container::-webkit-scrollbar-track {
+    background: rgba(21, 20, 15, 0.08);
+    border-radius: 9999px;
+    margin: 0 42%;
+  }
+  .dest-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(21, 20, 15, 0.45);
+    border-radius: 9999px;
+  }
+  .dest-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(21, 20, 15, 0.7);
+  }
+</style>

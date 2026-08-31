@@ -1,0 +1,31 @@
+---
+/* Instagram camera glyph stroked with the brand gradient. Inline SVG because the
+   gradient cannot be applied to a single-colour icon font glyph. */
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'h-4 w-4' } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="instagram-gradient" x1="0" y1="24" x2="24" y2="0">
+      <stop offset="0" stop-color="#FFDD55"></stop>
+      <stop offset="0.35" stop-color="#FF543E"></stop>
+      <stop offset="0.7" stop-color="#C837AB"></stop>
+      <stop offset="1" stop-color="#3771C8"></stop>
+    </linearGradient>
+  </defs>
+  <rect
+    x="2.4"
+    y="2.4"
+    width="19.2"
+    height="19.2"
+    rx="5.6"
+    fill="none"
+    stroke="url(#instagram-gradient)"
+    stroke-width="2.1"></rect>
+  <circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#instagram-gradient)" stroke-width="2.1"></circle>
+  <circle cx="17.4" cy="6.6" r="1.45" fill="url(#instagram-gradient)"></circle>
+</svg>

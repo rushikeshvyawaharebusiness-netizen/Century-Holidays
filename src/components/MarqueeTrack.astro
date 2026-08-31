@@ -1,0 +1,23 @@
+---
+interface Props {
+  reverse?: boolean;
+}
+
+const { reverse = false } = Astro.props;
+---
+
+<div data-reveal class="relative w-screen overflow-hidden py-4 ml-[calc(-50vw+50%)]">
+  <div
+    class:list={['marquee-row flex gap-8', reverse ? 'animate-marquee-reverse' : 'animate-marquee']}
+    style="animation-play-state: running;"
+  >
+    <div class="flex gap-8 pr-8"><slot /></div>
+    <div class="flex gap-8 pr-8" aria-hidden="true"><slot /></div>
+  </div>
+</div>
+
+<style>
+  .marquee-row:hover {
+    animation-play-state: paused;
+  }
+</style>

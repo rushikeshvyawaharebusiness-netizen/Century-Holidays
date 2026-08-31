@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import FormField from '../components/FormField.astro';
+import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from '../data/contact';
+
+const socialLinks = [
+  { icon: 'ph-fill ph-facebook-logo', label: 'Facebook' },
+  { icon: 'ph-fill ph-instagram-logo', label: 'Instagram' },
+  { icon: 'ph-fill ph-twitter-logo', label: 'Twitter' },
+  { icon: 'ph-fill ph-whatsapp-logo', label: 'WhatsApp' },
+];
+---
+
+<BaseLayout
+  title="Contact Century Holidays - Plan Your Adventure with Travel Experts"
+  description="Get in touch with Century Holidays for personalized travel itineraries, group tours, and expert travel advice. We are here to help you plan your next great adventure."
+  path="/contact.html"
+>
+  <main id="main-content">
+    <PageHero
+      title="Get in"
+      highlight="Touch"
+      subtitle="We are here to help you plan your next unforgettable journey. Reach out to our team of travel experts anytime."
+    />
+
+    <section class="relative z-20 -mt-16 pb-24">
+      <div class="container-page">
+        <div data-reveal class="grid overflow-hidden rounded-3xl border border-border shadow-panel lg:grid-cols-[1.3fr_1fr]">
+          <div class="relative overflow-hidden bg-ink p-10 text-text-inverse sm:p-16">
+            <div class="relative">
+              <h2 class="font-display text-3xl text-text-inverse">Contact Information</h2>
+              <p class="mt-3 max-w-sm text-text-inverse-muted">
+                We’re here to help you plan your next unforgettable journey. Reach out anytime.
+              </p>
+
+              <ul class="mt-12 flex flex-col gap-8">
+                <li class="flex items-start gap-5">
+                  <i class="ph-fill ph-map-pin-line mt-1 text-2xl text-brand" aria-hidden="true"></i>
+                  <div>
+                    <strong class="block font-display text-lg text-text-inverse">Visit Us</strong>
+                    <span class="text-text-inverse-muted">
+                      4th floor, Trinity Towers, near Jairam Glass, Tidke Colony, Nashik, Maharashtra 422002
+                    </span>
+                  </div>
+                </li>
+                <li class="flex items-start gap-5">
+                  <i class="ph-fill ph-phone-call mt-1 text-2xl text-brand" aria-hidden="true"></i>
+                  <div>
+                    <strong class="block font-display text-lg text-text-inverse">Call Us</strong>
+                    <a href={PHONE_HREF} class="tabular-nums text-text-inverse-muted transition-colors hover:text-brand">
+                      {PHONE_DISPLAY}
+                    </a>
+                  </div>
+                </li>
+                <li class="flex items-start gap-5">
+                  <i class="ph-fill ph-envelope-open mt-1 text-2xl text-brand" aria-hidden="true"></i>
+                  <div>
+                    <strong class="block font-display text-lg text-text-inverse">Email Us</strong>
+                    <a href={EMAIL_HREF} class="text-text-inverse-muted transition-colors hover:text-brand">
+                      {EMAIL}
+                    </a>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="mt-14 flex gap-3">
+                {socialLinks.map((s) => (
+                  <a
+                    href="#"
+                    aria-label={s.label}
+                    class="grid h-11 w-11 place-items-center rounded-full border border-text-inverse/15 bg-text-inverse/5 text-lg text-text-inverse transition-colors hover:bg-brand hover:text-ink"
+                  >
+                    <i class={s.icon} aria-hidden="true"></i>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-surface p-10 sm:p-16">
+            <h2 class="mb-10 font-display text-3xl text-ink">Send a Message</h2>
+            <form class="flex flex-col gap-6">
+              <div class="grid gap-6 sm:grid-cols-2">
+                <FormField icon="ph-user" label="Your Name" name="name" placeholder="John Doe" autocomplete="name" required />
+                <FormField icon="ph-phone" label="Phone Number" name="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required />
+              </div>
+              <FormField
+                icon="ph-envelope-simple"
+                label="Email Address"
+                name="email"
+                type="email"
+                placeholder="contact@centuryholidays.in"
+                autocomplete="email"
+                required
+              />
+              <FormField
+                as="textarea"
+                icon="ph-chat-text"
+                label="Your Message"
+                name="message"
+                placeholder="Tell us what you’re looking for…"
+                required
+              />
+              <button
+                type="submit"
+                class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-base font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+              >
+                Send Message <i class="ph-bold ph-paper-plane-right" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="leading-[0] grayscale-[20%]">
+      <iframe
+        src="https://maps.google.com/maps?q=Trinity%20Towers,%20near%20Jairam%20Glass,%20Tidke%20Colony,%20Nashik,%20Maharashtra%20422002&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        width="100%"
+        height="450"
+        style="border:0"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Century Holidays office location"
+      ></iframe>
+    </div>
+  </main>
+</BaseLayout>

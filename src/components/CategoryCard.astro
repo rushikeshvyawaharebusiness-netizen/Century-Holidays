@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  title: string;
+  description: string;
+}
+
+const { image, alt, title, description } = Astro.props;
+---
+
+<a href="#" class="group relative block aspect-[4/5] w-[280px] shrink-0 overflow-hidden rounded-2xl shadow-card sm:w-[320px]">
+  <Image
+    src={image}
+    alt={alt}
+    class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+    widths={[320, 640]}
+    sizes="320px"
+    loading="lazy"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
+  <div class="absolute inset-x-0 bottom-0 p-6">
+    <h3 class="translate-y-2 font-display text-xl text-text-inverse transition-transform duration-300 group-hover:translate-y-0 group-hover:text-brand">
+      {title}
+    </h3>
+    <p class="mt-2 translate-y-2 text-sm text-text-inverse-muted opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+      {description}
+    </p>
+  </div>
+</a>

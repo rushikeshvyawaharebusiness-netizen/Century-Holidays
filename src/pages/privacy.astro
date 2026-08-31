@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { EMAIL, PHONE_DISPLAY } from '../data/contact';
+---
+
+<BaseLayout
+  title="Privacy Policy | Century Holidays - Data Protection"
+  description="Read the Privacy Policy of Century Holidays. We are committed to protecting your data while creating memories for every Century."
+  path="/privacy.html"
+>
+  <main id="main-content">
+    <PageHero title="Privacy" highlight="Policy" subtitle="Last updated: March 2026" />
+
+    <section class="py-20 sm:py-24">
+      <div class="container-page">
+        <div data-reveal class="prose prose-lg mx-auto max-w-3xl rounded-3xl border border-border bg-surface p-10 shadow-panel sm:p-16 prose-headings:font-display prose-headings:text-ink prose-p:text-text-muted prose-li:text-text-muted prose-strong:text-ink">
+          <h2>1. Introduction</h2>
+          <p>
+            At Century Holidays, we recognize the importance of privacy and are committed to protecting your personal
+            data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you
+            visit our website, book travel services, or interact with us.
+          </p>
+
+          <h2>2. Information We Collect</h2>
+          <p>We may collect personal information that you provide directly to us, including but not limited to:</p>
+          <ul>
+            <li><strong>Identity Data:</strong> Full name, date of birth, gender, passport details, and nationality.</li>
+            <li><strong>Contact Data:</strong> Billing address, delivery address, email address, and telephone numbers.</li>
+            <li>
+              <strong>Financial Data:</strong> Bank account, payment card details, and billing information (processed
+              securely through our partners).
+            </li>
+            <li>
+              <strong>Transaction Data:</strong> Details about payments to and from you, and other details of products
+              and services you have purchased from us.
+            </li>
+          </ul>
+
+          <h2>3. How We Use Your Information</h2>
+          <p>We use the information we collect primarily to facilitate our services. This includes:</p>
+          <ul>
+            <li>Processing your travel bookings, reservations, and ticketing.</li>
+            <li>Communicating with you regarding your itinerary, updates, and emergency notifications.</li>
+            <li>Improving our website functionality and customer service experience.</li>
+            <li>Sending promotional marketing materials (only if you have opted in).</li>
+          </ul>
+
+          <h2>4. Data Sharing &amp; Third Parties</h2>
+          <p>
+            In order to fulfill your travel arrangements, we must share specific required personal data (such as your
+            name and passport details) with third-party service providers. This includes airlines, hotels, tour
+            operators, transport companies, and relevant government authorities (for visas and customs). We do not
+            sell, trade, or otherwise transfer your personally identifiable information to outside parties for their
+            independent marketing use.
+          </p>
+
+          <h2>5. Data Security</h2>
+          <p>
+            We implement a variety of industry-standard security measures to maintain the safety of your personal
+            information when you place an order or enter, submit, or access your personal information. However, no
+            absolute guarantee of security can be provided for data transmission over the Internet.
+          </p>
+
+          <h2>6. Your Rights</h2>
+          <p>
+            Depending on your location, you may have the right to request access to, correction of, or deletion of
+            your personal data. You may also have the right to object to the processing of your data or request data
+            portability. Please contact us to exercise these rights.
+          </p>
+
+          <h2>Contacting Us</h2>
+          <p>
+            If there are any questions regarding this privacy policy, you may contact us using the information
+            below:<br />
+            <strong>Email:</strong> {EMAIL}<br />
+            <strong>Phone:</strong> {PHONE_DISPLAY}
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

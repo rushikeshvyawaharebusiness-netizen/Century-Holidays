@@ -1,0 +1,263 @@
+import cardVietnam from '../assets/images/card-vietnam.jpg';
+import cardBhutan from '../assets/images/card-bhutan.jpg';
+import cardThailand from '../assets/images/card-thailand.jpg';
+import cardSriLanka from '../assets/images/card-srilanka.jpg';
+import cardDubai from '../assets/images/card-dubai.jpg';
+import cardBali from '../assets/images/card-bali.jpg';
+import cardPune from '../assets/images/card-pune.jpg';
+import cardMumbai from '../assets/images/card-mumbai.jpg';
+import himachal from '../assets/images/himachal.png';
+import spiti from '../assets/images/spiti.png';
+import meghalaya from '../assets/images/meghalaya.png';
+import dodham from '../assets/images/dodham.png';
+import chardham from '../assets/images/chardham.png';
+
+export interface Trip {
+  /** Stable id used in ?destination= links and the booking form's select. */
+  slug: string;
+  image: ImageMetadata;
+  alt: string;
+  name: string;
+  /** Compact uppercase label for cards, e.g. "VIETNAM". */
+  shortName: string;
+  /** Subtitle or secondary line, e.g. "ADVENTURE" or "Getaways From". */
+  subtitle?: string;
+  /** True for "Getaways From" cards where the subtitle sits ABOVE the destination name */
+  isGetaway?: boolean;
+  category: string;
+  /** 'domestic' | 'international' — drives the hero quick-picks and departures grouping. */
+  scope: 'domestic' | 'international';
+  duration: string;
+  location: string;
+  dateText: string;
+  moreDates: string;
+  price: string;
+  highlight: string;
+}
+
+/** 
+ * Primary showcase cards matching Image 2's authentic, non-AI aesthetic
+ * rendered with ultra-HD photography and razor-sharp typography.
+ */
+export const destinations: Trip[] = [
+  {
+    image: cardVietnam,
+    alt: 'Century Holidays - Vietnam Adventure Tour',
+    slug: 'vietnam',
+    shortName: 'VIETNAM',
+    subtitle: 'ADVENTURE',
+    name: 'Vietnam Adventure',
+    scope: 'international',
+    category: 'International Adventure',
+    duration: '6 Nights / 7 Days',
+    location: 'Hanoi & Ha Long Bay',
+    dateText: '12 Sep, 28 Sep',
+    moreDates: '+4',
+    price: '34,900',
+    highlight: 'Ancient pagodas, emerald waters of Ha Long Bay, lantern-lit alleys of Hoi An, and authentic Vietnamese culture.',
+  },
+  {
+    image: cardBhutan,
+    alt: 'Century Holidays - Bhutan Himalayan Kingdom Tour',
+    slug: 'bhutan',
+    shortName: 'BHUTAN',
+    subtitle: '',
+    name: 'Bhutan Expedition',
+    scope: 'international',
+    category: 'Himalayan Kingdom',
+    duration: '5 Nights / 6 Days',
+    location: 'Paro & Thimphu',
+    dateText: '18 Oct, 5 Nov',
+    moreDates: '+3',
+    price: '29,500',
+    highlight: 'Hike to the iconic Tiger’s Nest monastery, explore ancient dzongs, fluttering prayer flags, and peaceful valleys.',
+  },
+  {
+    image: cardThailand,
+    alt: 'Century Holidays - Thailand Adventure Tour',
+    slug: 'thailand',
+    shortName: 'THAILAND',
+    subtitle: 'ADVENTURE',
+    name: 'Thailand Adventure',
+    scope: 'international',
+    category: 'Island & City Adventure',
+    duration: '5 Nights / 6 Days',
+    location: 'Bangkok & Phuket',
+    dateText: '20 Sep, 15 Oct',
+    moreDates: '+5',
+    price: '32,500',
+    highlight: 'Wat Arun temple at golden hour, island-hopping through Phi Phi, street food in Bangkok, and turquoise Andaman waters.',
+  },
+  {
+    image: cardSriLanka,
+    alt: 'Century Holidays - Sri Lanka Adventure Tour',
+    slug: 'sri-lanka',
+    shortName: 'SRI LANKA',
+    subtitle: 'ADVENTURE',
+    name: 'Sri Lanka Adventure',
+    scope: 'international',
+    category: 'Tropical & Cultural Tour',
+    duration: '6 Nights / 7 Days',
+    location: 'Colombo & Kandy',
+    dateText: '5 Oct, 22 Oct',
+    moreDates: '+3',
+    price: '28,000',
+    highlight: 'Polonnaruwa ancient stone temples, Sigiriya lion rock fortress, lush tea plantations, and scenic southern beaches.',
+  },
+  {
+    image: cardDubai,
+    alt: 'Century Holidays - Dubai Luxury Adventure Tour',
+    slug: 'dubai',
+    shortName: 'DUBAI',
+    subtitle: 'Adventure',
+    name: 'Dubai Adventure',
+    scope: 'international',
+    category: 'Luxury & Desert Safari',
+    duration: '4 Nights / 5 Days',
+    location: 'Dubai, UAE',
+    dateText: '15 Oct, 2 Nov',
+    moreDates: '+6',
+    price: '45,900',
+    highlight: 'Desert dune bashing, Atlantis The Palm luxury stays, Dubai Marina yacht cruises, and glittering skyline views.',
+  },
+  {
+    image: cardBali,
+    alt: 'Century Holidays - Bali Tropical Adventure Tour',
+    slug: 'bali',
+    shortName: 'BALI',
+    subtitle: 'Adventure',
+    name: 'Bali Adventure',
+    scope: 'international',
+    category: 'Tropical Paradise',
+    duration: '6 Nights / 7 Days',
+    location: 'Denpasar & Ubud',
+    dateText: '12 Aug, 5 Sep',
+    moreDates: '+4',
+    price: '39,900',
+    highlight: 'Lempuyang Gates of Heaven framing Mount Agung, lush rice terraces in Ubud, private villa pools, and sunset beaches.',
+  },
+  {
+    image: cardPune,
+    alt: 'Century Holidays - Getaways From Pune',
+    slug: 'getaways-pune',
+    shortName: 'PUNE',
+    subtitle: 'Getaways From',
+    isGetaway: true,
+    name: 'Getaways From Pune',
+    scope: 'domestic',
+    category: 'Weekend Getaway',
+    duration: '2 Nights / 3 Days',
+    location: 'Western Ghats / Sahyadris',
+    dateText: 'Every Weekend',
+    moreDates: '+12',
+    price: '4,999',
+    highlight: 'Misty fort trails, mountain archway viewpoints, cloud-kissed Sahyadri valleys, and refreshing weekend monsoon treks.',
+  },
+  {
+    image: cardMumbai,
+    alt: 'Century Holidays - Getaways From Mumbai',
+    slug: 'getaways-mumbai',
+    shortName: 'MUMBAI',
+    subtitle: 'Getaways From',
+    isGetaway: true,
+    name: 'Getaways From Mumbai',
+    scope: 'domestic',
+    category: 'Weekend Getaway',
+    duration: '2 Nights / 3 Days',
+    location: 'Lonavala, Matheran & Igatpuri',
+    dateText: 'Every Weekend',
+    moreDates: '+12',
+    price: '5,499',
+    highlight: 'Cliff-edge valley panoramas, cascading waterfalls, cool mountain breezes, and instant escapes from city life.',
+  },
+];
+
+/** Additional iconic domestic & Himalayan treks */
+export const trending: Trip[] = [
+  {
+    image: himachal,
+    alt: 'Century Holidays - Himachal Premium Getaway Group Tour',
+    slug: 'himachal',
+    shortName: 'HIMACHAL',
+    subtitle: 'Getaways',
+    isGetaway: true,
+    name: 'Himachal Premium Getaway',
+    scope: 'domestic',
+    category: 'Group Tour',
+    duration: '9 Nights / 10 Days',
+    location: 'Chandigarh',
+    dateText: '25 Apr, 9 May',
+    moreDates: '+3',
+    price: '14,500',
+    highlight: 'Snow-capped passes, pine valleys and cozy hillside stays across Shimla, Manali and Kasol.',
+  },
+  {
+    image: spiti,
+    alt: 'Century Holidays - Spiti Valley Expedition Adventure Tour',
+    slug: 'spiti',
+    shortName: 'SPITI VALLEY',
+    subtitle: 'EXPEDITION',
+    name: 'Spiti Valley Expedition',
+    scope: 'domestic',
+    category: 'Adventure Tour',
+    duration: '7 Nights / 8 Days',
+    location: 'Shimla',
+    dateText: '10 May, 12 Jun',
+    moreDates: '+2',
+    price: '18,900',
+    highlight: 'High-altitude monasteries, moon-like terrain and campsites under some of the clearest skies in India.',
+  },
+  {
+    image: meghalaya,
+    alt: 'Century Holidays - Meghalaya Monsoon Magic Nature Retreat',
+    slug: 'meghalaya',
+    shortName: 'MEGHALAYA',
+    subtitle: 'NATURE RETREAT',
+    name: 'Meghalaya Monsoon Magic',
+    scope: 'domestic',
+    category: 'Nature Retreat',
+    duration: '5 Nights / 6 Days',
+    location: 'Guwahati',
+    dateText: '15 Jul, 20 Aug',
+    moreDates: '+1',
+    price: '21,500',
+    highlight: 'Living root bridges, waterfalls at full flow and the cleanest villages in Asia during peak monsoon.',
+  },
+  {
+    image: dodham,
+    alt: 'Century Holidays - Do Dham Yatra Kedarnath Spiritual Tour',
+    slug: 'do-dham',
+    shortName: 'KEDARNATH',
+    subtitle: 'SPIRITUAL YATRA',
+    name: 'Do Dham Yatra (Kedarnath)',
+    scope: 'domestic',
+    category: 'Spiritual Tour',
+    duration: '4 Nights / 5 Days',
+    location: 'Haridwar',
+    dateText: 'Every Weekend',
+    moreDates: '+8',
+    price: '11,900',
+    highlight: 'A guided pilgrimage to Kedarnath and Badrinath with darshan timings and travel planned around you.',
+  },
+  {
+    image: chardham,
+    alt: 'Century Holidays - Complete Char Dham Yatra Pilgrimage',
+    slug: 'char-dham',
+    shortName: 'CHAR DHAM',
+    subtitle: 'PILGRIMAGE',
+    name: 'Complete Char Dham Yatra',
+    scope: 'domestic',
+    category: 'Pilgrimage',
+    duration: '11 Nights / 12 Days',
+    location: 'Haridwar',
+    dateText: '10 May, 22 May',
+    moreDates: '+4',
+    price: '28,500',
+    highlight: 'The full circuit — Yamunotri, Gangotri, Kedarnath and Badrinath — in one comfortably paced yatra.',
+  },
+];
+
+/** Every package we sell, in one list — used by the booking form and the departures board. */
+export function allTrips(): Trip[] {
+  return [...destinations, ...trending];
+}

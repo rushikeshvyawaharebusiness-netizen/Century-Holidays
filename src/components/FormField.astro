@@ -1,0 +1,91 @@
+---
+interface Option {
+  value: string;
+  label: string;
+  selected?: boolean;
+  disabled?: boolean;
+}
+
+interface Props {
+  as?: 'input' | 'select' | 'textarea';
+  type?: string;
+  icon: string;
+  label: string;
+  name: string;
+  placeholder?: string;
+  required?: boolean;
+  min?: string | number;
+  value?: string | number;
+  rows?: number;
+  options?: Option[];
+  autocomplete?: string;
+}
+
+const {
+  as = 'input',
+  type = 'text',
+  icon,
+  label,
+  name,
+  placeholder,
+  required = false,
+  min,
+  value,
+  rows = 4,
+  options = [],
+  autocomplete,
+} = Astro.props;
+
+const inputMode = type === 'tel' ? 'tel' : type === 'number' ? 'numeric' : type === 'email' ? 'email' : undefined;
+const spellCheck = type === 'email' || type === 'tel' ? false : undefined;
+
+const fieldClasses =
+  'w-full rounded-lg border border-border bg-surface-muted py-3.5 pl-12 pr-4 text-sm text-text placeholder:text-text-muted transition-colors focus:border-brand focus:bg-surface focus:outline-none focus:ring-4 focus:ring-brand/20';
+---
+
+<label class="flex flex-col gap-2">
+  <span class="text-sm font-semibold text-ink">{label}</span>
+  <span class="relative flex items-center">
+    <i class={`ph-bold ${icon} pointer-events-none absolute left-4 text-lg text-text-muted`} aria-hidden="true"></i>
+
+    {as === 'select' && (
+      <select name={name} required={required} autocomplete={autocomplete} class={`${fieldClasses} appearance-none`}>
+        {options.map((opt: Option) => (
+          <option value={opt.value} selected={opt.selected} disabled={opt.disabled}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+    )}
+
+    {as === 'textarea' && (
+      <textarea
+        name={name}
+        required={required}
+        placeholder={placeholder}
+        rows={rows}
+        autocomplete={autocomplete}
+        class={`${fieldClasses} resize-y`}
+      ></textarea>
+    )}
+
+    {as === 'input' && (
+      <input
+        type={type}
+        name={name}
+        required={required}
+        placeholder={placeholder}
+        min={min}
+        value={value}
+        autocomplete={autocomplete}
+        inputmode={inputMode}
+        spellcheck={spellCheck}
+        class={fieldClasses}
+      />
+    )}
+
+    {as === 'select' && (
+      <i class="ph-bold ph-caret-down pointer-events-none absolute right-4 text-sm text-text-muted" aria-hidden="true"></i>
+    )}
+  </span>
+</label>

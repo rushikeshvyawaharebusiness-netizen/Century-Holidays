@@ -1,0 +1,127 @@
+---
+import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from '../data/contact';
+
+interface Props {
+  newsletterHeading?: string;
+}
+
+const { newsletterHeading = 'Join the Club' } = Astro.props;
+
+const exploreLinks = [
+  { label: 'Home', href: '/#home' },
+  { label: 'About Us', href: '/about.html' },
+  { label: 'Destinations', href: '/#destinations' },
+  { label: 'Why Choose Us', href: '/#why-us' },
+  { label: 'Contact Us', href: '/contact.html' },
+];
+
+const socialLinks = [
+  { icon: 'ph-fill ph-facebook-logo', label: 'Facebook' },
+  { icon: 'ph-fill ph-instagram-logo', label: 'Instagram' },
+  { icon: 'ph-fill ph-twitter-logo', label: 'Twitter' },
+  { icon: 'ph-fill ph-youtube-logo', label: 'YouTube' },
+];
+---
+
+<footer id="contact" class="bg-ink text-text-inverse-muted">
+  <div class="container-page py-20">
+    <div class="grid gap-12 lg:grid-cols-[2fr_1fr_1fr_1.4fr]">
+      <div>
+        <a href="/#home" class="mb-6 flex w-56 items-center" aria-label="Century Holidays home">
+          <!-- Vector lockup (see scripts/trace-logo.mjs), inverted to paper white so it
+               reads against the ink footer. -->
+          <img
+            src="/logo.svg"
+            alt="Century Holidays"
+            width="2400"
+            height="518"
+            class="footer-logo h-auto w-full"
+          />
+        </a>
+        <p class="mb-8 max-w-sm leading-relaxed">
+          Your ultimate destination for adventure treks, tours, and premium travel experiences with Century Holidays. Creating memories for every Century.
+        </p>
+        <div class="flex gap-3">
+          {socialLinks.map((s) => (
+            <a
+              href="#"
+              aria-label={s.label}
+              class="grid h-10 w-10 place-items-center rounded-full bg-text-inverse/10 text-lg text-text-inverse transition-colors hover:bg-brand hover:text-ink"
+            >
+              <i class={s.icon} aria-hidden="true"></i>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 class="mb-6 font-display text-xl text-text-inverse">Explore</h3>
+        <ul class="flex flex-col gap-3">
+          {exploreLinks.map((l) => (
+            <li>
+              <a href={l.href} class="transition-colors hover:text-brand">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="min-w-[240px]">
+        <h3 class="mb-6 font-display text-xl text-text-inverse">Contact Information</h3>
+        <ul class="flex flex-col gap-5">
+          <li class="flex items-start gap-3">
+            <i class="ph-bold ph-map-pin mt-1 shrink-0 text-lg text-brand" aria-hidden="true"></i>
+            <span>4th floor, Trinity Towers, near Jairam Glass, Tidke Colony, Nashik, Maharashtra 422002</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="ph-bold ph-phone mt-1 shrink-0 text-lg text-brand" aria-hidden="true"></i>
+            <a href={PHONE_HREF} class="tabular-nums transition-colors hover:text-brand">{PHONE_DISPLAY}</a>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="ph-bold ph-envelope-simple mt-1 shrink-0 text-lg text-brand" aria-hidden="true"></i>
+            <a href={EMAIL_HREF} class="transition-colors hover:text-brand">{EMAIL}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="mb-6 font-display text-xl text-text-inverse">{newsletterHeading}</h3>
+        <p class="mb-6">Subscribe for exclusive experiences and top adventure deals.</p>
+        <form class="flex">
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input
+            id="newsletter-email"
+            type="email"
+            name="email"
+            autocomplete="email"
+            spellcheck="false"
+            required
+            placeholder="Your email address"
+            class="w-full rounded-l-md border-0 bg-text-inverse/10 px-4 py-3 text-sm text-text-inverse placeholder:text-text-inverse-muted focus:bg-text-inverse/15"
+          />
+          <button
+            type="submit"
+            aria-label="Subscribe"
+            class="grid place-items-center rounded-r-md bg-brand px-4 text-ink transition-colors hover:bg-brand-dim"
+          >
+            <i class="ph-bold ph-paper-plane-right text-lg" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="mt-16 flex flex-col items-center justify-between gap-4 border-t border-text-inverse/10 pt-8 text-sm sm:flex-row">
+      <p>&copy; 2026 Century Holidays. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="/privacy.html" class="transition-colors hover:text-brand">Privacy Policy</a>
+        <a href="/terms.html" class="transition-colors hover:text-brand">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Black lockup → paper white, so it stays legible on the ink footer. */
+  .footer-logo {
+    filter: brightness(0) invert(1);
+  }
+</style>

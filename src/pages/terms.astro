@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="Terms & Conditions | Century Holidays - Booking Agreement"
+  description="Review the Terms and Conditions for booking with Century Holidays. Creating memories for every Century. Read our booking agreement and travel policies carefully before planning your journey."
+  path="/terms.html"
+>
+  <main id="main-content">
+    <PageHero title="Terms &amp;" highlight="Conditions" subtitle="Last updated: March 2026" />
+
+    <section class="py-20 sm:py-24">
+      <div class="container-page">
+        <div data-reveal class="prose prose-lg mx-auto max-w-3xl rounded-3xl border border-border bg-surface p-10 shadow-panel sm:p-16 prose-headings:font-display prose-headings:text-ink prose-p:text-text-muted prose-li:text-text-muted prose-strong:text-ink">
+          <h2>1. Agreement to Terms</h2>
+          <p>
+            By booking a trip, submitting a deposit, or engaging with Century Holidays, you acknowledge that you have
+            read, understood, and agree to be bound by these Terms and Conditions. These terms formulate a crucial
+            contract between you and Century Holidays.
+          </p>
+
+          <h2>2. Bookings, Deposits &amp; Payments</h2>
+          <p>
+            To secure your reservation, a non-refundable deposit is required at the time of booking. The specific
+            deposit amount will be communicated prior to booking confirmation.
+          </p>
+          <ul>
+            <li>Final payment is globally due 45 days prior to the commencement of travel unless otherwise specified.</li>
+            <li>Payments can be made via credit card, debit card, or wire transfer.</li>
+            <li>
+              Prices quoted are based on current exchange rates and tariffs and are subject to change without notice
+              until paid in full.
+            </li>
+          </ul>
+
+          <h2>3. Cancellations &amp; Refunds</h2>
+          <p>
+            If you wish to cancel your booking, you must submit your request to us in writing. Cancellation fees will
+            apply based on the date we receive your written notification:
+          </p>
+          <ul>
+            <li><strong>60+ Days before departure:</strong> Loss of initial deposit.</li>
+            <li><strong>59 - 30 Days before departure:</strong> 50% of total booking cost.</li>
+            <li><strong>29 - 0 Days before departure:</strong> 100% of total booking cost (no refund).</li>
+          </ul>
+
+          <h2>4. Travel Requirements &amp; Passports</h2>
+          <p>
+            It is exclusively the traveler’s responsibility to ensure they possess valid passports, visas, and
+            necessary health documentation (such as vaccination certificates) required for travel. Passports must
+            typically be valid for at least six months beyond the completion date of your journey. Century Holidays
+            takes no responsibility for travel disruption or loss of funds caused by missing or incorrect travel
+            documentation.
+          </p>
+
+          <h2>5. Liability &amp; Disclaimers</h2>
+          <p>
+            Century Holidays acts principally as an agent for airlines, hotels, tour operators, and other third-party
+            vendors. We shall not be held liable for any loss, damage, injury, accident, delay, or irregularity which
+            may be occasioned by reason of any defect in any vehicle, or through the acts or omissions of any company
+            or person engaged in conveying the passenger or carrying out the arrangements of the tour. Additionally,
+            we are not liable for incidental disruptions caused by weather, natural disasters, or geopolitical events
+            ("Acts of God").
+          </p>
+
+          <h2>6. Travel Insurance</h2>
+          <p>
+            We strongly highly recommend that all travelers purchase comprehensive travel insurance covering trip
+            cancellation, medical emergencies, and baggage loss immediately upon booking.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

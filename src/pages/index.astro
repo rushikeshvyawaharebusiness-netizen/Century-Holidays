@@ -1,0 +1,393 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarqueeTrack from '../components/MarqueeTrack.astro';
+import TripCard from '../components/TripCard.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import WhyUsSection from '../components/WhyUsSection.astro';
+import FaqItem from '../components/FaqItem.astro';
+import FormField from '../components/FormField.astro';
+import PosterSlider from '../components/PosterSlider.astro';
+// Previous hero background — kept in assets, swap the import below to revert:
+// import heroImage from '../assets/images/background.jpg';
+import heroImage from '../assets/images/hero-valley.jpg';
+import customer1 from '../assets/images/customer1.jpg';
+import customer2 from '../assets/images/customer2.jpg';
+import customer3 from '../assets/images/customer3.jpg';
+import customer4 from '../assets/images/customer4.jpg';
+import customer5 from '../assets/images/customer5.jpg';
+import SideScrollingBanners from '../components/SideScrollingBanners.astro';
+import DestinationCircles from '../components/DestinationCircles.astro';
+import SpecialitiesSection from '../components/SpecialitiesSection.astro';
+import { allTrips, destinations, trending } from '../data/trips';
+import { PHONE_E164, SOCIAL, bookingLink, whatsappLink } from '../data/contact';
+
+const categories = [
+  { image: customer1, alt: 'Century Holidays Happy Traveler - Trekking Adventure Experience', title: 'Happy Travelers', description: 'Unforgettable moments captured on our trips.' },
+  { image: customer2, alt: 'Century Holidays Adventure Seeker - Mountain Peak Success', title: 'Adventure Seekers', description: 'Making memories that last a lifetime.' },
+  { image: customer3, alt: 'Century Holidays Group Tour - Friends Travel Memories', title: 'Group Fun', description: 'Because the best memories are made with friends.' },
+  { image: customer4, alt: 'Century Holidays Scenic Escape - Nature Exploration', title: 'Scenic Escapes', description: 'Journey into the heart of nature.' },
+  { image: customer5, alt: 'Century Holidays Unforgettable Experience - Cultural Immersion', title: 'Unforgettable Experiences', description: 'Step out of your comfort zone.' },
+];
+
+const faqs = [
+  {
+    question: 'What is Century Holidays?',
+    answer: 'We are a premium travel agency completely dedicated to creating customized, stress-free travel experiences without any middlemen.',
+    open: true,
+  },
+  {
+    question: 'Is the first installment refundable if I cancel my trip?',
+    answer: 'Refund policies depend on the specific package and exactly when the cancellation is initiated. Please review our detailed cancellation policy.',
+  },
+  {
+    question: 'How much advance payment is required?',
+    answer: 'Typically, a 30% advance secures your booking, but this varies based on international flight and hotel requirements.',
+  },
+  {
+    question: 'Do you assist during the trip?',
+    answer: 'Absolutely! Our 24/7 support team is always just a quick WhatsApp text or phone call away while you are traveling.',
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'TravelAgency',
+  name: 'Century Holidays',
+  image: 'https://new-century-holidays-website.vercel.app/logo.png',
+  url: 'https://new-century-holidays-website.vercel.app/',
+  telephone: PHONE_E164,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '4th floor, Trinity Towers, near Jairam Glass, Tidke Colony',
+    addressLocality: 'Nashik',
+    addressRegion: 'Maharashtra',
+    postalCode: '422002',
+    addressCountry: 'IN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 19.9975,
+    longitude: 73.7898,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: '09:00',
+    closes: '20:00',
+  },
+  sameAs: [SOCIAL.facebook, SOCIAL.instagram, 'https://twitter.com/centuryholidays'],
+};
+---
+
+<BaseLayout
+  title="Century Holidays - Best Travel Agency for Adventure & Custom Tours"
+  description="Century Holidays is your premier travel partner for curated adventure treks, customized tours, and unforgettable travel experiences. Based in Nashik, we offer premium holiday packages worldwide. Creating memories for every Century."
+  path="/"
+  navVariant="transparent"
+  newsletterHeading="Join the Century Club"
+  structuredData={structuredData}
+>
+  <main id="main-content">
+    <!-- Hero -->
+    <header id="home" class="relative flex min-h-screen items-center pt-20">
+      <div class="absolute inset-0 -z-10 overflow-hidden">
+        <Image
+          src={heroImage}
+          alt="Travellers overlooking a Himalayan valley from their tour vehicle"
+          class="h-full w-full scale-150 object-cover object-[68%_88%] sm:scale-125 sm:object-[65%_75%] lg:scale-110 lg:object-[62%_100%]"
+          widths={[768, 1280, 1920]}
+          sizes="100vw"
+          priority
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent lg:bg-gradient-to-r lg:from-ink/0 lg:via-ink/0 lg:to-ink/85"></div>
+        <div class="absolute inset-0 bg-ink/25 lg:hidden"></div>
+      </div>
+
+      <div class="container-page">
+        <div class="mx-auto max-w-xl text-center lg:ml-auto lg:mr-0 lg:text-right">
+          <h1 class="text-balance font-display text-4xl leading-[1.1] text-text-inverse sm:text-6xl lg:text-7xl">
+            Explore the World with <span class="text-brand" translate="no">Century Holidays</span>
+          </h1>
+          <p class="mt-6 text-lg text-text-inverse-muted">
+            Join us for unforgettable treks, customized tours and premium travel experiences with Century Holidays.
+            Your next great adventure awaits.
+          </p>
+          <div class="mt-10 flex flex-wrap justify-center gap-4 lg:justify-end">
+            <a
+              href="#destinations"
+              class="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-base font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
+              Explore Destinations <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a
+              href="/book.html"
+              class="inline-flex items-center gap-2 rounded-full border-2 border-text-inverse/30 px-7 py-3.5 text-base font-bold text-text-inverse transition-colors hover:border-brand hover:bg-brand hover:text-ink"
+            >
+              Plan Your Trip
+            </a>
+          </div>
+
+          <div class="mt-10 border-t border-text-inverse/15 pt-6">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-text-inverse-muted">Popular right now</p>
+            <ul class="mt-4 flex flex-wrap justify-center gap-2 lg:justify-end">
+              {allTrips().map((trip) => (
+                <li>
+                  <a
+                    href={bookingLink(trip.slug)}
+                    class="inline-flex items-center rounded-full border border-text-inverse/25 bg-ink/25 px-4 py-2 text-sm font-semibold text-text-inverse backdrop-blur-sm transition-colors hover:border-brand hover:bg-brand hover:text-ink"
+                  >
+                    {trip.shortName}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Destinations (Image 2 Style Cards) -->
+    <section id="destinations" class="bg-surface py-16 sm:py-24">
+      <div class="container-page">
+        <div data-reveal class="mb-10 flex flex-col items-center text-center">
+          <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Curated Adventures</span>
+          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">Explore Destinations</h2>
+          <p class="mt-4 max-w-xl text-lg text-text-muted">
+            Discover our hand-picked international tours and weekend escapes — pure adventure, authentic moments.
+          </p>
+
+          <!-- Destination Filter Tabs (Image 1 Style Pill Filter) -->
+          <div class="mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-3" id="destination-filter-tabs">
+            <button
+              type="button"
+              class="dest-filter-pill active rounded-full px-5 py-2 text-sm font-bold transition-all duration-200 bg-brand text-ink shadow-sm"
+              data-filter="all"
+            >
+              All Adventures
+            </button>
+            <button
+              type="button"
+              class="dest-filter-pill rounded-full border border-border bg-surface-muted px-5 py-2 text-sm font-bold transition-all duration-200 text-ink-muted hover:bg-border hover:text-ink"
+              data-filter="international"
+            >
+              International Escapes
+            </button>
+            <button
+              type="button"
+              class="dest-filter-pill rounded-full border border-border bg-surface-muted px-5 py-2 text-sm font-bold transition-all duration-200 text-ink-muted hover:bg-border hover:text-ink"
+              data-filter="domestic"
+            >
+              Weekend Getaways
+            </button>
+          </div>
+        </div>
+
+        {/* 8-Card Responsive Grid Matching Image 2 with generous spacing */}
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-8 xl:gap-10 gap-y-10 sm:gap-y-12 justify-items-center"
+          id="destination-cards-grid"
+        >
+          {destinations.map((trip) => (
+            <div class="dest-card-item w-full flex justify-center px-1.5" data-scope={trip.scope}>
+              <TripCard trip={trip} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function initDestFilters() {
+        const pills = document.querySelectorAll<HTMLButtonElement>('.dest-filter-pill');
+        const cards = document.querySelectorAll<HTMLElement>('.dest-card-item');
+
+        pills.forEach((pill) => {
+          pill.addEventListener('click', () => {
+            pills.forEach((p) => {
+              p.classList.remove('active', 'bg-brand', 'text-ink', 'shadow-sm');
+              p.classList.add('border', 'border-border', 'bg-surface-muted', 'text-ink-muted');
+            });
+
+            pill.classList.add('active', 'bg-brand', 'text-ink', 'shadow-sm');
+            pill.classList.remove('border', 'border-border', 'bg-surface-muted', 'text-ink-muted');
+
+            const filter = pill.getAttribute('data-filter');
+            cards.forEach((card) => {
+              const scope = card.getAttribute('data-scope');
+              if (filter === 'all' || scope === filter) {
+                card.style.display = 'flex';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      }
+
+      initDestFilters();
+      document.addEventListener('astro:page-load', initDestFilters);
+    </script>
+
+    <!-- Trending -->
+    <section id="trending" class="bg-paper py-20 sm:py-28">
+      <div class="container-page">
+        <div data-reveal class="mb-14 flex flex-col items-center text-center">
+          <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Discover The Best</span>
+          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">Trending Trips</h2>
+          <p class="mt-4 max-w-xl text-lg text-text-muted">
+            Handpicked destinations for your next unforgettable journey.
+          </p>
+        </div>
+      </div>
+
+      <MarqueeTrack reverse>
+        {trending.map((trip) => <TripCard trip={trip} />)}
+      </MarqueeTrack>
+
+      <div class="container-page mt-14 flex justify-center">
+        <a
+          href="/book.html"
+          class="inline-flex items-center gap-2 rounded-full border-2 border-border px-7 py-3.5 text-base font-bold text-ink transition-colors hover:border-brand hover:bg-brand"
+        >
+          Plan Your Trip
+        </a>
+      </div>
+    </section>
+
+    <!-- Booking -->
+    <section id="book-now" class="relative overflow-hidden bg-surface py-20 sm:py-28">
+      <div class="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand/10 blur-[100px]"></div>
+
+      <div class="container-page relative grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:items-center">
+        <div data-reveal>
+          <span class="mb-2 inline-block text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Start Planning</span>
+          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">
+            Ready for your next Adventure?
+          </h2>
+          <p class="mt-4 max-w-md text-lg text-text-muted">
+            Fill out the details below and our travel experts will design a personalized itinerary tailored to your
+            exact preferences.
+          </p>
+
+          <ul class="mt-10 flex flex-col gap-4">
+            {['Best Price Guarantee', '100% Customization', '24/7 Priority Support'].map((perk) => (
+              <li class="flex items-center gap-3 text-lg font-semibold text-ink">
+                <i class="ph-fill ph-check-circle text-2xl text-ink-muted" aria-hidden="true"></i> {perk}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div data-reveal class="rounded-3xl border border-border bg-surface p-8 shadow-panel sm:p-12">
+          <form class="flex flex-col gap-6">
+            <div class="grid gap-6 sm:grid-cols-2">
+              <FormField icon="ph-user" label="Full Name" name="name" placeholder="Your Name" autocomplete="name" required />
+              <FormField icon="ph-phone" label="Phone Number" name="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required />
+            </div>
+            <div class="grid gap-6 sm:grid-cols-2">
+              <FormField icon="ph-envelope-simple" label="Email Address" name="email" type="email" placeholder="example@email.com" autocomplete="email" required />
+              <FormField icon="ph-map-pin" label="Destination" name="destination" placeholder="e.g. Bali, Spiti, etc." required />
+            </div>
+            <div class="grid gap-6 sm:grid-cols-2">
+              <FormField icon="ph-map-trifold" label="State" name="state" placeholder="Your State" autocomplete="address-level1" required />
+              <FormField icon="ph-buildings" label="City" name="city" placeholder="Your City" autocomplete="address-level2" required />
+            </div>
+            <div class="grid gap-6 sm:grid-cols-2">
+              <FormField icon="ph-users" label="No of Adults" name="adults" type="number" min="1" value="2" required />
+              <FormField icon="ph-baby" label="Number of Children" name="children" type="number" min="0" value="0" />
+            </div>
+
+            <button
+              type="submit"
+              class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-base font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
+              Request Free Quote <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 to 3 Side Scrolling Banners (Website Theme Typography) -->
+    <SideScrollingBanners />
+
+    <!-- Popular Destination Quick Browse (16 Authentic Circles Matching Image) -->
+    <DestinationCircles />
+
+    <!-- What We Specialize In / Book with Confidence -->
+    <SpecialitiesSection />
+
+    <!-- Categories -->
+    <section id="categories" class="bg-paper py-20 sm:py-28">
+      <div class="container-page">
+        <div data-reveal class="mb-14 flex flex-col items-center text-center">
+          <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Curated Experiences</span>
+          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">Real Experiences</h2>
+        </div>
+      </div>
+
+      <MarqueeTrack>
+        {categories.map((c) => <CategoryCard image={c.image} alt={c.alt} title={c.title} description={c.description} />)}
+      </MarqueeTrack>
+    </section>
+
+    <!-- Why Us (Theme Harmonized Bento Grid & Trust Strip) -->
+    <WhyUsSection />
+
+    <!-- Sliding Posters (New Year Early Bird Sale & Zamna Festival Bali) -->
+    <PosterSlider />
+
+
+    <!-- Expert CTA -->
+    <section class="py-20 sm:py-28">
+      <div class="container-page">
+        <div data-reveal class="relative overflow-hidden rounded-3xl">
+          <img
+            src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2073&auto=format&fit=crop"
+            alt="Epic Travel Destination"
+            width="2073"
+            height="1382"
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/20"></div>
+
+          <div class="relative max-w-xl px-8 py-20 sm:px-16 sm:py-28">
+            <h2 class="font-display text-3xl leading-tight text-text-inverse sm:text-5xl lg:text-6xl">
+              Not sure where your <span class="text-brand">next adventure</span> should be?
+            </h2>
+            <p class="mt-6 text-lg text-text-inverse-muted">
+              Leave the details to us! Our experts design trips that match your energy and bring your travel dreams
+              alive.
+            </p>
+            <a
+              href={whatsappLink("Hi Century Holidays! I'm not sure where to go yet — can you suggest options?")}
+              target="_blank"
+              rel="noopener"
+              class="mt-10 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-base font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
+              Connect with Expert <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <section id="faqs" class="bg-paper py-20 sm:py-28">
+      <div class="container-page">
+        <div data-reveal class="mb-14 flex flex-col items-center text-center">
+          <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Got Questions?</span>
+          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div class="mx-auto grid max-w-5xl gap-5 lg:grid-cols-2 lg:items-start">
+          {faqs.map((faq) => <FaqItem question={faq.question} answer={faq.answer} open={faq.open} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

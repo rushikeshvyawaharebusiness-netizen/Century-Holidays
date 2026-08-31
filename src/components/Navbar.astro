@@ -1,0 +1,359 @@
+---
+import MobileNav from './MobileNav.astro';
+import GoogleIcon from './icons/GoogleIcon.astro';
+import InstagramIcon from './icons/InstagramIcon.astro';
+import { PHONE_DISPLAY, PHONE_HREF, SOCIAL } from '../data/contact';
+import { allTrips } from '../data/trips';
+
+interface Props {
+  variant?: 'transparent' | 'solid';
+  activePath: string;
+}
+
+const { variant = 'solid', activePath } = Astro.props;
+
+const isHome = activePath === '/';
+const homeHref = isHome ? '#home' : '/';
+
+const links = [
+  { label: 'Home', href: homeHref, match: '/' },
+  { label: 'About Us', href: '/about.html', match: '/about.html' },
+  { label: 'Contact Us', href: '/contact.html', match: '/contact.html' },
+];
+
+/* Trust bar. Client-confirmed signals only — the Google rating is 4.9. */
+const trustSignals = [
+  { brand: 'google', label: '4.9 Google Rating' },
+  { icon: 'ph-headset', label: '24/7 Trip Support' },
+  { brand: 'instagram', label: '@centuryholidays', href: SOCIAL.instagram },
+] satisfies Array<{ brand?: string; icon?: string; label: string; href?: string }>;
+
+const searchTrips = allTrips();
+---
+
+<header
+  id="site-navbar"
+  data-variant={variant}
+  class:list={[
+    'fixed inset-x-0 top-0 z-50 transition-colors duration-300',
+    variant === 'transparent' ? 'bg-transparent' : 'bg-surface/95 shadow-[0_1px_0_rgba(21,20,15,0.06)] backdrop-blur',
+  ]}
+>
+  <div class="trust-bar bg-ink text-text-inverse">
+    <div class="container-page flex h-9 items-center justify-center gap-5 overflow-hidden sm:gap-8">
+      {trustSignals.map((signal, i) => {
+        const inner = (
+          <>
+            {signal.brand === 'google' && <GoogleIcon class="h-4 w-4 shrink-0" />}
+            {signal.brand === 'instagram' && <InstagramIcon class="h-4 w-4 shrink-0" />}
+            {signal.icon && <i class={`ph-fill ${signal.icon} text-base text-brand`} aria-hidden="true"></i>}
+            <span class="whitespace-nowrap text-xs font-semibold tabular-nums sm:text-[0.8125rem]">
+              {signal.label}
+            </span>
+          </>
+        );
+        return signal.href ? (
+          <a
+            href={signal.href}
+            target="_blank"
+            rel="noopener"
+            class:list={['flex items-center gap-2 transition-colors hover:text-brand', i === 2 && 'hidden sm:flex']}
+          >
+            {inner}
+          </a>
+        ) : (
+          <span class:list={['flex items-center gap-2', i === 2 && 'hidden sm:flex']}>{inner}</span>
+        );
+      })}
+    </div>
+  </div>
+
+  <div class="container-page flex h-20 items-center justify-between gap-4">
+    <a href={isHome ? '#home' : '/'} class="flex w-48 shrink-0 items-center sm:w-56 lg:w-60" aria-label="Century Holidays home">
+      {/*
+        Vector, not raster: the slot inside the R is only ~3.5px tall at header size, and
+        any resampled bitmap turns it into a grey smudge (which also made the compass C
+        look clipped). The SVG stays crisp at every size and DPR. Traced from the master
+        artwork by scripts/trace-logo.mjs.
+      */}
+      <img
+        src="/logo.svg"
+        alt="Century Holidays"
+        width="2400"
+        height="518"
+        class:list={[
+          'h-auto w-full transition-[filter] duration-300',
+          variant === 'transparent' ? 'navbar-logo-onhero' : '',
+        ]}
+      />
+    </a>
+
+    <a
+      href={PHONE_HREF}
+      class="navbar-phone hidden items-center gap-2 rounded-full border border-brand/50 bg-brand/15 px-4 py-2 text-sm font-bold shadow-sm transition-colors hover:bg-brand hover:text-ink md:inline-flex"
+    >
+      <i class="ph-fill ph-phone text-base text-brand-dim" aria-hidden="true"></i>
+      <span class="whitespace-nowrap tabular-nums">{PHONE_DISPLAY}</span>
+    </a>
+
+    <nav class="hidden items-center gap-10 lg:flex" aria-label="Primary">
+      {links.map((link) => {
+        const isActive = link.match === activePath || (link.match === '/' && isHome);
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              'nav-link relative text-sm font-semibold tracking-wide transition-colors',
+              variant === 'transparent' ? 'text-text-inverse/85 hover:text-text-inverse' : 'text-ink/80 hover:text-ink',
+              isActive && (variant === 'transparent' ? '!text-text-inverse' : '!text-ink'),
+            ]}
+            data-active={isActive}
+          >
+            {link.label}
+            <span class:list={['nav-underline', isActive && 'nav-underline-active']} />
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="flex items-center gap-3 sm:gap-4">
+      <a
+        href="/book.html"
+        class="navbar-cta hidden rounded-full bg-brand px-6 py-2.5 text-sm font-bold text-ink shadow-card transition duration-300 hover:-translate-y-0.5 hover:shadow-card-hover sm:inline-flex"
+      >
+        Book Now
+      </a>
+      <button
+        type="button"
+        id="trip-search-toggle"
+        aria-label="Search destinations"
+        aria-expanded="false"
+        aria-controls="trip-search-panel"
+        class="navbar-search grid h-11 w-11 place-items-center rounded-full bg-ink text-lg text-text-inverse transition-transform duration-200 hover:-translate-y-0.5"
+      >
+        <i class="ph-bold ph-magnifying-glass" aria-hidden="true"></i>
+      </button>
+      <a
+        href={PHONE_HREF}
+        aria-label={`Call Century Holidays on ${PHONE_DISPLAY}`}
+        class="navbar-phone-icon grid h-11 w-11 place-items-center rounded-full border border-brand/50 bg-brand/15 text-lg md:hidden"
+      >
+        <i class="ph-fill ph-phone" aria-hidden="true"></i>
+      </a>
+      <button
+        type="button"
+        id="mobile-nav-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class:list={[
+          'mobile-toggle-btn grid h-11 w-11 place-items-center rounded-full text-xl transition-colors lg:hidden',
+          variant === 'transparent' ? 'text-text-inverse' : 'text-ink',
+        ]}
+      >
+        <i class="ph ph-list" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="trip-search-panel" hidden class="border-t border-border bg-surface shadow-panel">
+    <div class="container-page py-6">
+      <label for="trip-search-input" class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-ink-muted">
+        Where do you want to go?
+      </label>
+      <div class="relative">
+        <i
+          class="ph-bold ph-magnifying-glass pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg text-ink-muted"
+          aria-hidden="true"></i>
+        <input
+          id="trip-search-input"
+          type="search"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Try Spiti, Char Dham or Bali…"
+          class="w-full rounded-full border border-border bg-surface-muted py-3.5 pl-12 pr-4 text-sm text-text placeholder:text-text-muted focus:border-brand focus:bg-surface focus:outline-none focus:ring-4 focus:ring-brand/20"
+        />
+      </div>
+
+      <p id="trip-search-status" class="sr-only" aria-live="polite"></p>
+
+      <ul id="trip-search-results" class="mt-4 grid gap-2 sm:grid-cols-2">
+        {searchTrips.map((trip) => (
+          <li data-search-item data-haystack={`${trip.name} ${trip.shortName} ${trip.location} ${trip.category}`.toLowerCase()}>
+            <a
+              href={`/book.html?destination=${trip.slug}`}
+              class="flex items-center justify-between gap-4 rounded-xl border border-border px-4 py-3 transition-colors hover:border-brand hover:bg-surface-muted"
+            >
+              <span class="min-w-0">
+                <span class="block truncate text-sm font-bold text-ink">{trip.name}</span>
+                <span class="block truncate text-xs text-text-muted">
+                  {trip.scope === 'domestic' ? 'India' : 'International'} &middot; {trip.duration}
+                </span>
+              </span>
+              <span class="shrink-0 font-display text-sm tabular-nums text-ink">₹{trip.price}</span>
+            </a>
+          </li>
+        ))}
+        <li id="trip-search-empty" hidden class="sm:col-span-2">
+          <a href="/book.html" class="block rounded-xl border border-dashed border-border px-4 py-3 text-sm text-text-muted hover:border-brand">
+            No package matches that yet — tell us where you want to go and we'll build it.
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<MobileNav />
+
+<style>
+  .nav-underline {
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 0;
+    background: var(--color-brand);
+    transition: width 0.25s ease;
+  }
+  .nav-link:hover .nav-underline,
+  .nav-underline-active {
+    width: 100%;
+  }
+  /* Scrolled bar is yellow, so the underline must be dark to stay visible. */
+  #site-navbar[data-variant='transparent'].is-scrolled .nav-underline,
+  #site-navbar[data-variant='transparent'].is-scrolled .nav-underline-active {
+    background: var(--color-ink);
+  }
+  /* On the transparent hero navbar the logo is recolored to pure white so it reads
+     against photography; once scrolled the bar turns yellow, so it flips to solid ink. */
+  .navbar-logo-onhero {
+    filter: brightness(0) invert(1);
+  }
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-logo-onhero {
+    filter: brightness(0);
+  }
+  /* Scrolled hero bar: brand yellow, giving the transparent navbar a warm
+     accent once the hero scrolls out of view. */
+  #site-navbar[data-variant='transparent'].is-scrolled {
+    background-color: var(--color-brand);
+    box-shadow: 0 1px 0 rgba(21, 20, 15, 0.08);
+  }
+  #site-navbar[data-variant='transparent'].is-scrolled .nav-link {
+    color: color-mix(in srgb, var(--color-ink) 80%, transparent) !important;
+  }
+  #site-navbar[data-variant='transparent'].is-scrolled .mobile-toggle-btn {
+    color: var(--color-ink);
+  }
+
+  /* The trust bar is a landing signal, not a permanent fixture — it collapses once
+     the visitor scrolls so the fixed header returns to a single 5rem row. */
+  .trust-bar {
+    overflow: hidden;
+    max-height: 2.25rem;
+    transition: max-height 0.3s ease;
+  }
+  #site-navbar.is-scrolled .trust-bar {
+    max-height: 0;
+  }
+
+  /* Phone pill sits on photography while the hero bar is transparent, so its label is
+     white there; on the white scrolled bar (and on solid pages) it reads as ink. */
+  #site-navbar[data-variant='transparent'] .navbar-phone,
+  #site-navbar[data-variant='transparent'] .navbar-phone-icon {
+    color: var(--color-text-inverse);
+  }
+  /* Hover fills the pill with solid brand yellow, so label and icon must go ink —
+     this rule is unlayered and would otherwise beat Tailwind's hover:text-ink. */
+  #site-navbar[data-variant='transparent'] .navbar-phone:hover,
+  #site-navbar[data-variant='transparent'] .navbar-phone:hover .ph-phone,
+  #site-navbar[data-variant='transparent'] .navbar-phone-icon:hover,
+  #site-navbar[data-variant='transparent'] .navbar-phone-icon:hover .ph-phone {
+    color: var(--color-ink);
+  }
+  /* On the yellow scrolled bar the phone pill hover uses a dark fill
+     instead of brand yellow, so it stays visible against the yellow navbar. */
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-phone:hover,
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-phone:hover .ph-phone,
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-phone-icon:hover,
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-phone-icon:hover .ph-phone {
+    color: var(--color-text-inverse);
+    background-color: var(--color-ink);
+  }
+  #site-navbar[data-variant='solid'] .navbar-phone,
+  #site-navbar[data-variant='solid'] .navbar-phone-icon,
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-phone,
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-phone-icon {
+    color: var(--color-ink);
+  }
+  /* Icon glyphs: brand yellow has too little contrast on white, so every icon in the
+     bar darkens to ink once scrolled. */
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-phone .ph-phone,
+  #site-navbar[data-variant='transparent'].is-scrolled .navbar-phone-icon .ph-phone,
+  #site-navbar[data-variant='solid'] .navbar-phone .ph-phone,
+  #site-navbar[data-variant='solid'] .navbar-phone-icon .ph-phone {
+    color: var(--color-ink);
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById('site-navbar');
+  if (navbar) {
+    const onScroll = () => {
+      navbar.classList.toggle('is-scrolled', window.scrollY > 40);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // Destination search: filters the package list already rendered in the panel, so it
+  // works without a request and degrades to a plain link list if JS never runs.
+  const searchToggle = document.getElementById('trip-search-toggle');
+  const searchPanel = document.getElementById('trip-search-panel') as HTMLElement | null;
+  const searchInput = document.getElementById('trip-search-input') as HTMLInputElement | null;
+  const searchStatus = document.getElementById('trip-search-status');
+  const searchEmpty = document.getElementById('trip-search-empty');
+  const searchItems = [...document.querySelectorAll<HTMLElement>('[data-search-item]')];
+
+  const setSearchOpen = (open: boolean) => {
+    if (!searchPanel || !searchToggle) return;
+    searchPanel.hidden = !open;
+    searchToggle.setAttribute('aria-expanded', String(open));
+    if (open) searchInput?.focus();
+  };
+
+  searchToggle?.addEventListener('click', () => {
+    setSearchOpen(Boolean(searchPanel?.hidden ?? true));
+  });
+
+  searchInput?.addEventListener('input', () => {
+    const query = searchInput.value.trim().toLowerCase();
+    let matches = 0;
+
+    for (const item of searchItems) {
+      const isMatch = !query || (item.dataset.haystack ?? '').includes(query);
+      item.hidden = !isMatch;
+      if (isMatch) matches++;
+    }
+
+    if (searchEmpty) searchEmpty.hidden = matches > 0;
+    if (searchStatus) {
+      searchStatus.textContent = matches
+        ? `${matches} package${matches === 1 ? '' : 's'} found`
+        : 'No packages found';
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !searchPanel?.hidden) {
+      setSearchOpen(false);
+      searchToggle?.focus();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as Node;
+    if (!searchPanel || searchPanel.hidden) return;
+    if (!searchPanel.contains(target) && !searchToggle?.contains(target)) setSearchOpen(false);
+  });
+</script>

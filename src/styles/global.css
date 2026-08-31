@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+  Century Holidays brand system.
+  Brand yellow (#F0EA1B) is reserved for functional accents only — CTA
+  buttons, active nav/tab indicators, form focus rings, and icon accents
+  on dark surfaces (footer, hero, photo overlays). It is NOT used for
+  decorative text, gradients, eyebrow labels, or icon chips on light
+  backgrounds — those use --color-ink / --color-ink-muted instead, to
+  keep the light-background UI clean and free of yellow "spark".
+*/
+@theme {
+  --color-brand: #f0ea1b;
+  --color-brand-dim: #d8d100;
+
+  --color-ink: #15140f;
+  --color-ink-soft: #211f17;
+  --color-ink-muted: #4a4a42;
+
+  --color-paper: #fdfdf9;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f3ea;
+  --color-border: #e7e4d5;
+
+  --color-text: #1c1b15;
+  --color-text-muted: #5c5b4f;
+  --color-text-inverse: #fdfdf9;
+  --color-text-inverse-muted: #c9c8bc;
+
+  --font-display: "Fraunces", serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(21, 20, 15, 0.04), 0 12px 32px -12px rgba(21, 20, 15, 0.16);
+  --shadow-card-hover: 0 4px 8px rgba(21, 20, 15, 0.06), 0 24px 48px -16px rgba(21, 20, 15, 0.22);
+  --shadow-panel: 0 30px 80px -24px rgba(21, 20, 15, 0.35);
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 48s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-text);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  a, button {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-dim);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@utility glass-panel {
+  background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid color-mix(in srgb, var(--color-surface) 80%, transparent);
+}
+
+/* Scroll-reveal: progressive enhancement — only activates once the "js" class
+   lands on <html> (set synchronously in BaseLayout), so content stays visible
+   by default if JavaScript fails to run. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@utility marquee-row {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}

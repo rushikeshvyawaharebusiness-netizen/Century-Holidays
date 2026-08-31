@@ -1,0 +1,218 @@
+---
+import { Image } from 'astro:assets';
+import bannerHampta from '../assets/images/banner-hampta-hd.png';
+import bannerSpiti from '../assets/images/banner-spiti-hd.png';
+import bannerKedarnath from '../assets/images/banner-kedarnath-hd.png';
+import bannerBali from '../assets/images/banner-bali-hd.png';
+import { bookingLink } from '../data/contact';
+
+const slides = [
+  {
+    id: 'hampta-pass',
+    title: 'Hampta Pass Trek From Delhi',
+    image: bannerHampta,
+    alt: 'Hampta Pass Trek from Delhi - 7 Days Trek Package Starting from ₹12,000',
+    link: bookingLink('hampta-pass'),
+  },
+  {
+    id: 'spiti-valley',
+    title: 'Spiti Valley Expedition From Shimla',
+    image: bannerSpiti,
+    alt: 'Spiti Valley Expedition from Shimla - 8 Days Road Trip Package Starting from ₹18,900',
+    link: bookingLink('spiti'),
+  },
+  {
+    id: 'kedarnath',
+    title: 'Kedarnath Yatra From Haridwar',
+    image: bannerKedarnath,
+    alt: 'Kedarnath Yatra from Haridwar - 5 Days Spiritual Trek Package Starting from ₹11,900',
+    link: bookingLink('do-dham'),
+  },
+  {
+    id: 'bali',
+    title: 'Bali Tropical Escape From Mumbai',
+    image: bannerBali,
+    alt: 'Bali Tropical Escape from Mumbai - 7 Days Luxury Island Package Starting from ₹39,900',
+    link: bookingLink('bali'),
+  },
+];
+---
+
+<section
+  class="promo-banner-section relative w-full overflow-hidden bg-surface pb-6 sm:pb-8"
+  aria-label="Featured Adventure Banners"
+>
+  {/* Full Bleed Edge-to-Edge Banner Carousel (No Side Gaps) */}
+  <div
+    class="promo-slider relative w-full overflow-hidden bg-ink group"
+    id="promo-banner-slider"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="Curated Adventure Packages"
+  >
+    {/* Slides Wrapper */}
+    <div
+      class="slider-track flex transition-transform duration-500 ease-out"
+      id="promo-slider-track"
+    >
+      {slides.map((slide, idx) => (
+        <div
+          class="slide-item relative min-w-full shrink-0 aspect-[16/6] sm:aspect-[2560/580] overflow-hidden bg-ink"
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${idx + 1} of ${slides.length}: ${slide.title}`}
+        >
+          {/* Ultra-HD 2560px Banner Graphic Full Width */}
+          <a
+            href={slide.link}
+            class="relative block h-full w-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand"
+            aria-label={`View ${slide.title} package`}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.alt}
+              class="h-full w-full object-cover object-center transition-transform duration-700 ease-out hover:scale-[1.01]"
+              widths={[1024, 1600, 2560]}
+              sizes="100vw"
+              quality={95}
+              priority={idx === 0}
+            />
+            <span class="sr-only">View {slide.title} package</span>
+          </a>
+        </div>
+      ))}
+    </div>
+
+    {/* Prev / Next Subtle Arrows */}
+    <button
+      type="button"
+      id="slider-prev"
+      class="absolute left-4 sm:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-ink/75 text-white backdrop-blur-md transition-all hover:bg-brand hover:text-ink hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand shadow-xl opacity-80 group-hover:opacity-100"
+      aria-label="Previous banner slide"
+    >
+      <i class="ph-bold ph-caret-left text-xl sm:text-2xl" aria-hidden="true"></i>
+    </button>
+    <button
+      type="button"
+      id="slider-next"
+      class="absolute right-4 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-ink/75 text-white backdrop-blur-md transition-all hover:bg-brand hover:text-ink hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand shadow-xl opacity-80 group-hover:opacity-100"
+      aria-label="Next banner slide"
+    >
+      <i class="ph-bold ph-caret-right text-xl sm:text-2xl" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  {/* Carousel Pagination Dots (Matching Image 1: . . -) */}
+  <div
+    class="mt-4 sm:mt-5 flex items-center justify-center gap-2.5"
+    id="slider-dots"
+    role="tablist"
+    aria-label="Banner pagination controls"
+  >
+    {slides.map((_, i) => (
+      <button
+        type="button"
+        class={`slider-dot transition-all duration-300 rounded-full cursor-pointer ${
+          i === 0 ? 'w-8 h-2.5 bg-brand' : 'w-2.5 h-2.5 bg-ink-muted/40 hover:bg-ink-muted'
+        }`}
+        data-index={i}
+        role="tab"
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-label={`Go to slide ${i + 1}`}
+      />
+    ))}
+  </div>
+</section>
+
+<script>
+  function initPromoSlider() {
+    const slider = document.getElementById('promo-banner-slider');
+    const track = document.getElementById('promo-slider-track') as HTMLElement | null;
+    const dots = document.querySelectorAll<HTMLButtonElement>('.slider-dot');
+    const prevBtn = document.getElementById('slider-prev');
+    const nextBtn = document.getElementById('slider-next');
+
+    if (!track || dots.length === 0) return;
+
+    let currentIndex = 0;
+    const totalSlides = dots.length;
+    let autoplayTimer: ReturnType<typeof setInterval> | null = null;
+
+    function goToSlide(index: number) {
+      currentIndex = (index + totalSlides) % totalSlides;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      dots.forEach((dot, idx) => {
+        const isCurrent = idx === currentIndex;
+        dot.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        if (isCurrent) {
+          dot.classList.remove('w-2.5', 'bg-ink-muted/40');
+          dot.classList.add('w-8', 'bg-brand');
+        } else {
+          dot.classList.remove('w-8', 'bg-brand');
+          dot.classList.add('w-2.5', 'bg-ink-muted/40');
+        }
+      });
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, 5000);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const index = parseInt(target.getAttribute('data-index') || '0', 10);
+        goToSlide(index);
+        startAutoplay();
+      });
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      goToSlide(currentIndex - 1);
+      startAutoplay();
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      goToSlide(currentIndex + 1);
+      startAutoplay();
+    });
+
+    slider?.addEventListener('mouseenter', stopAutoplay);
+    slider?.addEventListener('mouseleave', startAutoplay);
+
+    // Touch Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider?.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAutoplay();
+    }, { passive: true });
+
+    slider?.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) goToSlide(currentIndex + 1);
+        else goToSlide(currentIndex - 1);
+      }
+      startAutoplay();
+    }, { passive: true });
+
+    startAutoplay();
+  }
+
+  initPromoSlider();
+  document.addEventListener('astro:page-load', initPromoSlider);
+</script>

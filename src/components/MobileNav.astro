@@ -1,0 +1,51 @@
+---
+---
+
+<div id="mobile-nav-backdrop" class="fixed inset-0 z-[60] hidden bg-ink/50 backdrop-blur-sm"></div>
+
+<div
+  id="mobile-nav"
+  class="fixed inset-y-0 right-0 z-[70] flex w-[82%] max-w-sm translate-x-full flex-col overflow-y-auto overscroll-contain bg-surface p-8 shadow-panel transition-transform duration-300 ease-out"
+  style="padding-top: max(2rem, env(safe-area-inset-top)); padding-bottom: max(2rem, env(safe-area-inset-bottom));"
+>
+  <button
+    type="button"
+    id="mobile-nav-close"
+    aria-label="Close menu"
+    class="mb-10 grid h-11 w-11 place-items-center self-end rounded-full bg-surface-muted text-2xl text-ink"
+  >
+    <i class="ph ph-x" aria-hidden="true"></i>
+  </button>
+
+  <nav class="flex flex-col gap-6" aria-label="Mobile">
+    <a href="/#home" class="text-xl font-bold text-ink">Home</a>
+    <a href="/about.html" class="text-xl font-bold text-ink">About Us</a>
+    <a href="/contact.html" class="text-xl font-bold text-ink">Contact Us</a>
+    <a
+      href="/book.html"
+      class="mt-4 inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-base font-bold text-ink"
+    >
+      Book Now
+    </a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('mobile-nav-toggle');
+  const drawer = document.getElementById('mobile-nav');
+  const backdrop = document.getElementById('mobile-nav-backdrop');
+  const closeBtn = document.getElementById('mobile-nav-close');
+
+  const setOpen = (open: boolean) => {
+    if (!drawer || !backdrop || !toggle) return;
+    drawer.classList.toggle('translate-x-full', !open);
+    backdrop.classList.toggle('hidden', !open);
+    document.body.classList.toggle('overflow-hidden', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+
+  toggle?.addEventListener('click', () => setOpen(true));
+  closeBtn?.addEventListener('click', () => setOpen(false));
+  backdrop?.addEventListener('click', () => setOpen(false));
+  drawer?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+</script>

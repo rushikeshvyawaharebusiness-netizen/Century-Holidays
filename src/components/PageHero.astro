@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  highlight: string;
+  subtitle: string;
+  tone?: 'light' | 'dark';
+}
+
+const { title, highlight, subtitle, tone = 'light' } = Astro.props;
+const isDark = tone === 'dark';
+---
+
+<section
+  class:list={[
+    'relative overflow-hidden pb-20 pt-40 text-center sm:pb-24 sm:pt-44',
+    isDark ? 'bg-ink' : 'bg-paper',
+  ]}
+>
+  <div class="container-page relative">
+    <h1
+      class:list={[
+        'text-balance font-display text-5xl sm:text-6xl lg:text-7xl',
+        isDark ? 'text-text-inverse' : 'text-ink',
+      ]}
+    >
+      {title} <span class:list={[isDark && 'text-brand']}>{highlight}</span>
+    </h1>
+    <p
+      class:list={[
+        'mx-auto mt-5 max-w-xl text-lg',
+        isDark ? 'text-text-inverse-muted' : 'text-text-muted',
+      ]}
+    >
+      {subtitle}
+    </p>
+  </div>
+</section>
