@@ -196,37 +196,23 @@ const structuredData = {
             </span>
           </a>
 
-          <!-- 2. Google Reviews -->
+          <!-- 2. Google Reviews (Numbers scroll from 100 to 300) -->
           <div class="flex items-center gap-1.5 sm:gap-2">
             <GoogleIcon class="h-4.5 w-4.5 sm:h-5 sm:w-5 shrink-0" />
             <i class="ph-fill ph-star text-base sm:text-lg text-[#F59E0B] shrink-0" aria-hidden="true"></i>
-            <div class="h-5 sm:h-6 overflow-hidden relative" aria-label="4.9 Google Rating with 500+ Reviews">
-              <div class="trust-ticker flex flex-col font-bold tracking-tight text-ink text-xs sm:text-sm tabular-nums select-none">
-                <span class="h-5 sm:h-6 flex items-center">4.9(500+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(1,200+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(2,500+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(5,000+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(8.5k+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(500+ Reviews)</span>
-              </div>
-            </div>
+            <span class="text-xs sm:text-sm font-bold tracking-tight text-ink tabular-nums whitespace-nowrap">
+              4.9(<span id="counter-reviews">100</span>+ Reviews)
+            </span>
           </div>
 
-          <!-- 3. Travellers -->
+          <!-- 3. Travellers (Numbers scroll from 2,000 to 7,000) -->
           <div class="flex items-center gap-2">
             <div class="flex items-center justify-center h-6 w-6 rounded-full bg-brand/25 text-ink shrink-0">
               <i class="ph-bold ph-users-three text-base" aria-hidden="true"></i>
             </div>
-            <div class="h-5 sm:h-6 overflow-hidden relative" aria-label="10,000+ Happy Travellers">
-              <div class="trust-ticker-delayed flex flex-col font-bold tracking-tight text-ink text-xs sm:text-sm tabular-nums select-none">
-                <span class="h-5 sm:h-6 flex items-center">10,000+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">18,000+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">25,000+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">35,000+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">50,000+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">10,000+ Travellers</span>
-              </div>
-            </div>
+            <span class="text-xs sm:text-sm font-bold tracking-tight text-ink tabular-nums whitespace-nowrap">
+              <span id="counter-travellers">2,000</span>+ Travellers
+            </span>
           </div>
         </div>
       </div>
@@ -535,51 +521,63 @@ const structuredData = {
   </main>
 </BaseLayout>
 
-<style>
-  @keyframes trust-ticker-scroll {
-    0%, 14% {
-      transform: translateY(0%);
-    }
-    20%, 34% {
-      transform: translateY(-16.666%);
-    }
-    40%, 54% {
-      transform: translateY(-33.333%);
-    }
-    60%, 74% {
-      transform: translateY(-50%);
-    }
-    80%, 94% {
-      transform: translateY(-66.666%);
-    }
-    100% {
-      transform: translateY(-83.333%);
-    }
-  }
-
-  .trust-ticker {
-    animation: trust-ticker-scroll 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-  }
-
-  .trust-ticker-delayed {
-    animation: trust-ticker-scroll 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-    animation-delay: 1s;
-  }
-
-  .trust-ticker:hover,
-  .trust-ticker-delayed:hover {
-    animation-play-state: paused;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .trust-ticker,
-    .trust-ticker-delayed {
-      animation: none;
-    }
-  }
-</style>
-
 <script>
+  function setupLiveCounters() {
+    const reviewsEl = document.getElementById('counter-reviews');
+    const travellersEl = document.getElementById('counter-travellers');
+    if (!reviewsEl || !travellersEl) return;
+
+    const revMin = 100;
+    const revMax = 300;
+    const travMin = 2000;
+    const travMax = 7000;
+
+    const scrollDuration = 3000; // 3 seconds smooth scroll
+    const pauseDuration = 3500;  // 3.5 seconds pause at final numbers
+
+    let animId = null;
+    let timeoutId = null;
+    let startTime = null;
+
+    function runScroll(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / scrollDuration, 1);
+
+      // Smooth deceleration curve
+      const ease = 1 - Math.pow(1 - progress, 2.2);
+
+      const currentRev = Math.round(revMin + (revMax - revMin) * ease);
+      const currentTrav = Math.round(travMin + (travMax - travMin) * ease);
+
+      reviewsEl.textContent = String(currentRev);
+      travellersEl.textContent = currentTrav.toLocaleString();
+
+      if (progress < 1) {
+        animId = requestAnimationFrame(runScroll);
+      } else {
+        reviewsEl.textContent = String(revMax);
+        travellersEl.textContent = travMax.toLocaleString();
+
+        timeoutId = setTimeout(() => {
+          startTime = null;
+          animId = requestAnimationFrame(runScroll);
+        }, pauseDuration);
+      }
+    }
+
+    animId = requestAnimationFrame(runScroll);
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        if (animId) cancelAnimationFrame(animId);
+        if (timeoutId) clearTimeout(timeoutId);
+      },
+      { once: true }
+    );
+  }
+
   function setupFaqToggle() {
     const btn = document.getElementById('faq-toggle-btn');
     const container = document.getElementById('faq-extra-container');
@@ -605,6 +603,11 @@ const structuredData = {
     });
   }
 
-  setupFaqToggle();
-  document.addEventListener('astro:page-load', setupFaqToggle);
+  function initPage() {
+    setupLiveCounters();
+    setupFaqToggle();
+  }
+
+  initPage();
+  document.addEventListener('astro:page-load', initPage);
 </script>
