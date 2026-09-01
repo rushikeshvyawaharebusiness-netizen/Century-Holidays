@@ -92,7 +92,7 @@ const structuredData = {
 >
   <main id="main-content">
     <!-- Hero -->
-    <header id="home" class="relative flex min-h-screen min-h-[100dvh] flex-col justify-between pt-24 pb-6 sm:pt-28 sm:pb-8">
+    <header id="home" class="relative flex min-h-screen min-h-[100dvh] flex-col justify-between pt-24 pb-0 sm:pt-28">
       <div class="absolute inset-0 -z-10 overflow-hidden">
         <Image
           src={heroImage}
@@ -133,36 +133,39 @@ const structuredData = {
         </div>
       </div>
 
-      <!-- Hero Bottom Trust Badges (Centered in the middle at bottom of hero image) -->
-      <div class="relative z-10 w-full px-4 pt-4">
-        <div class="container-page flex justify-center">
-          <div class="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 rounded-full border border-white/20 bg-ink/65 px-5 py-2.5 sm:px-8 sm:py-3 text-text-inverse backdrop-blur-md shadow-xl">
-            <!-- 4.9 Google Rating -->
-            <div class="flex items-center gap-2">
-              <GoogleIcon class="h-4 w-4 sm:h-4.5 sm:w-4.5 shrink-0" />
-              <span class="text-xs sm:text-sm font-bold tabular-nums">4.9 Google Rating</span>
+      <!-- Hero Bottom Trust Strip (Matching Reference Image) -->
+      <div class="relative z-20 w-full bg-surface border-y border-border shadow-xs">
+        <div class="container-page flex flex-wrap items-center justify-center gap-6 sm:gap-12 md:gap-16 py-3.5 sm:py-4">
+          <!-- 1. Instagram Community -->
+          <a
+            href={SOCIAL.instagram}
+            target="_blank"
+            rel="noopener"
+            class="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-105"
+          >
+            <InstagramIcon class="h-5 w-5 sm:h-5.5 sm:w-5.5 shrink-0" />
+            <span class="text-xs sm:text-sm font-bold tracking-tight text-ink group-hover:text-brand">
+              @centuryholidays
+            </span>
+          </a>
+
+          <!-- 2. Google Reviews -->
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <GoogleIcon class="h-4.5 w-4.5 sm:h-5 sm:w-5 shrink-0" />
+            <i class="ph-fill ph-star text-base sm:text-lg text-[#F59E0B]" aria-hidden="true"></i>
+            <span class="text-xs sm:text-sm font-bold tracking-tight text-ink tabular-nums">
+              4.9(500+ Reviews)
+            </span>
+          </div>
+
+          <!-- 3. Travellers -->
+          <div class="flex items-center gap-2">
+            <div class="flex items-center justify-center h-6 w-6 rounded-full bg-brand/25 text-ink">
+              <i class="ph-bold ph-users-three text-base" aria-hidden="true"></i>
             </div>
-
-            <span class="hidden sm:inline-block h-3.5 w-px bg-white/25" aria-hidden="true"></span>
-
-            <!-- 24/7 Trip Support -->
-            <div class="flex items-center gap-2">
-              <i class="ph-fill ph-headset text-base text-brand" aria-hidden="true"></i>
-              <span class="text-xs sm:text-sm font-bold">24/7 Trip Support</span>
-            </div>
-
-            <span class="hidden sm:inline-block h-3.5 w-px bg-white/25" aria-hidden="true"></span>
-
-            <!-- Instagram -->
-            <a
-              href={SOCIAL.instagram}
-              target="_blank"
-              rel="noopener"
-              class="flex items-center gap-2 transition-colors hover:text-brand"
-            >
-              <InstagramIcon class="h-4 w-4 sm:h-4.5 sm:w-4.5 shrink-0" />
-              <span class="text-xs sm:text-sm font-bold">@centuryholidays</span>
-            </a>
+            <span class="text-xs sm:text-sm font-bold tracking-tight text-ink">
+              10,000+ Travellers
+            </span>
           </div>
         </div>
       </div>
