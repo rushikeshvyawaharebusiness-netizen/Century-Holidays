@@ -19,6 +19,8 @@ import customer5 from '../assets/images/customer5.jpg';
 import SideScrollingBanners from '../components/SideScrollingBanners.astro';
 import DestinationCircles from '../components/DestinationCircles.astro';
 import SpecialitiesSection from '../components/SpecialitiesSection.astro';
+import GoogleIcon from '../components/icons/GoogleIcon.astro';
+import InstagramIcon from '../components/icons/InstagramIcon.astro';
 import { destinations, trending } from '../data/trips';
 import { PHONE_E164, SOCIAL, whatsappLink } from '../data/contact';
 
@@ -90,7 +92,7 @@ const structuredData = {
 >
   <main id="main-content">
     <!-- Hero -->
-    <header id="home" class="relative flex min-h-screen min-h-[100dvh] items-center pt-32 pb-16 sm:pt-36 sm:pb-20 lg:py-0">
+    <header id="home" class="relative flex min-h-screen min-h-[100dvh] flex-col justify-between pt-24 pb-6 sm:pt-28 sm:pb-8">
       <div class="absolute inset-0 -z-10 overflow-hidden">
         <Image
           src={heroImage}
@@ -104,7 +106,8 @@ const structuredData = {
         <div class="absolute inset-0 bg-ink/25 lg:hidden"></div>
       </div>
 
-      <div class="container-page w-full">
+      <!-- Main Hero Content (Vertically centered) -->
+      <div class="container-page w-full my-auto py-8">
         <div class="mx-auto max-w-2xl text-center lg:ml-auto lg:mr-0 lg:text-right">
           <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-[1.12] text-text-inverse tracking-tight">
             Crafting memories for <span class="text-brand">every century</span>
@@ -125,6 +128,40 @@ const structuredData = {
               class="inline-flex items-center gap-2 rounded-full border-2 border-text-inverse/30 px-7 py-3.5 text-base font-bold text-text-inverse transition-colors hover:border-brand hover:bg-brand hover:text-ink"
             >
               Book Now
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Bottom Trust Badges (Centered in the middle at bottom of hero image) -->
+      <div class="relative z-10 w-full px-4 pt-4">
+        <div class="container-page flex justify-center">
+          <div class="inline-flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 rounded-full border border-white/20 bg-ink/65 px-5 py-2.5 sm:px-8 sm:py-3 text-text-inverse backdrop-blur-md shadow-xl">
+            <!-- 4.9 Google Rating -->
+            <div class="flex items-center gap-2">
+              <GoogleIcon class="h-4 w-4 sm:h-4.5 sm:w-4.5 shrink-0" />
+              <span class="text-xs sm:text-sm font-bold tabular-nums">4.9 Google Rating</span>
+            </div>
+
+            <span class="hidden sm:inline-block h-3.5 w-px bg-white/25" aria-hidden="true"></span>
+
+            <!-- 24/7 Trip Support -->
+            <div class="flex items-center gap-2">
+              <i class="ph-fill ph-headset text-base text-brand" aria-hidden="true"></i>
+              <span class="text-xs sm:text-sm font-bold">24/7 Trip Support</span>
+            </div>
+
+            <span class="hidden sm:inline-block h-3.5 w-px bg-white/25" aria-hidden="true"></span>
+
+            <!-- Instagram -->
+            <a
+              href={SOCIAL.instagram}
+              target="_blank"
+              rel="noopener"
+              class="flex items-center gap-2 transition-colors hover:text-brand"
+            >
+              <InstagramIcon class="h-4 w-4 sm:h-4.5 sm:w-4.5 shrink-0" />
+              <span class="text-xs sm:text-sm font-bold">@centuryholidays</span>
             </a>
           </div>
         </div>
