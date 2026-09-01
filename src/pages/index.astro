@@ -35,22 +35,69 @@ const categories = [
 const faqs = [
   {
     question: 'What is Century Holidays?',
-    answer: 'We are a premium travel agency completely dedicated to creating customized, stress-free travel experiences without any middlemen.',
+    answer: 'We are a premier travel agency dedicated to curated group treks, bespoke international holidays, and domestic expeditions with zero middlemen and 100% on-ground support.',
     open: true,
   },
   {
-    question: 'Is the first installment refundable if I cancel my trip?',
-    answer: 'Refund policies depend on the specific package and exactly when the cancellation is initiated. Please review our detailed cancellation policy.',
+    question: 'How do I book a tour with Century Holidays?',
+    answer: 'You can book directly by clicking "Book Now" on our website, exploring our destination packages, or connecting directly with our travel specialists on WhatsApp at +91 7066187551 for instant reservation assistance.',
   },
   {
-    question: 'How much advance payment is required?',
-    answer: 'Typically, a 30% advance secures your booking, but this varies based on international flight and hotel requirements.',
+    question: 'How much advance payment is required to confirm a booking?',
+    answer: 'Typically, a 30% advance deposit secures your booking slot. The remaining balance is cleared closer to the departure date depending on international flight and hotel arrangements.',
   },
   {
-    question: 'Do you assist during the trip?',
-    answer: 'Absolutely! Our 24/7 support team is always just a quick WhatsApp text or phone call away while you are traveling.',
+    question: 'Is the advance payment refundable if I cancel my trip?',
+    answer: 'Refund policies depend on the destination package and the timing of your cancellation. We provide transparent cancellation schedules and flexible rescheduling vouchers for eligible trips.',
+  },
+  {
+    question: 'Can trips be customized for private groups, families, or couples?',
+    answer: 'Yes! In addition to our popular fixed group departures, our travel specialists design 100% customized private itineraries tailored to your dates, pace, hotel preferences, and budget.',
+  },
+  {
+    question: 'Do you assist with flights, visas, and travel insurance?',
+    answer: 'Absolutely. We provide end-to-end guidance on visa documentation, embassy appointments, domestic and international flight ticketing, and comprehensive medical travel insurance.',
+  },
+  {
+    question: 'Are solo travelers welcome on your group trips?',
+    answer: 'Over 50% of our travelers join solo! Our group tours provide a safe, welcoming, and vibrant social environment led by verified trip captains where solo adventurers make lifelong friends.',
+  },
+  {
+    question: 'What kind of accommodation and transport is provided?',
+    answer: 'We partner exclusively with verified 3-star to 5-star boutique hotels, premium resorts, and luxury glamping sites. All ground transfers use sanitized private vehicles (Force Travellers, SUVs, or luxury coaches) with licensed professional drivers.',
+  },
+  {
+    question: 'Do you provide 24/7 on-ground assistance during the tour?',
+    answer: 'Yes, around the clock. From your arrival airport pickup until your return flight home, our experienced on-ground trip captains and 24/7 emergency support desk are always just a phone call or WhatsApp message away.',
+  },
+  {
+    question: 'What safety and medical measures are taken for high-altitude treks?',
+    answer: 'For Himalayan treks (Ladakh, Spiti, Kedarkantha), we enforce strict acclimatization schedules and provide portable oxygen cylinders, comprehensive first-aid kits, pulse oximeters, and certified mountaineering guides.',
+  },
+  {
+    question: 'When will I receive my final itinerary and trip coordinator details?',
+    answer: 'Your day-wise tour vouchers, hotel vouchers, packing checklist, and dedicated trip captain contact details are shared in an exclusive WhatsApp briefing group 3 to 5 days prior to your departure.',
+  },
+  {
+    question: 'What should I pack for international trips or trekking expeditions?',
+    answer: 'Upon booking confirmation, you will receive a detailed packing checklist tailored specifically to your destination, season, and activities—covering thermal layers, trekking footwear, rain gear, and essential medicines.',
+  },
+  {
+    question: 'Are meals included in your tour packages?',
+    answer: 'Most packages include daily buffet breakfasts and select dinners at your accommodation, as outlined in each trip itinerary. Lunches are often kept open so you can explore local regional cafes and authentic food spots.',
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'We accept all major secure payment methods including UPI (Google Pay, PhonePe, Paytm), Credit Cards, Debit Cards, Net Banking, and direct IMPS/NEFT transfers with official GST invoices.',
+  },
+  {
+    question: 'How can I reach Century Holidays for urgent inquiries or support?',
+    answer: 'You can call us directly on +91 7066187551, WhatsApp our support desk, email contact@centuryholidays.in, or visit our office on the 4th Floor, Trinity Towers, Tidke Colony, Nashik, Maharashtra.',
   },
 ];
+
+const initialFaqs = faqs.slice(0, 10);
+const extraFaqs = faqs.slice(10);
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -109,10 +156,10 @@ const structuredData = {
       <!-- Main Hero Content (Vertically centered) -->
       <div class="container-page w-full my-auto py-8">
         <div class="mx-auto max-w-2xl text-center lg:ml-auto lg:mr-0 lg:text-right">
-          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-[1.12] text-text-inverse tracking-tight">
+          <h1 class="font-sans font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] text-text-inverse tracking-tight">
             Crafting memories for <span class="text-brand">every century</span>
           </h1>
-          <p class="mt-5 text-base sm:text-lg text-text-inverse-muted leading-relaxed max-w-xl mx-auto lg:ml-auto lg:mr-0">
+          <p class="mt-5 text-base sm:text-lg lg:text-xl text-text-inverse/90 font-normal leading-relaxed max-w-xl mx-auto lg:ml-auto lg:mr-0">
             Join us for unforgettable treks, customized tours and premium travel experiences.
             Your next great adventure awaits.
           </p>
@@ -149,35 +196,35 @@ const structuredData = {
             </span>
           </a>
 
-          <!-- 2. Google Reviews (Total 300 reviews) -->
+          <!-- 2. Google Reviews -->
           <div class="flex items-center gap-1.5 sm:gap-2">
             <GoogleIcon class="h-4.5 w-4.5 sm:h-5 sm:w-5 shrink-0" />
             <i class="ph-fill ph-star text-base sm:text-lg text-[#F59E0B] shrink-0" aria-hidden="true"></i>
-            <div class="h-5 sm:h-6 overflow-hidden relative" aria-label="4.9 Google Rating with 300 Reviews">
+            <div class="h-5 sm:h-6 overflow-hidden relative" aria-label="4.9 Google Rating with 500+ Reviews">
               <div class="trust-ticker flex flex-col font-bold tracking-tight text-ink text-xs sm:text-sm tabular-nums select-none">
-                <span class="h-5 sm:h-6 flex items-center">4.9(240+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(265+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(280+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(295+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(300+ Reviews)</span>
-                <span class="h-5 sm:h-6 flex items-center">4.9(240+ Reviews)</span>
+                <span class="h-5 sm:h-6 flex items-center">4.9(500+ Reviews)</span>
+                <span class="h-5 sm:h-6 flex items-center">4.9(1,200+ Reviews)</span>
+                <span class="h-5 sm:h-6 flex items-center">4.9(2,500+ Reviews)</span>
+                <span class="h-5 sm:h-6 flex items-center">4.9(5,000+ Reviews)</span>
+                <span class="h-5 sm:h-6 flex items-center">4.9(8.5k+ Reviews)</span>
+                <span class="h-5 sm:h-6 flex items-center">4.9(500+ Reviews)</span>
               </div>
             </div>
           </div>
 
-          <!-- 3. Travellers (Total 7,000 travellers) -->
+          <!-- 3. Travellers -->
           <div class="flex items-center gap-2">
             <div class="flex items-center justify-center h-6 w-6 rounded-full bg-brand/25 text-ink shrink-0">
               <i class="ph-bold ph-users-three text-base" aria-hidden="true"></i>
             </div>
-            <div class="h-5 sm:h-6 overflow-hidden relative" aria-label="7,000+ Happy Travellers">
+            <div class="h-5 sm:h-6 overflow-hidden relative" aria-label="10,000+ Happy Travellers">
               <div class="trust-ticker-delayed flex flex-col font-bold tracking-tight text-ink text-xs sm:text-sm tabular-nums select-none">
-                <span class="h-5 sm:h-6 flex items-center">5,500+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">6,000+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">6,400+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">6,800+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">7,000+ Travellers</span>
-                <span class="h-5 sm:h-6 flex items-center">5,500+ Travellers</span>
+                <span class="h-5 sm:h-6 flex items-center">10,000+ Travellers</span>
+                <span class="h-5 sm:h-6 flex items-center">18,000+ Travellers</span>
+                <span class="h-5 sm:h-6 flex items-center">25,000+ Travellers</span>
+                <span class="h-5 sm:h-6 flex items-center">35,000+ Travellers</span>
+                <span class="h-5 sm:h-6 flex items-center">50,000+ Travellers</span>
+                <span class="h-5 sm:h-6 flex items-center">10,000+ Travellers</span>
               </div>
             </div>
           </div>
@@ -415,15 +462,73 @@ const structuredData = {
     <!-- FAQs -->
     <section id="faqs" class="bg-paper py-20 sm:py-28">
       <div class="container-page">
-        <div data-reveal class="mb-14 flex flex-col items-center text-center">
-          <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Got Questions?</span>
-          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">
+        <!-- Section Header -->
+        <div data-reveal class="mb-12 sm:mb-16 flex flex-col items-center text-center">
+          <div class="mb-3.5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 shadow-xs">
+            <i class="ph-fill ph-question text-base text-brand"></i>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-ink">Everything You Need To Know</span>
+          </div>
+          <h2 class="font-sans font-extrabold text-3xl sm:text-4xl lg:text-5xl text-ink tracking-tight">
             Frequently Asked Questions
           </h2>
+          <p class="mt-3.5 max-w-xl text-base sm:text-lg text-text-muted">
+            Got questions about your upcoming adventure? Here is everything you need to know about our packages, payments, and 24/7 on-trip support.
+          </p>
         </div>
 
-        <div class="mx-auto grid max-w-5xl gap-5 lg:grid-cols-2 lg:items-start">
-          {faqs.map((faq) => <FaqItem question={faq.question} answer={faq.answer} open={faq.open} />)}
+        <!-- Initial 10 FAQs (Starting view) -->
+        <div class="mx-auto grid max-w-5xl gap-4 sm:gap-5 lg:grid-cols-2 lg:items-start">
+          {initialFaqs.map((faq) => <FaqItem question={faq.question} answer={faq.answer} open={faq.open} />)}
+        </div>
+
+        <!-- Extra FAQs (Items 11-15, toggled by user) -->
+        <div id="faq-extra-container" class="mx-auto mt-4 sm:mt-5 hidden max-w-5xl">
+          <div class="grid gap-4 sm:gap-5 lg:grid-cols-2 lg:items-start">
+            {extraFaqs.map((faq) => <FaqItem question={faq.question} answer={faq.answer} open={faq.open} />)}
+          </div>
+        </div>
+
+        <!-- Show More / Less Toggle Button -->
+        <div class="mt-10 sm:mt-12 flex flex-col items-center justify-center">
+          <button
+            type="button"
+            id="faq-toggle-btn"
+            class="group inline-flex items-center gap-2.5 rounded-full border-2 border-ink bg-surface px-8 py-3.5 text-sm font-bold text-ink shadow-xs transition-all duration-200 hover:bg-ink hover:text-white hover:shadow-card cursor-pointer"
+            aria-expanded="false"
+            aria-controls="faq-extra-container"
+          >
+            <span id="faq-toggle-label">View All 15 FAQs</span>
+            <i id="faq-toggle-icon" class="ph-bold ph-caret-down text-base transition-transform duration-300 group-hover:translate-y-0.5" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- Need Help / 24/7 Support Banner -->
+        <div class="mx-auto mt-14 sm:mt-18 max-w-3xl rounded-3xl border border-border bg-surface p-6 sm:p-8 text-center shadow-card">
+          <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-brand/20 text-ink text-2xl mb-4">
+            <i class="ph-fill ph-headset" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-sans text-xl sm:text-2xl font-bold text-ink tracking-tight">Still have questions?</h3>
+          <p class="mt-2 text-sm sm:text-base text-text-muted max-w-md mx-auto">
+            Can’t find what you’re looking for? Our travel experts are available 24/7 to help you plan your dream holiday.
+          </p>
+          <div class="mt-6 flex flex-wrap justify-center gap-3 sm:gap-4">
+            <a
+              href={whatsappLink("Hi Century Holidays! I have a question about booking a tour.")}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
+              <i class="ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
+              <span>Chat with Expert on WhatsApp</span>
+            </a>
+            <a
+              href="tel:+917066187551"
+              class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-sm font-bold text-ink transition-colors hover:border-ink hover:bg-surface-muted"
+            >
+              <i class="ph-bold ph-phone text-lg" aria-hidden="true"></i>
+              <span>Call +91 7066187551</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -473,3 +578,33 @@ const structuredData = {
     }
   }
 </style>
+
+<script>
+  function setupFaqToggle() {
+    const btn = document.getElementById('faq-toggle-btn');
+    const container = document.getElementById('faq-extra-container');
+    const label = document.getElementById('faq-toggle-label');
+    const icon = document.getElementById('faq-toggle-icon');
+
+    if (!btn || !container || !label || !icon) return;
+
+    btn.addEventListener('click', () => {
+      const isHidden = container.classList.contains('hidden');
+      if (isHidden) {
+        container.classList.remove('hidden');
+        label.textContent = 'Show Fewer FAQs (10)';
+        icon.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        container.classList.add('hidden');
+        label.textContent = 'View All 15 FAQs';
+        icon.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
+
+  setupFaqToggle();
+  document.addEventListener('astro:page-load', setupFaqToggle);
+</script>
