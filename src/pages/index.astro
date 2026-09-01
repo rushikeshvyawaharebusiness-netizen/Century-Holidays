@@ -19,8 +19,8 @@ import customer5 from '../assets/images/customer5.jpg';
 import SideScrollingBanners from '../components/SideScrollingBanners.astro';
 import DestinationCircles from '../components/DestinationCircles.astro';
 import SpecialitiesSection from '../components/SpecialitiesSection.astro';
-import { allTrips, destinations, trending } from '../data/trips';
-import { PHONE_E164, SOCIAL, bookingLink, whatsappLink } from '../data/contact';
+import { destinations, trending } from '../data/trips';
+import { PHONE_E164, SOCIAL, whatsappLink } from '../data/contact';
 
 const categories = [
   { image: customer1, alt: 'Century Holidays Happy Traveler - Trekking Adventure Experience', title: 'Happy Travelers', description: 'Unforgettable moments captured on our trips.' },
@@ -90,7 +90,7 @@ const structuredData = {
 >
   <main id="main-content">
     <!-- Hero -->
-    <header id="home" class="relative flex min-h-screen items-center pt-20">
+    <header id="home" class="relative flex min-h-screen min-h-[100dvh] items-center pt-24 pb-16 sm:pt-28 sm:pb-20 lg:py-0">
       <div class="absolute inset-0 -z-10 overflow-hidden">
         <Image
           src={heroImage}
@@ -104,16 +104,19 @@ const structuredData = {
         <div class="absolute inset-0 bg-ink/25 lg:hidden"></div>
       </div>
 
-      <div class="container-page">
-        <div class="mx-auto max-w-xl text-center lg:ml-auto lg:mr-0 lg:text-right">
-          <h1 class="text-balance font-display text-4xl leading-[1.1] text-text-inverse sm:text-6xl lg:text-7xl">
-            Explore the World with <span class="text-brand" translate="no">Century Holidays</span>
+      <div class="container-page w-full">
+        <div class="mx-auto max-w-2xl text-center lg:ml-auto lg:mr-0 lg:text-right">
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-ink/40 px-4 py-1.5 backdrop-blur-xs">
+            <span class="text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-brand">Century Holidays</span>
+          </div>
+          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold leading-[1.12] text-text-inverse tracking-tight">
+            Crafting memories for <span class="text-brand">every century</span>
           </h1>
-          <p class="mt-6 text-lg text-text-inverse-muted">
+          <p class="mt-5 text-base sm:text-lg text-text-inverse-muted leading-relaxed max-w-xl mx-auto lg:ml-auto lg:mr-0">
             Join us for unforgettable treks, customized tours and premium travel experiences with Century Holidays.
             Your next great adventure awaits.
           </p>
-          <div class="mt-10 flex flex-wrap justify-center gap-4 lg:justify-end">
+          <div class="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4 lg:justify-end">
             <a
               href="#destinations"
               class="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-base font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
@@ -126,22 +129,6 @@ const structuredData = {
             >
               Plan Your Trip
             </a>
-          </div>
-
-          <div class="mt-10 border-t border-text-inverse/15 pt-6">
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-text-inverse-muted">Popular right now</p>
-            <ul class="mt-4 flex flex-wrap justify-center gap-2 lg:justify-end">
-              {allTrips().map((trip) => (
-                <li>
-                  <a
-                    href={bookingLink(trip.slug)}
-                    class="inline-flex items-center rounded-full border border-text-inverse/25 bg-ink/25 px-4 py-2 text-sm font-semibold text-text-inverse backdrop-blur-sm transition-colors hover:border-brand hover:bg-brand hover:text-ink"
-                  >
-                    {trip.shortName}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
