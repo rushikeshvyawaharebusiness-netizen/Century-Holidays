@@ -158,7 +158,6 @@
 
 <script>
   function initTravelerPopup() {
-    const STORAGE_KEY = 'century_lead_popup_dismissed_v1';
     const overlay = document.getElementById('traveler-popup-overlay');
     const card = document.getElementById('traveler-popup-card');
     const backdrop = document.getElementById('traveler-popup-backdrop');
@@ -170,9 +169,16 @@
 
     if (!overlay || !card) return;
 
-    // Check if dismissed in this session
-    const isDismissed = sessionStorage.getItem(STORAGE_KEY);
-    if (isDismissed) return;
+    // Show on homepage ('/' or '/index.html')
+    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+    const isHomePage = currentPath === '/' || currentPath.endsWith('index.html');
+    if (!isHomePage) return;
+
+    // Reset form state in case of view-transition / re-init
+    if (form && successView) {
+      form.classList.remove('hidden');
+      successView.classList.add('hidden');
+    }
 
     function openPopup() {
       if (!overlay || !card) return;
@@ -190,14 +196,12 @@
       card.classList.remove('scale-100');
       card.classList.add('scale-95');
       document.body.classList.remove('overflow-hidden');
-      // Mark as dismissed for the session
-      sessionStorage.setItem(STORAGE_KEY, 'true');
     }
 
-    // Trigger popup after 1.2 seconds for visitors
+    // Always trigger popup promptly on homepage refresh / load
     const timer = setTimeout(() => {
       openPopup();
-    }, 1200);
+    }, 800);
 
     // Close listeners
     closeBtn?.addEventListener('click', () => {
@@ -227,18 +231,15 @@
       const formData = new FormData(form);
       const name = (formData.get('travelerName')) || 'Traveler';
 
-      // Mark dismissed for session
-      sessionStorage.setItem(STORAGE_KEY, 'true');
-
       // Switch to success view
       if (successName) successName.textContent = typeof name === 'string' ? (name.split(' ')[0] || 'Traveler') : 'Traveler';
       form.classList.add('hidden');
       successView?.classList.remove('hidden');
 
-      // Auto-close after 3 seconds
+      // Auto-close after 2.5 seconds
       setTimeout(() => {
         closePopup();
-      }, 3000);
+      }, 2500);
     });
   }
 
