@@ -5,6 +5,7 @@ import cardThailandHd from '../assets/images/card-thailand-hd.jpg';
 import cardSriLanka from '../assets/images/card-srilanka.jpg';
 import cardDubai from '../assets/images/card-dubai.jpg';
 import cardBali from '../assets/images/card-bali.jpg';
+import cardAlmaty from '../assets/images/poster-almaty.jpg';
 import cardPune from '../assets/images/card-pune.jpg';
 import cardMumbai from '../assets/images/card-mumbai.jpg';
 import himachal from '../assets/images/himachal.png';
@@ -12,6 +13,7 @@ import spiti from '../assets/images/spiti.png';
 import meghalaya from '../assets/images/meghalaya.png';
 import dodham from '../assets/images/dodham.png';
 import chardham from '../assets/images/chardham.png';
+import hampta from '../assets/images/banner-hampta-hd.png';
 
 export interface Trip {
   /** Stable id used in ?destination= links and the booking form's select. */
@@ -38,9 +40,10 @@ export interface Trip {
 
 /** 
  * Primary showcase cards matching Image 2's authentic, non-AI aesthetic
- * rendered with ultra-HD photography and razor-sharp typography.
+ * Exactly 8 International and 8 Domestic trips for perfectly matched 4-column rows.
  */
 export const destinations: Trip[] = [
+  // ── International Escapes (8 Cards: Exactly 2 rows of 4) ──
   {
     image: cardVietnam,
     alt: 'Century Holidays - Vietnam Adventure Tour',
@@ -94,7 +97,7 @@ export const destinations: Trip[] = [
     alt: 'Century Holidays - Bhutan Himalayan Kingdom Tour',
     slug: 'bhutan',
     shortName: 'BHUTAN',
-    subtitle: '',
+    subtitle: 'KINGDOM',
     name: 'Bhutan Expedition',
     scope: 'international',
     category: 'Himalayan Kingdom',
@@ -110,7 +113,7 @@ export const destinations: Trip[] = [
     alt: 'Century Holidays - Sri Lanka Adventure Tour',
     slug: 'sri-lanka',
     shortName: 'SRI LANKA',
-    subtitle: 'ADVENTURE',
+    subtitle: 'TROPICAL',
     name: 'Sri Lanka Adventure',
     scope: 'international',
     category: 'Tropical & Cultural Tour',
@@ -126,7 +129,7 @@ export const destinations: Trip[] = [
     alt: 'Century Holidays - Dubai Luxury Adventure Tour',
     slug: 'dubai',
     shortName: 'DUBAI',
-    subtitle: 'Adventure',
+    subtitle: 'SAFARI',
     name: 'Dubai Adventure',
     scope: 'international',
     category: 'Luxury & Desert Safari',
@@ -142,7 +145,7 @@ export const destinations: Trip[] = [
     alt: 'Century Holidays - Bali Tropical Adventure Tour',
     slug: 'bali',
     shortName: 'BALI',
-    subtitle: 'Adventure',
+    subtitle: 'PARADISE',
     name: 'Bali Adventure',
     scope: 'international',
     category: 'Tropical Paradise',
@@ -153,6 +156,24 @@ export const destinations: Trip[] = [
     price: '39,900',
     highlight: 'Lempuyang Gates of Heaven framing Mount Agung, lush rice terraces in Ubud, private villa pools, and sunset beaches.',
   },
+  {
+    image: cardAlmaty,
+    alt: 'Century Holidays - Kazakhstan Almaty Tour',
+    slug: 'almaty',
+    shortName: 'ALMATY',
+    subtitle: 'KAZAKHSTAN',
+    name: 'Almaty Mountain Tour',
+    scope: 'international',
+    category: 'Central Asia Adventure',
+    duration: '5 Nights / 6 Days',
+    location: 'Almaty, Kazakhstan',
+    dateText: '15 Oct, 5 Nov',
+    moreDates: '+4',
+    price: '49,900',
+    highlight: 'Shymbulak ski resort, turquoise Big Almaty Lake, Kok Tobe hill panorama, and vibrant pedestrian Arbat street.',
+  },
+
+  // ── Domestic Destinations (8 Cards: Exactly 2 rows of 4, perfectly matching Mumbai) ──
   {
     image: himachal,
     alt: 'Century Holidays - Himachal Premium Mountain Tour',
@@ -190,7 +211,7 @@ export const destinations: Trip[] = [
     alt: 'Century Holidays - Meghalaya Nature Expedition',
     slug: 'meghalaya',
     shortName: 'MEGHALAYA',
-    subtitle: 'ADVENTURE',
+    subtitle: 'NATURE RETREAT',
     name: 'Meghalaya Nature Expedition',
     scope: 'domestic',
     category: 'North East Explorer',
@@ -216,6 +237,38 @@ export const destinations: Trip[] = [
     moreDates: '+8',
     price: '11,900',
     highlight: 'Sacred Himalayan darshan, helicopter shuttle coordination, mountain trek assistance, and peaceful Aarti ceremonies.',
+  },
+  {
+    image: chardham,
+    alt: 'Century Holidays - Complete Char Dham Yatra Pilgrimage',
+    slug: 'char-dham',
+    shortName: 'CHAR DHAM',
+    subtitle: 'PILGRIMAGE',
+    name: 'Complete Char Dham Yatra',
+    scope: 'domestic',
+    category: 'Spiritual Yatra',
+    duration: '11 Nights / 12 Days',
+    location: 'Haridwar & Yamunotri',
+    dateText: '10 May, 22 May',
+    moreDates: '+4',
+    price: '28,500',
+    highlight: 'The full sacred circuit — Yamunotri, Gangotri, Kedarnath, and Badrinath — with comfortable transport and VIP darshan coordination.',
+  },
+  {
+    image: hampta,
+    alt: 'Century Holidays - Hampta Pass Himalayan Trek',
+    slug: 'hampta-pass',
+    shortName: 'HAMPTA PASS',
+    subtitle: 'HIMALAYAN TREK',
+    name: 'Hampta Pass Trek',
+    scope: 'domestic',
+    category: 'Himalayan Trek',
+    duration: '4 Nights / 5 Days',
+    location: 'Manali & Hampta',
+    dateText: 'Weekly Batches',
+    moreDates: '+6',
+    price: '10,999',
+    highlight: 'Dramatic crossover trek from lush green Kullu valley to the stark cold desert of Lahaul with camping at Chandratal.',
   },
   {
     image: cardPune,

@@ -14,7 +14,7 @@ const { trip } = Astro.props;
 const shortLocation = trip.location.split(/[,/&]/)[0].trim();
 ---
 
-<article class="trip-card group relative flex aspect-[3/4] sm:aspect-[4/5] w-[260px] sm:w-[275px] flex-col overflow-hidden rounded-2xl sm:rounded-3xl shadow-card transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover bg-ink">
+<article class="trip-card group relative flex aspect-[3/4] sm:aspect-[4/5] w-full max-w-[275px] sm:max-w-[285px] flex-col overflow-hidden rounded-2xl sm:rounded-3xl shadow-card transition-all duration-300 hover:-translate-y-2 hover:shadow-card-hover bg-ink">
   <a
     href={bookingLink(trip.slug)}
     class="relative flex h-full w-full flex-col overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
