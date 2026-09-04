@@ -8,12 +8,12 @@ import cardBali from '../assets/images/card-bali.jpg';
 import cardAlmaty from '../assets/images/poster-almaty.jpg';
 import cardPune from '../assets/images/card-pune.jpg';
 import cardMumbai from '../assets/images/card-mumbai.jpg';
-import himachal from '../assets/images/himachal.png';
+import himachal from '../assets/images/card-himachal-hd.jpg';
 import spiti from '../assets/images/spiti.png';
-import meghalaya from '../assets/images/meghalaya.png';
+import meghalaya from '../assets/images/card-meghalaya-hd.jpg';
 import dodham from '../assets/images/dodham.png';
 import chardham from '../assets/images/chardham.png';
-import hampta from '../assets/images/banner-hampta-hd.png';
+import hampta from '../assets/images/card-hampta-hd.jpg';
 
 export interface Trip {
   /** Stable id used in ?destination= links and the booking form's select. */
