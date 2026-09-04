@@ -6,7 +6,6 @@ import TripCard from '../components/TripCard.astro';
 import CategoryCard from '../components/CategoryCard.astro';
 import WhyUsSection from '../components/WhyUsSection.astro';
 import FaqItem from '../components/FaqItem.astro';
-import FormField from '../components/FormField.astro';
 import PosterSlider from '../components/PosterSlider.astro';
 // Previous hero background — kept in assets, swap the import below to revert:
 // import heroImage from '../assets/images/background.jpg';
@@ -225,31 +224,31 @@ const structuredData = {
           <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Curated Adventures</span>
           <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">Explore Destinations</h2>
           <p class="mt-4 max-w-xl text-lg text-text-muted">
-            Discover our hand-picked international tours and domestic adventures — pure adventure, authentic moments.
+            Discover our hand-picked international tours and weekend escapes — pure adventure, authentic moments.
           </p>
 
           <!-- Destination Filter Tabs (Image 1 Style Pill Filter) -->
           <div class="mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-3" id="destination-filter-tabs">
             <button
               type="button"
-              class="dest-filter-pill active rounded-full px-5 py-2 text-sm font-bold transition-all duration-200 bg-brand text-ink shadow-sm cursor-pointer"
+              class="dest-filter-pill active rounded-full px-5 py-2 text-sm font-bold transition-all duration-200 bg-brand text-ink shadow-sm"
               data-filter="all"
             >
               All Adventures
             </button>
             <button
               type="button"
-              class="dest-filter-pill rounded-full border border-border bg-surface-muted px-5 py-2 text-sm font-bold transition-all duration-200 text-ink-muted hover:bg-border hover:text-ink cursor-pointer"
+              class="dest-filter-pill rounded-full border border-border bg-surface-muted px-5 py-2 text-sm font-bold transition-all duration-200 text-ink-muted hover:bg-border hover:text-ink"
               data-filter="international"
             >
               International Escapes
             </button>
             <button
               type="button"
-              class="dest-filter-pill rounded-full border border-border bg-surface-muted px-5 py-2 text-sm font-bold transition-all duration-200 text-ink-muted hover:bg-border hover:text-ink cursor-pointer"
+              class="dest-filter-pill rounded-full border border-border bg-surface-muted px-5 py-2 text-sm font-bold transition-all duration-200 text-ink-muted hover:bg-border hover:text-ink"
               data-filter="domestic"
             >
-              Domestic Destinations
+              Weekend Getaways
             </button>
           </div>
         </div>
@@ -326,59 +325,6 @@ const structuredData = {
       </div>
     </section>
 
-    <!-- Booking -->
-    <section id="book-now" class="relative overflow-hidden bg-surface py-20 sm:py-28">
-      <div class="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand/10 blur-[100px]"></div>
-
-      <div class="container-page relative grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:items-center">
-        <div data-reveal>
-          <span class="mb-2 inline-block text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Start Planning</span>
-          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">
-            Ready for your next Adventure?
-          </h2>
-          <p class="mt-4 max-w-md text-lg text-text-muted">
-            Fill out the details below and our travel experts will design a personalized itinerary tailored to your
-            exact preferences.
-          </p>
-
-          <ul class="mt-10 flex flex-col gap-4">
-            {['Best Price Guarantee', '100% Customization', '24/7 Priority Support'].map((perk) => (
-              <li class="flex items-center gap-3 text-lg font-semibold text-ink">
-                <i class="ph-fill ph-check-circle text-2xl text-ink-muted" aria-hidden="true"></i> {perk}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div data-reveal class="rounded-3xl border border-border bg-surface p-8 shadow-panel sm:p-12">
-          <form class="flex flex-col gap-6">
-            <div class="grid gap-6 sm:grid-cols-2">
-              <FormField icon="ph-user" label="Full Name" name="name" placeholder="Your Name" autocomplete="name" required />
-              <FormField icon="ph-phone" label="Phone Number" name="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required />
-            </div>
-            <div class="grid gap-6 sm:grid-cols-2">
-              <FormField icon="ph-envelope-simple" label="Email Address" name="email" type="email" placeholder="example@email.com" autocomplete="email" required />
-              <FormField icon="ph-map-pin" label="Destination" name="destination" placeholder="e.g. Bali, Spiti, etc." required />
-            </div>
-            <div class="grid gap-6 sm:grid-cols-2">
-              <FormField icon="ph-map-trifold" label="State" name="state" placeholder="Your State" autocomplete="address-level1" required />
-              <FormField icon="ph-buildings" label="City" name="city" placeholder="Your City" autocomplete="address-level2" required />
-            </div>
-            <div class="grid gap-6 sm:grid-cols-2">
-              <FormField icon="ph-users" label="No of Adults" name="adults" type="number" min="1" value="2" required />
-              <FormField icon="ph-baby" label="Number of Children" name="children" type="number" min="0" value="0" />
-            </div>
-
-            <button
-              type="submit"
-              class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-base font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
-            >
-              Request Free Quote <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
 
     <!-- 2 to 3 Side Scrolling Banners (Website Theme Typography) -->
     <SideScrollingBanners />
@@ -486,35 +432,6 @@ const structuredData = {
             <span id="faq-toggle-label">View All 15 FAQs</span>
             <i id="faq-toggle-icon" class="ph-bold ph-caret-down text-base transition-transform duration-300 group-hover:translate-y-0.5" aria-hidden="true"></i>
           </button>
-        </div>
-
-        <!-- Need Help / 24/7 Support Banner -->
-        <div class="mx-auto mt-14 sm:mt-18 max-w-3xl rounded-3xl border border-border bg-surface p-6 sm:p-8 text-center shadow-card">
-          <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-brand/20 text-ink text-2xl mb-4">
-            <i class="ph-fill ph-headset" aria-hidden="true"></i>
-          </div>
-          <h3 class="font-sans text-xl sm:text-2xl font-bold text-ink tracking-tight">Still have questions?</h3>
-          <p class="mt-2 text-sm sm:text-base text-text-muted max-w-md mx-auto">
-            Can’t find what you’re looking for? Our travel experts are available 24/7 to help you plan your dream holiday.
-          </p>
-          <div class="mt-6 flex flex-wrap justify-center gap-3 sm:gap-4">
-            <a
-              href={whatsappLink("Hi Century Holidays! I have a question about booking a tour.")}
-              target="_blank"
-              rel="noopener"
-              class="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
-            >
-              <i class="ph-fill ph-whatsapp-logo text-lg" aria-hidden="true"></i>
-              <span>Chat with Expert on WhatsApp</span>
-            </a>
-            <a
-              href="tel:+917066187551"
-              class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-sm font-bold text-ink transition-colors hover:border-ink hover:bg-surface-muted"
-            >
-              <i class="ph-bold ph-phone text-lg" aria-hidden="true"></i>
-              <span>Call +91 7066187551</span>
-            </a>
-          </div>
         </div>
       </div>
     </section>
