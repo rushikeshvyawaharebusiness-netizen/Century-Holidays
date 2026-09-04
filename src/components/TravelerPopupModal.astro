@@ -1,170 +1,155 @@
 ---
 // TravelerPopupModal.astro
-// First-time visitor lead capture popup with Century Holidays theme styling
-// Triggered once per visitor using localStorage ('century_lead_popup_seen')
+// Clean, minimal first-time visitor lead capture popup
+// Pure white background, website yellow (#F0EA1B) accent, no sparkle colors
 ---
 
 <div
   id="traveler-popup-overlay"
-  class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300 ease-out"
+  class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-opacity duration-300 ease-out"
   role="dialog"
   aria-modal="true"
   aria-labelledby="popup-title"
 >
-  {/* Glassmorphic Dark Backdrop */}
-  <div id="traveler-popup-backdrop" class="fixed inset-0 bg-ink/75 backdrop-blur-xs transition-opacity duration-300"></div>
+  {/* Dark Backdrop */}
+  <div id="traveler-popup-backdrop" class="fixed inset-0 bg-black/60 transition-opacity duration-300"></div>
 
-  {/* Modal Container */}
+  {/* Modal Container: Solid Pure White Background */}
   <div
     id="traveler-popup-card"
-    class="relative w-full max-w-md scale-95 rounded-3xl border border-border bg-surface shadow-2xl transition-all duration-300 ease-out overflow-hidden"
+    class="relative w-full max-w-md scale-95 rounded-2xl border border-gray-200 bg-white shadow-2xl transition-all duration-300 ease-out overflow-hidden"
   >
     {/* Close Button */}
     <button
       type="button"
       id="traveler-popup-close"
-      class="absolute top-4 right-4 z-20 grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full bg-surface-muted text-ink/70 hover:bg-ink hover:text-white transition-colors duration-200 cursor-pointer shadow-xs"
+      class="absolute top-4 right-4 z-20 grid h-8 w-8 place-items-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-150 cursor-pointer"
       aria-label="Close dialog"
     >
-      <i class="ph-bold ph-x text-base" aria-hidden="true"></i>
+      <i class="ph-bold ph-x text-lg" aria-hidden="true"></i>
     </button>
 
-    {/* Header with Warm Theme Accent */}
-    <div class="relative bg-gradient-to-b from-brand/20 via-brand/5 to-transparent p-6 pb-4 sm:p-7 sm:pb-4 border-b border-border/70">
-      <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-ink shadow-2xs mb-2">
-        <span class="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>Plan Your Trip</span>
+    {/* Header */}
+    <div class="px-6 pt-7 pb-2 sm:px-8 sm:pt-8">
+      <div class="inline-flex items-center rounded bg-[#F0EA1B]/25 border border-[#F0EA1B] px-2.5 py-0.5 text-xs font-bold text-gray-950 mb-2.5">
+        Plan Your Trip
       </div>
-
-      <h3 id="popup-title" class="font-display text-2xl sm:text-[26px] font-bold text-ink leading-tight">
-        Where do you want to <span class="text-ink underline decoration-brand decoration-4 underline-offset-4">travel next?</span>
+      <h3 id="popup-title" class="font-display text-2xl sm:text-[26px] font-bold text-gray-950 leading-tight">
+        Where do you want to travel?
       </h3>
-      <p class="mt-1.5 text-xs sm:text-sm text-text-muted leading-relaxed">
-        Tell us where you want to go. Our team will share handpicked itineraries and exclusive quotes directly with you.
+      <p class="mt-1.5 text-xs sm:text-sm text-gray-600 leading-relaxed">
+        Tell us your destination to receive personalized itineraries and special packages directly on WhatsApp.
       </p>
     </div>
 
     {/* Form Body */}
-    <div class="p-6 sm:p-7 pt-4 sm:pt-5">
-      <form id="traveler-popup-form" class="flex flex-col gap-3.5">
+    <div class="px-6 pb-7 pt-3 sm:px-8 sm:pb-8">
+      <form id="traveler-popup-form" class="flex flex-col gap-4">
         {/* Full Name */}
         <div>
-          <label for="popup-input-name" class="block text-xs font-bold text-ink uppercase tracking-wider mb-1.5">
-            Full Name <span class="text-red-500">*</span>
+          <label for="popup-input-name" class="block text-xs font-semibold text-gray-800 uppercase tracking-wide mb-1.5">
+            Full Name <span class="text-gray-400">*</span>
           </label>
           <div class="relative flex items-center">
-            <i class="ph-bold ph-user pointer-events-none absolute left-3.5 text-lg text-text-muted" aria-hidden="true"></i>
+            <i class="ph-bold ph-user pointer-events-none absolute left-3.5 text-base text-gray-400" aria-hidden="true"></i>
             <input
               type="text"
               id="popup-input-name"
               name="travelerName"
               required
-              placeholder="e.g. Rahul Sharma"
+              placeholder="Enter your name"
               autocomplete="name"
-              class="w-full rounded-xl border border-border bg-surface-muted py-2.5 sm:py-3 pl-10 sm:pl-11 pr-4 text-sm font-medium text-ink placeholder:text-text-muted/60 transition-colors focus:border-brand focus:bg-surface focus:outline-none focus:ring-3 focus:ring-brand/25"
+              class="w-full rounded-xl border border-gray-300 bg-white py-2.5 sm:py-3 pl-10 pr-4 text-sm font-medium text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#F0EA1B] focus:outline-none focus:ring-2 focus:ring-[#F0EA1B]"
             />
           </div>
         </div>
 
         {/* WhatsApp Number */}
         <div>
-          <label for="popup-input-phone" class="block text-xs font-bold text-ink uppercase tracking-wider mb-1.5">
-            WhatsApp Number <span class="text-red-500">*</span>
+          <label for="popup-input-phone" class="block text-xs font-semibold text-gray-800 uppercase tracking-wide mb-1.5">
+            WhatsApp Number <span class="text-gray-400">*</span>
           </label>
           <div class="relative flex items-center">
-            <i class="ph-bold ph-whatsapp-logo pointer-events-none absolute left-3.5 text-lg text-emerald-600" aria-hidden="true"></i>
+            <i class="ph-bold ph-phone pointer-events-none absolute left-3.5 text-base text-gray-400" aria-hidden="true"></i>
             <input
               type="tel"
               id="popup-input-phone"
               name="travelerPhone"
               required
-              placeholder="e.g. +91 98765 43210"
+              placeholder="+91 98765 43210"
               autocomplete="tel"
-              class="w-full rounded-xl border border-border bg-surface-muted py-2.5 sm:py-3 pl-10 sm:pl-11 pr-4 text-sm font-medium text-ink placeholder:text-text-muted/60 transition-colors focus:border-brand focus:bg-surface focus:outline-none focus:ring-3 focus:ring-brand/25"
+              class="w-full rounded-xl border border-gray-300 bg-white py-2.5 sm:py-3 pl-10 pr-4 text-sm font-medium text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#F0EA1B] focus:outline-none focus:ring-2 focus:ring-[#F0EA1B]"
             />
           </div>
         </div>
 
         {/* Destination */}
         <div>
-          <label for="popup-input-dest" class="block text-xs font-bold text-ink uppercase tracking-wider mb-1.5">
-            Destination of Choice <span class="text-red-500">*</span>
+          <label for="popup-input-dest" class="block text-xs font-semibold text-gray-800 uppercase tracking-wide mb-1.5">
+            Destination <span class="text-gray-400">*</span>
           </label>
           <div class="relative flex items-center">
-            <i class="ph-bold ph-map-pin pointer-events-none absolute left-3.5 text-lg text-text-muted" aria-hidden="true"></i>
+            <i class="ph-bold ph-map-pin pointer-events-none absolute left-3.5 text-base text-gray-400" aria-hidden="true"></i>
             <select
               id="popup-input-dest"
               name="destination"
               required
-              class="w-full appearance-none rounded-xl border border-border bg-surface-muted py-2.5 sm:py-3 pl-10 sm:pl-11 pr-9 text-sm font-medium text-ink transition-colors focus:border-brand focus:bg-surface focus:outline-none focus:ring-3 focus:ring-brand/25 cursor-pointer"
+              class="w-full appearance-none rounded-xl border border-gray-300 bg-white py-2.5 sm:py-3 pl-10 pr-9 text-sm font-medium text-gray-900 transition-colors focus:border-[#F0EA1B] focus:outline-none focus:ring-2 focus:ring-[#F0EA1B] cursor-pointer"
             >
-              <option value="" disabled selected>Select destination...</option>
-              <optgroup label="International Escapes">
+              <option value="" disabled selected>Select a destination</option>
+              <optgroup label="International Destinations">
                 <option value="Bali">Bali, Indonesia</option>
-                <option value="Thailand">Thailand (Phuket & Krabi)</option>
-                <option value="Vietnam">Vietnam & Ha Long Bay</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Vietnam">Vietnam</option>
                 <option value="Paris">Paris, France</option>
                 <option value="Dubai">Dubai, UAE</option>
                 <option value="Sri Lanka">Sri Lanka</option>
                 <option value="Bhutan">Bhutan</option>
-                <option value="Europe">Europe Grand Tour</option>
+                <option value="Europe">Europe</option>
               </optgroup>
-              <optgroup label="Domestic & Himalayan">
-                <option value="Spiti">Spiti Valley Expedition</option>
-                <option value="Ladakh">Ladakh High-Pass Tour</option>
-                <option value="Meghalaya">Meghalaya & North East</option>
-                <option value="Himachal">Himachal Pradesh (Manali & Kasol)</option>
-                <option value="Kerala">Kerala Backwaters & Munnar</option>
-                <option value="Kedarnath">Do Dham / Kedarnath Yatra</option>
+              <optgroup label="Domestic Destinations">
+                <option value="Himachal">Himachal Pradesh</option>
+                <option value="Spiti">Spiti Valley</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Ladakh">Ladakh</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Kedarnath">Kedarnath / Do Dham</option>
                 <option value="Andaman">Andaman Islands</option>
               </optgroup>
-              <option value="Custom">Other / Custom Vacation</option>
+              <option value="Custom">Other Destination</option>
             </select>
-            <i class="ph-bold ph-caret-down pointer-events-none absolute right-3.5 text-sm text-text-muted" aria-hidden="true"></i>
+            <i class="ph-bold ph-caret-down pointer-events-none absolute right-3.5 text-sm text-gray-400" aria-hidden="true"></i>
           </div>
         </div>
 
-        {/* Submit CTA */}
+        {/* Submit CTA - Website Yellow */}
         <button
           type="submit"
-          class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 sm:py-3.5 px-6 text-sm sm:text-base font-bold text-ink shadow-xs transition-all duration-200 hover:bg-brand-dim hover:shadow-card hover:-translate-y-0.5 cursor-pointer"
+          class="mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F0EA1B] py-3 sm:py-3.5 px-6 text-sm sm:text-base font-bold text-gray-950 transition-colors hover:bg-[#e2dc15] cursor-pointer"
         >
           <span>Get Free Itinerary & Quotes</span>
           <i class="ph-bold ph-arrow-right text-base" aria-hidden="true"></i>
         </button>
       </form>
 
-      {/* Success State (Hidden by default) */}
+      {/* Success State */}
       <div id="traveler-popup-success" class="hidden py-6 text-center">
-        <div class="mx-auto mb-3 grid h-13 w-13 place-items-center rounded-full bg-emerald-100 text-emerald-600 text-2xl">
+        <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-[#F0EA1B] text-gray-950 text-xl font-bold">
           <i class="ph-bold ph-check" aria-hidden="true"></i>
         </div>
-        <h4 class="font-display text-2xl font-bold text-ink">
+        <h4 class="text-2xl font-bold text-gray-950">
           Thank you, <span id="popup-success-name">Traveler</span>!
         </h4>
-        <p class="mt-2 text-xs sm:text-sm text-text-muted max-w-xs mx-auto leading-relaxed">
-          Our travel specialist will reach out to you on WhatsApp shortly with customized itineraries and exclusive rates.
+        <p class="mt-2 text-sm text-gray-600 max-w-xs mx-auto leading-relaxed">
+          We have received your details. Our travel expert will contact you on WhatsApp with customized plans and pricing.
         </p>
         <button
           type="button"
           id="popup-success-close-btn"
-          class="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-2 text-xs font-bold text-ink hover:bg-surface-muted transition-colors cursor-pointer"
+          class="mt-5 inline-flex items-center justify-center rounded-xl bg-gray-100 hover:bg-gray-200 px-6 py-2.5 text-sm font-semibold text-gray-800 transition-colors cursor-pointer"
         >
-          Continue Exploring Site
+          Close
         </button>
-      </div>
-
-      {/* Trust Micro-Footer */}
-      <div class="mt-4 flex items-center justify-center gap-3 text-[11px] font-semibold text-text-muted/80">
-        <span class="flex items-center gap-1">
-          <i class="ph-fill ph-shield-check text-brand-dim" aria-hidden="true"></i>
-          100% Privacy
-        </span>
-        <span>&bull;</span>
-        <span class="flex items-center gap-1">
-          <i class="ph-fill ph-whatsapp-logo text-emerald-600" aria-hidden="true"></i>
-          Instant WhatsApp Support
-        </span>
       </div>
     </div>
   </div>
@@ -177,7 +162,7 @@
     const card = document.getElementById('traveler-popup-card');
     const backdrop = document.getElementById('traveler-popup-backdrop');
     const closeBtn = document.getElementById('traveler-popup-close');
-    const form = document.getElementById('traveler-popup-form');
+    const form = document.getElementById('traveler-popup-form') as HTMLFormElement | null;
     const successView = document.getElementById('traveler-popup-success');
     const successCloseBtn = document.getElementById('popup-success-close-btn');
     const successName = document.getElementById('popup-success-name');
@@ -189,6 +174,7 @@
     if (hasSeen) return;
 
     function openPopup() {
+      if (!overlay || !card) return;
       overlay.classList.remove('opacity-0', 'pointer-events-none');
       overlay.classList.add('opacity-100', 'pointer-events-auto');
       card.classList.remove('scale-95');
@@ -197,6 +183,7 @@
     }
 
     function closePopup() {
+      if (!overlay || !card) return;
       overlay.classList.remove('opacity-100', 'pointer-events-auto');
       overlay.classList.add('opacity-0', 'pointer-events-none');
       card.classList.remove('scale-100');
@@ -238,8 +225,6 @@
       e.preventDefault();
       const formData = new FormData(form);
       const name = (formData.get('travelerName')) || 'Traveler';
-      const phone = (formData.get('travelerPhone')) || '';
-      const dest = (formData.get('destination')) || '';
 
       // Save submission flag
       localStorage.setItem(STORAGE_KEY, 'true');
