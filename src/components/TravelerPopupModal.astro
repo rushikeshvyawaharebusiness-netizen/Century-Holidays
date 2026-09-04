@@ -1,0 +1,262 @@
+---
+// TravelerPopupModal.astro
+// First-time visitor lead capture popup with Century Holidays theme styling
+// Triggered once per visitor using localStorage ('century_lead_popup_seen')
+---
+
+<div
+  id="traveler-popup-overlay"
+  class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300 ease-out"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="popup-title"
+>
+  {/* Glassmorphic Dark Backdrop */}
+  <div id="traveler-popup-backdrop" class="fixed inset-0 bg-ink/75 backdrop-blur-xs transition-opacity duration-300"></div>
+
+  {/* Modal Container */}
+  <div
+    id="traveler-popup-card"
+    class="relative w-full max-w-md scale-95 rounded-3xl border border-border bg-surface shadow-2xl transition-all duration-300 ease-out overflow-hidden"
+  >
+    {/* Close Button */}
+    <button
+      type="button"
+      id="traveler-popup-close"
+      class="absolute top-4 right-4 z-20 grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full bg-surface-muted text-ink/70 hover:bg-ink hover:text-white transition-colors duration-200 cursor-pointer shadow-xs"
+      aria-label="Close dialog"
+    >
+      <i class="ph-bold ph-x text-base" aria-hidden="true"></i>
+    </button>
+
+    {/* Header with Warm Theme Accent */}
+    <div class="relative bg-gradient-to-b from-brand/20 via-brand/5 to-transparent p-6 pb-4 sm:p-7 sm:pb-4 border-b border-border/70">
+      <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-ink shadow-2xs mb-2">
+        <span class="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Plan Your Trip</span>
+      </div>
+
+      <h3 id="popup-title" class="font-display text-2xl sm:text-[26px] font-bold text-ink leading-tight">
+        Where do you want to <span class="text-ink underline decoration-brand decoration-4 underline-offset-4">travel next?</span>
+      </h3>
+      <p class="mt-1.5 text-xs sm:text-sm text-text-muted leading-relaxed">
+        Tell us where you want to go. Our team will share handpicked itineraries and exclusive quotes directly with you.
+      </p>
+    </div>
+
+    {/* Form Body */}
+    <div class="p-6 sm:p-7 pt-4 sm:pt-5">
+      <form id="traveler-popup-form" class="flex flex-col gap-3.5">
+        {/* Full Name */}
+        <div>
+          <label for="popup-input-name" class="block text-xs font-bold text-ink uppercase tracking-wider mb-1.5">
+            Full Name <span class="text-red-500">*</span>
+          </label>
+          <div class="relative flex items-center">
+            <i class="ph-bold ph-user pointer-events-none absolute left-3.5 text-lg text-text-muted" aria-hidden="true"></i>
+            <input
+              type="text"
+              id="popup-input-name"
+              name="travelerName"
+              required
+              placeholder="e.g. Rahul Sharma"
+              autocomplete="name"
+              class="w-full rounded-xl border border-border bg-surface-muted py-2.5 sm:py-3 pl-10 sm:pl-11 pr-4 text-sm font-medium text-ink placeholder:text-text-muted/60 transition-colors focus:border-brand focus:bg-surface focus:outline-none focus:ring-3 focus:ring-brand/25"
+            />
+          </div>
+        </div>
+
+        {/* WhatsApp Number */}
+        <div>
+          <label for="popup-input-phone" class="block text-xs font-bold text-ink uppercase tracking-wider mb-1.5">
+            WhatsApp Number <span class="text-red-500">*</span>
+          </label>
+          <div class="relative flex items-center">
+            <i class="ph-bold ph-whatsapp-logo pointer-events-none absolute left-3.5 text-lg text-emerald-600" aria-hidden="true"></i>
+            <input
+              type="tel"
+              id="popup-input-phone"
+              name="travelerPhone"
+              required
+              placeholder="e.g. +91 98765 43210"
+              autocomplete="tel"
+              class="w-full rounded-xl border border-border bg-surface-muted py-2.5 sm:py-3 pl-10 sm:pl-11 pr-4 text-sm font-medium text-ink placeholder:text-text-muted/60 transition-colors focus:border-brand focus:bg-surface focus:outline-none focus:ring-3 focus:ring-brand/25"
+            />
+          </div>
+        </div>
+
+        {/* Destination */}
+        <div>
+          <label for="popup-input-dest" class="block text-xs font-bold text-ink uppercase tracking-wider mb-1.5">
+            Destination of Choice <span class="text-red-500">*</span>
+          </label>
+          <div class="relative flex items-center">
+            <i class="ph-bold ph-map-pin pointer-events-none absolute left-3.5 text-lg text-text-muted" aria-hidden="true"></i>
+            <select
+              id="popup-input-dest"
+              name="destination"
+              required
+              class="w-full appearance-none rounded-xl border border-border bg-surface-muted py-2.5 sm:py-3 pl-10 sm:pl-11 pr-9 text-sm font-medium text-ink transition-colors focus:border-brand focus:bg-surface focus:outline-none focus:ring-3 focus:ring-brand/25 cursor-pointer"
+            >
+              <option value="" disabled selected>Select destination...</option>
+              <optgroup label="International Escapes">
+                <option value="Bali">Bali, Indonesia</option>
+                <option value="Thailand">Thailand (Phuket & Krabi)</option>
+                <option value="Vietnam">Vietnam & Ha Long Bay</option>
+                <option value="Paris">Paris, France</option>
+                <option value="Dubai">Dubai, UAE</option>
+                <option value="Sri Lanka">Sri Lanka</option>
+                <option value="Bhutan">Bhutan</option>
+                <option value="Europe">Europe Grand Tour</option>
+              </optgroup>
+              <optgroup label="Domestic & Himalayan">
+                <option value="Spiti">Spiti Valley Expedition</option>
+                <option value="Ladakh">Ladakh High-Pass Tour</option>
+                <option value="Meghalaya">Meghalaya & North East</option>
+                <option value="Himachal">Himachal Pradesh (Manali & Kasol)</option>
+                <option value="Kerala">Kerala Backwaters & Munnar</option>
+                <option value="Kedarnath">Do Dham / Kedarnath Yatra</option>
+                <option value="Andaman">Andaman Islands</option>
+              </optgroup>
+              <option value="Custom">Other / Custom Vacation</option>
+            </select>
+            <i class="ph-bold ph-caret-down pointer-events-none absolute right-3.5 text-sm text-text-muted" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        {/* Submit CTA */}
+        <button
+          type="submit"
+          class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand py-3 sm:py-3.5 px-6 text-sm sm:text-base font-bold text-ink shadow-xs transition-all duration-200 hover:bg-brand-dim hover:shadow-card hover:-translate-y-0.5 cursor-pointer"
+        >
+          <span>Get Free Itinerary & Quotes</span>
+          <i class="ph-bold ph-arrow-right text-base" aria-hidden="true"></i>
+        </button>
+      </form>
+
+      {/* Success State (Hidden by default) */}
+      <div id="traveler-popup-success" class="hidden py-6 text-center">
+        <div class="mx-auto mb-3 grid h-13 w-13 place-items-center rounded-full bg-emerald-100 text-emerald-600 text-2xl">
+          <i class="ph-bold ph-check" aria-hidden="true"></i>
+        </div>
+        <h4 class="font-display text-2xl font-bold text-ink">
+          Thank you, <span id="popup-success-name">Traveler</span>!
+        </h4>
+        <p class="mt-2 text-xs sm:text-sm text-text-muted max-w-xs mx-auto leading-relaxed">
+          Our travel specialist will reach out to you on WhatsApp shortly with customized itineraries and exclusive rates.
+        </p>
+        <button
+          type="button"
+          id="popup-success-close-btn"
+          class="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-2 text-xs font-bold text-ink hover:bg-surface-muted transition-colors cursor-pointer"
+        >
+          Continue Exploring Site
+        </button>
+      </div>
+
+      {/* Trust Micro-Footer */}
+      <div class="mt-4 flex items-center justify-center gap-3 text-[11px] font-semibold text-text-muted/80">
+        <span class="flex items-center gap-1">
+          <i class="ph-fill ph-shield-check text-brand-dim" aria-hidden="true"></i>
+          100% Privacy
+        </span>
+        <span>&bull;</span>
+        <span class="flex items-center gap-1">
+          <i class="ph-fill ph-whatsapp-logo text-emerald-600" aria-hidden="true"></i>
+          Instant WhatsApp Support
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initTravelerPopup() {
+    const STORAGE_KEY = 'century_lead_popup_seen';
+    const overlay = document.getElementById('traveler-popup-overlay');
+    const card = document.getElementById('traveler-popup-card');
+    const backdrop = document.getElementById('traveler-popup-backdrop');
+    const closeBtn = document.getElementById('traveler-popup-close');
+    const form = document.getElementById('traveler-popup-form');
+    const successView = document.getElementById('traveler-popup-success');
+    const successCloseBtn = document.getElementById('popup-success-close-btn');
+    const successName = document.getElementById('popup-success-name');
+
+    if (!overlay || !card) return;
+
+    // Check if user has already seen or dismissed popup
+    const hasSeen = localStorage.getItem(STORAGE_KEY);
+    if (hasSeen) return;
+
+    function openPopup() {
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+      overlay.classList.add('opacity-100', 'pointer-events-auto');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closePopup() {
+      overlay.classList.remove('opacity-100', 'pointer-events-auto');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      document.body.classList.remove('overflow-hidden');
+      // Mark as seen so it does not trigger again
+      localStorage.setItem(STORAGE_KEY, 'true');
+    }
+
+    // Trigger popup after 2.5 seconds for first-time visitors
+    const timer = setTimeout(() => {
+      openPopup();
+    }, 2500);
+
+    // Close listeners
+    closeBtn?.addEventListener('click', () => {
+      clearTimeout(timer);
+      closePopup();
+    });
+
+    backdrop?.addEventListener('click', () => {
+      clearTimeout(timer);
+      closePopup();
+    });
+
+    successCloseBtn?.addEventListener('click', () => {
+      closePopup();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('opacity-100')) {
+        closePopup();
+      }
+    });
+
+    // Handle Form Submit
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const name = (formData.get('travelerName')) || 'Traveler';
+      const phone = (formData.get('travelerPhone')) || '';
+      const dest = (formData.get('destination')) || '';
+
+      // Save submission flag
+      localStorage.setItem(STORAGE_KEY, 'true');
+
+      // Switch to success view
+      if (successName) successName.textContent = typeof name === 'string' ? (name.split(' ')[0] || 'Traveler') : 'Traveler';
+      form.classList.add('hidden');
+      successView?.classList.remove('hidden');
+
+      // Optional: Auto-close after 3.5 seconds
+      setTimeout(() => {
+        closePopup();
+      }, 3500);
+    });
+  }
+
+  // Run on initial load and View Transitions
+  initTravelerPopup();
+  document.addEventListener('astro:page-load', initTravelerPopup);
+</script>

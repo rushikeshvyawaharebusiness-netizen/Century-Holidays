@@ -2,6 +2,7 @@
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import QuickContact from '../components/QuickContact.astro';
+import TravelerPopupModal from '../components/TravelerPopupModal.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -76,6 +77,7 @@ const ogImageURL = new URL('/og-cover.png', Astro.site);
     <slot />
     <Footer newsletterHeading={newsletterHeading} />
     <QuickContact message={quickContactMessage} />
+    <TravelerPopupModal />
 
     <script>
       const io = new IntersectionObserver(
