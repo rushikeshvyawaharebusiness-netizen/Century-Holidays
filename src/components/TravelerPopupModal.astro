@@ -1,7 +1,7 @@
 ---
 // TravelerPopupModal.astro
-// Styled to match the exact user-provided reference design
-// Clean white rounded card, pill inputs, "+91 Enter mobile number", and "Talk to our Experts" green button
+// Styled to match the user's reference design
+// White rounded card, pill inputs, destination selection dropdown like older version, and website theme yellow button (#F0EA1B)
 ---
 
 <div
@@ -40,7 +40,7 @@
       </p>
     </div>
 
-    <!-- Form Body (Pill-shaped inputs matching reference) -->
+    <!-- Form Body -->
     <div class="mt-5">
       <form id="traveler-popup-form" class="flex flex-col gap-3">
         <!-- Name Field -->
@@ -56,33 +56,37 @@
           />
         </div>
 
-        <!-- Destination Field -->
-        <div>
-          <input
-            type="text"
+        <!-- Destination Selection Dropdown (Opens like older version) -->
+        <div class="relative flex items-center">
+          <select
             id="popup-input-dest"
             name="destination"
-            list="popup-dest-suggestions"
             required
-            placeholder="Choose your destination..."
-            autocomplete="off"
-            class="w-full rounded-full border border-gray-300 bg-white px-5 py-2.5 sm:py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-gray-600 transition-colors"
-          />
-          <datalist id="popup-dest-suggestions">
-            <option value="Bali, Indonesia"></option>
-            <option value="Thailand (Phuket & Krabi)"></option>
-            <option value="Vietnam & Ha Long Bay"></option>
-            <option value="Paris, France"></option>
-            <option value="Dubai, UAE"></option>
-            <option value="Himachal (Manali & Kasol)"></option>
-            <option value="Spiti Valley Expedition"></option>
-            <option value="Meghalaya & North East"></option>
-            <option value="Ladakh High-Pass Tour"></option>
-            <option value="Kerala Backwaters"></option>
-            <option value="Kedarnath / Do Dham"></option>
-            <option value="Sri Lanka"></option>
-            <option value="Bhutan"></option>
-          </datalist>
+            class="w-full appearance-none rounded-full border border-gray-300 bg-white py-2.5 sm:py-3 pl-5 pr-10 text-sm font-medium text-gray-900 transition-colors focus:outline-none focus:border-gray-600 cursor-pointer"
+          >
+            <option value="" disabled selected>Choose your destination...</option>
+            <optgroup label="International Escapes">
+              <option value="Bali, Indonesia">Bali, Indonesia</option>
+              <option value="Thailand (Phuket & Krabi)">Thailand (Phuket & Krabi)</option>
+              <option value="Vietnam & Ha Long Bay">Vietnam & Ha Long Bay</option>
+              <option value="Paris, France">Paris, France</option>
+              <option value="Dubai, UAE">Dubai, UAE</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Bhutan">Bhutan</option>
+              <option value="Europe Grand Tour">Europe Grand Tour</option>
+            </optgroup>
+            <optgroup label="Domestic & Himalayan">
+              <option value="Himachal (Manali & Kasol)">Himachal (Manali & Kasol)</option>
+              <option value="Spiti Valley Expedition">Spiti Valley Expedition</option>
+              <option value="Meghalaya & North East">Meghalaya & North East</option>
+              <option value="Ladakh High-Pass Tour">Ladakh High-Pass Tour</option>
+              <option value="Kerala Backwaters">Kerala Backwaters</option>
+              <option value="Kedarnath / Do Dham">Kedarnath / Do Dham</option>
+              <option value="Andaman Islands">Andaman Islands</option>
+            </optgroup>
+            <option value="Other / Custom Vacation">Other / Custom Vacation</option>
+          </select>
+          <i class="ph-bold ph-caret-down pointer-events-none absolute right-4 text-sm text-gray-400" aria-hidden="true"></i>
         </div>
 
         <!-- Phone Field with +91 -->
@@ -112,10 +116,10 @@
           />
         </div>
 
-        <!-- Submit Button (Green pill matching reference) -->
+        <!-- Submit Button (Website theme yellow) -->
         <button
           type="submit"
-          class="mt-1 inline-flex w-full items-center justify-center rounded-full bg-[#038749] py-3 sm:py-3.5 px-6 text-sm sm:text-base font-bold text-white transition-colors hover:bg-[#02743e] cursor-pointer shadow-xs"
+          class="mt-1 inline-flex w-full items-center justify-center rounded-full bg-[#F0EA1B] hover:bg-[#e4de16] py-3 sm:py-3.5 px-6 text-sm sm:text-base font-bold text-gray-950 transition-colors cursor-pointer shadow-xs"
         >
           Talk to our Experts
         </button>
@@ -123,7 +127,7 @@
 
       <!-- Success State -->
       <div id="traveler-popup-success" class="hidden py-6 text-center">
-        <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-[#038749] text-white text-xl font-bold">
+        <div class="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-[#F0EA1B] text-gray-950 text-xl font-bold">
           <i class="ph-bold ph-check" aria-hidden="true"></i>
         </div>
         <h4 class="text-xl font-bold text-gray-900">
