@@ -1,541 +1,199 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import storyPhoto from '../assets/images/banner-spiti-hd.jpg';
 
-// Real-world HD photography (100% authentic, zero AI-generated artwork)
-import heroSpiti from '../assets/images/banner-spiti-hd.jpg';
-import mountainsSpeciality from '../assets/images/speciality-mountains.jpg';
-import spiritualSpeciality from '../assets/images/speciality-spiritual.jpg';
-import internationalSpeciality from '../assets/images/speciality-international.jpg';
-
-import customer1 from '../assets/images/customer1.jpg';
-import customer2 from '../assets/images/customer2.jpg';
-import customer3 from '../assets/images/customer3.jpg';
-import customer4 from '../assets/images/customer4.jpg';
-
-const metrics = [
-  { value: '12,000+', label: 'Happy Travelers', icon: 'ph-users-three' },
-  { value: '150+', label: 'Curated Itineraries', icon: 'ph-compass' },
-  { value: '98.6%', label: '5-Star Satisfaction', icon: 'ph-star' },
-  { value: '8+ Years', label: 'On-Ground Excellence', icon: 'ph-shield-check' },
-];
-
-const pillars = [
+const certifications = [
   {
-    icon: 'ph-tree-evergreen',
-    title: 'Locally Rooted & Partner-Driven',
+    icon: 'ph-seal-check',
+    title: 'Government Registered Agency',
+    badge: 'Official License',
     description:
-      'We work directly with vetted local guides, family homestays, and experienced hill drivers across India and abroad — not faceless algorithmic aggregator portals.',
+      'Fully recognized and legally registered travel operating enterprise adhering to state and national tourism regulations, business ethics, and passenger consumer protection norms.',
   },
   {
-    icon: 'ph-sliders-horizontal',
-    title: '100% Bespoke Pacing',
+    icon: 'ph-first-aid',
+    title: 'Certified Mountain & Trail Safety',
+    badge: 'Safety First',
     description:
-      'No rigid herd-mentality tours. We customize wake-up times, acclimatization rest days, vehicle choices, and culinary preferences around your family or group style.',
+      'Strict adherence to high-altitude safety guidelines, certified local guides, medical-grade oxygen contingencies, and verified hill-certified commercial transport partners.',
   },
   {
-    icon: 'ph-headset',
-    title: '24/7 Dedicated Human Concierge',
+    icon: 'ph-receipt',
+    title: '100% Financial Transparency',
+    badge: 'GST Invoicing',
     description:
-      'From the moment you arrive at the airport until you return safely home, you have one dedicated trip coordinator on direct call for instant assistance.',
+      'Transparent itemized pricing with full GST compliance, official digital receipts, zero hidden fees, and clear, upfront cancellation and refund policies.',
   },
   {
-    icon: 'ph-shield-plus',
-    title: 'Safety & Altitude Protocols',
+    icon: 'ph-shield-check',
+    title: 'Verified Ground Fleet & Stays',
+    badge: 'Vetted Partners',
     description:
-      'We build every high-altitude trek and spiritual yatra around real weather windows, medical grade oxygen support, and certified mountain trail safety.',
-  },
-];
-
-const specialities = [
-  {
-    title: 'Himalayan Treks & Expeditions',
-    subtitle: 'Spiti, Hampta Pass, Himachal, Meghalaya',
-    image: mountainsSpeciality,
-    alt: 'Real photograph of Himalayan mountains with Buddhist stupa and prayer flags',
-    description:
-      'Engineered for adventure enthusiasts who desire the thrill of high Himalayan passes with the peace of mind that certified trail leaders and robust safety gear provide.',
-    badges: ['Certified Trek Leads', 'Acclimatization Built-in', 'Verified Campsites'],
-    link: '/#destinations',
-  },
-  {
-    title: 'Sacred Yatras & Pilgrimages',
-    subtitle: 'Char Dham, Do Dham Kedarnath, Badrinath',
-    image: spiritualSpeciality,
-    alt: 'Authentic photograph of Kedarnath Temple with pilgrims against snow-capped peaks',
-    description:
-      'Guided spiritual pilgrimages arranged with deep reverence. We handle VIP darshan coordination, senior-friendly transportation, and helicopter bookings.',
-    badges: ['VIP Darshan Coordination', 'Senior Care Support', 'Helicopter Assistance'],
-    link: '/#destinations',
-  },
-  {
-    title: 'Curated International Escapes',
-    subtitle: 'Bali, Vietnam, Thailand, Dubai, Almaty',
-    image: internationalSpeciality,
-    alt: 'Real photograph of Ulun Danu Beratan temple reflecting in Lake Bratan in Bali',
-    description:
-      'From romantic island honeymoons in Bali to cultural adventures through Vietnam and Almaty, every itinerary is designed to immerse you without the logistical stress.',
-    badges: ['Handpicked Resorts', 'Private Transfers', 'Visa Assistance'],
-    link: '/#destinations',
-  },
-];
-
-const testimonials = [
-  {
-    name: 'Ananya & Rohan K.',
-    trip: 'Spiti Valley Expedition',
-    image: customer1,
-    comment:
-      'Century Holidays made our Spiti journey feel effortless. While other groups were stuck waiting for passes, our driver and lead knew every alternate route. Truly an authentic experience!',
-  },
-  {
-    name: 'Dr. Suresh & Shobha M.',
-    trip: 'Kedarnath Do Dham Yatra',
-    image: customer2,
-    comment:
-      'Organizing a pilgrimage for my elderly parents seemed daunting, but Century Holidays took care of pony allocations, warm stays near the temple, and seamless helicopter coordination.',
-  },
-  {
-    name: 'Vikram & Friends',
-    trip: 'Hampta Pass Trek',
-    image: customer3,
-    comment:
-      'The campsite at Shea Goru was breathtaking! Delicious hot meals at 14,000 feet and leaders who genuinely cared about our safety. 10/10 recommendation for adventure lovers.',
-  },
-  {
-    name: 'Pooja Deshmukh',
-    trip: 'Bali Luxury Getaway',
-    image: customer4,
-    comment:
-      'Every hotel in Ubud and Seminyak was handpicked to perfection. Zero hidden costs, transparent pricing, and instant WhatsApp support anytime we needed restaurant recommendations.',
+      'Direct contracts with certified commercial transport operators, seasoned hill drivers, and inspected boutique properties, homestays, and hotels across all destinations.',
   },
 ];
 ---
 
 <BaseLayout
-  title="About Century Holidays - Premier Travel Agency in Nashik | Curated Tours & Treks"
-  description="Learn about Century Holidays, an accredited travel agency based in Nashik. We craft authentic, safety-first Himalayan expeditions, sacred yatras, and luxury international holidays."
+  title="About Us - Company Story & Certifications | Century Holidays"
+  description="Discover the story behind Century Holidays, an accredited travel agency based in Nashik. Learn about our founding, philosophy, and official agency certifications."
   path="/about.html"
 >
   <main id="main-content" class="bg-paper text-ink">
-    <!-- Hero Header -->
-    <section class="relative overflow-hidden border-b border-border bg-gradient-to-b from-surface-muted/60 via-paper to-paper pb-16 pt-32 sm:pb-24 sm:pt-40">
-      <div class="container-page relative z-10 text-center">
-        <!-- Eyebrow Pill Badge -->
-        <div data-reveal class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 shadow-xs">
-          <span class="inline-block h-2 w-2 rounded-full bg-[#F0EA1B]"></span>
-          <span class="text-xs font-bold uppercase tracking-wider text-ink-muted sm:text-[13px]">
-            Established in Nashik • Trusted Since 2018
-          </span>
-        </div>
-
-        <!-- Main Title -->
-        <h1 data-reveal class="mx-auto mt-6 max-w-4xl text-balance font-display text-4xl leading-tight sm:text-6xl sm:leading-tight lg:text-7xl">
-          Crafting Authentic Journeys Across <span class="relative inline-block underline decoration-[#F0EA1B] decoration-wavy decoration-from-font">India & Beyond</span>
+    <!-- Clean Minimalist Header -->
+    <section class="border-b border-border bg-surface py-16 pt-32 sm:py-20 sm:pt-40">
+      <div class="container-page text-center">
+        <span class="inline-block text-xs font-bold uppercase tracking-[0.2em] text-ink-muted">
+          About Century Holidays • Est. 2018
+        </span>
+        <h1 class="mt-3 font-display text-4xl text-ink sm:text-5xl lg:text-6xl">
+          Our Story & Certifications
         </h1>
-
-        <!-- Subtitle -->
-        <p data-reveal class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg lg:text-xl">
-          We are a full-service, accredited travel company dedicated to human-led, safety-first exploration. From snow-clad Himalayan passes to sacred pilgrimages and boutique international retreats, every detail is engineered by passionate specialists.
+        <p class="mx-auto mt-4 max-w-2xl text-base text-text-muted sm:text-lg">
+          Rooted in Nashik, Maharashtra, we are a certified travel company dedicated to human-led, transparent, and authentic travel experiences.
         </p>
-
-        <!-- Quick CTAs -->
-        <div data-reveal class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:mt-10">
-          <a
-            href="/#destinations"
-            class="inline-flex items-center gap-2 rounded-full bg-[#F0EA1B] px-8 py-3.5 text-base font-bold text-gray-950 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#e4de16]"
-          >
-            Explore Destinations <i class="ph-bold ph-arrow-right text-lg" aria-hidden="true"></i>
-          </a>
-          <a
-            href="/contact.html"
-            class="inline-flex items-center gap-2 rounded-full border-2 border-border bg-surface px-8 py-3.5 text-base font-bold text-ink transition-colors duration-200 hover:border-ink hover:bg-surface-muted"
-          >
-            Contact Our Team
-          </a>
-        </div>
-
-        <!-- Metrics Strip -->
-        <div data-reveal class="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
-          {metrics.map((m) => (
-            <div class="flex flex-col items-center rounded-2xl border border-border bg-surface p-5 shadow-xs transition-transform duration-200 hover:-translate-y-1 sm:p-6">
-              <i class:list={['ph-bold text-2xl text-ink-muted sm:text-3xl', m.icon]} aria-hidden="true"></i>
-              <span class="mt-3 font-display text-2xl font-bold text-ink sm:text-3xl lg:text-4xl">{m.value}</span>
-              <span class="mt-1 text-xs font-semibold uppercase tracking-wider text-text-muted sm:text-sm">{m.label}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
 
-    <!-- Our Story Section: Asymmetrical Editorial Grid -->
-    <section class="py-20 sm:py-28">
+    <!-- Company Story Section -->
+    <section class="py-16 sm:py-24">
       <div class="container-page">
         <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <!-- Real Photography Visual -->
-          <div data-reveal class="relative lg:col-span-6">
-            <div class="relative overflow-hidden rounded-3xl border border-border bg-surface shadow-panel">
+          <!-- Real HD Photography -->
+          <div class="lg:col-span-6">
+            <div class="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
               <Image
-                src={heroSpiti}
-                alt="Century Holidays travelers trekking on a high mountain trail in Spiti Valley with Himalayan peaks"
-                class="aspect-[4/3] w-full object-cover sm:aspect-[16/11]"
-                widths={[640, 1024, 1400]}
+                src={storyPhoto}
+                alt="Century Holidays travelers on a mountain trail overlooking the Spiti river valley"
+                class="aspect-[4/3] w-full object-cover"
+                widths={[640, 1024]}
                 sizes="(min-width: 1024px) 560px, 90vw"
                 loading="eager"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent"></div>
-              <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-xl bg-ink/85 p-3 text-text-inverse backdrop-blur-md sm:bottom-6 sm:left-6 sm:right-6 sm:p-4">
-                <div class="flex items-center gap-3">
-                  <span class="flex h-9 w-9 items-center justify-center rounded-full bg-[#F0EA1B] text-gray-950 font-bold">
-                    <i class="ph-bold ph-map-pin text-lg" aria-hidden="true"></i>
-                  </span>
-                  <div>
-                    <p class="text-xs font-bold sm:text-sm">Spiti Valley High Ridge Trek</p>
-                    <p class="text-[11px] text-text-inverse-muted sm:text-xs">Real Expedition Photo • Century Holidays Group</p>
-                  </div>
-                </div>
-                <span class="hidden rounded-full bg-surface/20 px-3 py-1 text-xs font-semibold sm:inline-block">100% Genuine</span>
+              <div class="border-t border-border bg-surface p-4 text-xs text-text-muted sm:text-sm">
+                <span class="font-bold text-ink">Spiti Valley Expedition:</span> Real on-ground travel photograph taken during a Century Holidays mountain expedition.
               </div>
-            </div>
-
-            <!-- Floating Trust Quote Card -->
-            <div class="relative -mt-6 ml-auto mr-4 max-w-[280px] rounded-2xl border border-border bg-surface p-4 shadow-card sm:-mt-10 sm:mr-6 sm:max-w-[320px] sm:p-5">
-              <div class="flex items-center gap-2 text-[#b0a905]">
-                <i class="ph-fill ph-star text-sm"></i>
-                <i class="ph-fill ph-star text-sm"></i>
-                <i class="ph-fill ph-star text-sm"></i>
-                <i class="ph-fill ph-star text-sm"></i>
-                <i class="ph-fill ph-star text-sm"></i>
-              </div>
-              <p class="mt-2 text-xs italic leading-relaxed text-text-muted sm:text-sm">
-                "We walk every trail, test every hotel, and vet every hill driver before we put our name on an itinerary."
-              </p>
-              <p class="mt-2 text-[11px] font-bold uppercase tracking-wider text-ink sm:text-xs">— Ground Operations Philosophy</p>
             </div>
           </div>
 
-          <!-- Editorial Narrative Content -->
-          <div data-reveal class="lg:col-span-6">
-            <span class="inline-block rounded-md bg-surface-muted px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-muted">
-              Our Story & Origin
+          <!-- Story Text Content -->
+          <div class="lg:col-span-6">
+            <span class="text-xs font-bold uppercase tracking-widest text-ink-muted">
+              Company Story
             </span>
-            <h2 class="mt-4 font-display text-3xl leading-snug sm:text-4xl sm:leading-snug lg:text-5xl">
-              Travel Built on Real Ground Knowledge, Not Impersonal Algorithms
+            <h2 class="mt-2 font-display text-3xl sm:text-4xl text-ink">
+              Building Meaningful Travel Through Real Ground Knowledge
             </h2>
+
             <div class="mt-6 space-y-4 text-base leading-relaxed text-text-muted sm:text-lg">
               <p>
-                Century Holidays was born in Nashik, Maharashtra, out of a simple observation: the modern travel industry has become overwhelmed by impersonal booking engines that reduce unforgettable journeys into sterile coupon codes and generic checklists.
+                Founded in 2018 in Nashik, Maharashtra, <strong class="text-ink font-semibold">Century Holidays</strong> was established with a singular objective: to bring genuine personal care, local expertise, and transparent operations back to travel planning.
               </p>
               <p>
-                We set out with a radically different conviction: that true travel is about human relationships, local stewardship, and round-the-clock ground accountability. Whether you are navigating the sheer scree of Hampta Pass, seeking quiet darshan at Kedarnath, or landing in Bali for a honeymoon, your itinerary should be crafted by someone who has lived it.
+                In an industry increasingly dominated by impersonal algorithms and automated booking portals, we believe that memorable travel requires human connection. Whether navigating a high Himalayan mountain pass, undertaking a sacred pilgrimage like Char Dham, or embarking on an international family holiday, travelers deserve guidance from someone who truly understands the terrain.
               </p>
               <p>
-                Over the past 8+ years, we have built trusted, direct partnerships with local Sherpas, seasoned Himalayan drivers, monastery custodians, and boutique resort owners. That direct relationship allows us to bypass middlemen, guarantee safety windows, and deliver exceptional value directly to our travelers.
+                Over the years, we have cultivated direct, reliable partnerships with local guides, experienced hill drivers, monastery custodians, and vetted boutique hotels across India and overseas. By working directly with trusted ground partners, we eliminate middlemen and ensure that every itinerary is paced realistically, prioritizing safety, comfort, and authenticity.
               </p>
             </div>
 
-            <!-- Highlights Checklist -->
-            <div class="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div class="flex items-center gap-2.5">
-                <i class="ph-fill ph-check-circle text-lg text-green-600" aria-hidden="true"></i>
-                <span class="text-sm font-semibold text-ink">Zero Hidden Surcharges</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <i class="ph-fill ph-check-circle text-lg text-green-600" aria-hidden="true"></i>
-                <span class="text-sm font-semibold text-ink">Certified Mountain Leaders</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <i class="ph-fill ph-check-circle text-lg text-green-600" aria-hidden="true"></i>
-                <span class="text-sm font-semibold text-ink">Medical & Oxygen Contingencies</span>
-              </div>
-              <div class="flex items-center gap-2.5">
-                <i class="ph-fill ph-check-circle text-lg text-green-600" aria-hidden="true"></i>
-                <span class="text-sm font-semibold text-ink">Handpicked Boutique Accommodations</span>
-              </div>
+            <!-- Core Guiding Principles -->
+            <div class="mt-8 border-t border-border pt-6">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-ink">Our Guiding Commitments</h3>
+              <ul class="mt-3 space-y-2 text-sm text-text-muted sm:text-base">
+                <li class="flex items-center gap-2.5">
+                  <i class="ph-fill ph-check-circle text-green-600" aria-hidden="true"></i>
+                  <span>Personally vetted routes, accommodations, and drivers</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <i class="ph-fill ph-check-circle text-green-600" aria-hidden="true"></i>
+                  <span>Honest, transparent pricing with zero hidden surcharges</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <i class="ph-fill ph-check-circle text-green-600" aria-hidden="true"></i>
+                  <span>Dedicated, continuous human assistance throughout your journey</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Core Pillars: The Century Standard -->
-    <section class="border-y border-border bg-surface-muted/50 py-20 sm:py-28">
+    <!-- Agency Certifications Section -->
+    <section class="border-t border-border bg-surface-muted/50 py-16 sm:py-24">
       <div class="container-page">
-        <div data-reveal class="mx-auto max-w-2xl text-center">
-          <span class="inline-block rounded-md bg-surface px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-muted shadow-xs">
-            The Century Standard
+        <div class="max-w-2xl">
+          <span class="text-xs font-bold uppercase tracking-widest text-ink-muted">
+            Official Compliance
           </span>
-          <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl">
-            Why Discerning Travelers Choose Us
+          <h2 class="mt-2 font-display text-3xl sm:text-4xl text-ink">
+            Agency Certifications & Standards
           </h2>
-          <p class="mt-4 text-base text-text-muted sm:text-lg">
-            We don't simply sell tour packages. We manage all logistics from beginning to end with obsessive attention to safety, comfort, and authenticity.
+          <p class="mt-3 text-base text-text-muted sm:text-lg">
+            Century Holidays operates with formal commercial registration, strict adherence to tourism standards, and full operational transparency.
           </p>
         </div>
 
-        <div data-reveal class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map((pillar) => (
-            <div class="group flex flex-col justify-between rounded-2xl border border-border bg-surface p-6 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-ink/40 hover:shadow-card sm:p-7">
-              <div>
-                <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-surface-muted text-ink transition-colors duration-300 group-hover:bg-[#F0EA1B] group-hover:text-gray-950">
-                  <i class:list={['ph-bold text-2xl', pillar.icon]} aria-hidden="true"></i>
-                </div>
-                <h3 class="mt-5 font-display text-xl font-bold leading-snug text-ink">{pillar.title}</h3>
-                <p class="mt-3 text-sm leading-relaxed text-text-muted sm:text-base">{pillar.description}</p>
-              </div>
-              <div class="mt-6 border-t border-border/60 pt-4">
-                <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ink-muted group-hover:text-ink">
-                  Guaranteed Standard <i class="ph-bold ph-caret-right" aria-hidden="true"></i>
+        <!-- Certifications 2x2 Grid -->
+        <div class="mt-12 grid gap-6 sm:grid-cols-2">
+          {certifications.map((cert) => (
+            <div class="rounded-2xl border border-border bg-surface p-7 shadow-xs">
+              <div class="flex items-center justify-between">
+                <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-surface-muted text-ink">
+                  <i class:list={['ph-bold text-2xl', cert.icon]} aria-hidden="true"></i>
+                </span>
+                <span class="rounded-full bg-[#F0EA1B]/20 border border-[#F0EA1B]/40 px-3 py-1 text-xs font-bold text-gray-900">
+                  {cert.badge}
                 </span>
               </div>
+              <h3 class="mt-5 font-display text-xl font-bold text-ink">{cert.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-text-muted sm:text-base">{cert.description}</p>
             </div>
           ))}
         </div>
-      </div>
-    </section>
 
-    <!-- Visual Specialization Showcase (Real Photography Cards) -->
-    <section class="py-20 sm:py-28">
-      <div class="container-page">
-        <div data-reveal class="mx-auto max-w-2xl text-center">
-          <span class="inline-block rounded-md bg-surface-muted px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-muted">
-            Expertise in Motion
-          </span>
-          <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl">
-            Our Three Signature Disciplines
-          </h2>
-          <p class="mt-4 text-base text-text-muted sm:text-lg">
-            Every route we engineer falls into one of three core travel specializations where our ground depth is unmatched.
-          </p>
-        </div>
-
-        <div data-reveal class="mt-14 grid gap-8 lg:grid-cols-3">
-          {specialities.map((spec) => (
-            <div class="group overflow-hidden rounded-3xl border border-border bg-surface shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-panel">
-              <!-- Real HD Photo Container -->
-              <div class="relative aspect-[16/10] overflow-hidden bg-surface-muted">
-                <Image
-                  src={spec.image}
-                  alt={spec.alt}
-                  class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  widths={[480, 800]}
-                  sizes="(min-width: 1024px) 380px, 90vw"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/20 to-transparent"></div>
-                <div class="absolute bottom-4 left-4 right-4 text-text-inverse">
-                  <span class="text-xs font-medium uppercase tracking-wider text-[#F0EA1B]">{spec.subtitle}</span>
-                  <h3 class="mt-1 font-display text-2xl font-bold leading-tight">{spec.title}</h3>
-                </div>
-              </div>
-
-              <!-- Content & Badges -->
-              <div class="p-6 sm:p-7">
-                <p class="text-sm leading-relaxed text-text-muted sm:text-base">{spec.description}</p>
-                <div class="mt-5 flex flex-wrap gap-2">
-                  {spec.badges.map((badge) => (
-                    <span class="inline-flex items-center gap-1 rounded-full border border-border bg-surface-muted px-3 py-1 text-xs font-semibold text-ink-muted">
-                      <i class="ph-bold ph-check text-[10px] text-green-600" aria-hidden="true"></i>
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-                <div class="mt-6 border-t border-border pt-4">
-                  <a
-                    href={spec.link}
-                    class="inline-flex items-center gap-2 text-sm font-bold text-ink transition-colors hover:text-[#b0a905]"
-                  >
-                    View Available Batches <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Real Traveler Voices & Testimonials -->
-    <section class="border-y border-border bg-surface-muted/40 py-20 sm:py-28">
-      <div class="container-page">
-        <div data-reveal class="mx-auto max-w-2xl text-center">
-          <span class="inline-block rounded-md bg-surface px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-muted shadow-xs">
-            Traveler Testimonials
-          </span>
-          <h2 class="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl">
-            Real Stories from Real Travelers
-          </h2>
-          <p class="mt-4 text-base text-text-muted sm:text-lg">
-            Hear directly from the adventurers, families, and couples who explored the world alongside Century Holidays.
-          </p>
-        </div>
-
-        <div data-reveal class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {testimonials.map((t) => (
-            <div class="flex flex-col justify-between rounded-2xl border border-border bg-surface p-6 shadow-xs transition-transform duration-200 hover:-translate-y-1">
-              <div>
-                <div class="flex items-center gap-1 text-[#b0a905]">
-                  <i class="ph-fill ph-star text-sm"></i>
-                  <i class="ph-fill ph-star text-sm"></i>
-                  <i class="ph-fill ph-star text-sm"></i>
-                  <i class="ph-fill ph-star text-sm"></i>
-                  <i class="ph-fill ph-star text-sm"></i>
-                </div>
-                <p class="mt-4 text-sm italic leading-relaxed text-text-muted">"{t.comment}"</p>
-              </div>
-              <div class="mt-6 flex items-center gap-3 border-t border-border pt-4">
-                <Image
-                  src={t.image}
-                  alt={`Photo of ${t.name}`}
-                  class="h-11 w-11 rounded-full object-cover ring-2 ring-[#F0EA1B]"
-                  widths={[80]}
-                  width={44}
-                  height={44}
-                />
-                <div>
-                  <p class="text-sm font-bold text-ink">{t.name}</p>
-                  <p class="text-xs text-text-muted">{t.trip}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Physical Agency Headquarters & Verification Section -->
-    <section class="py-20 sm:py-28">
-      <div class="container-page">
-        <div data-reveal class="overflow-hidden rounded-3xl border border-border bg-surface shadow-panel">
-          <div class="grid lg:grid-cols-12">
-            <!-- Details Column -->
-            <div class="p-8 sm:p-12 lg:col-span-7">
-              <span class="inline-block rounded-md bg-surface-muted px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-muted">
-                Official Agency Headquarters
-              </span>
-              <h2 class="mt-4 font-display text-3xl sm:text-4xl">
-                Come Visit Our Nashik Office
-              </h2>
-              <p class="mt-4 text-base leading-relaxed text-text-muted sm:text-lg">
-                We believe in genuine accountability. If you are in Nashik or Maharashtra, feel free to walk into our office, have a coffee with our senior travel planners, and customize your itinerary face-to-face.
+        <!-- Official Office & Registration Information Card -->
+        <div class="mt-10 rounded-2xl border border-border bg-surface p-7 sm:p-8 shadow-xs">
+          <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div class="lg:col-span-8">
+              <h3 class="font-display text-xl font-bold text-ink">Registered Office & Contact Details</h3>
+              <p class="mt-2 text-sm text-text-muted">
+                Clients and partners are welcome to visit our head office or reach out to our administration team directly.
               </p>
-
-              <div class="mt-8 space-y-5">
-                <div class="flex items-start gap-4">
-                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-muted text-ink">
-                    <i class="ph-bold ph-map-pin text-xl" aria-hidden="true"></i>
+              <div class="mt-5 space-y-3 text-sm sm:text-base text-text-muted">
+                <div class="flex items-start gap-3">
+                  <i class="ph-bold ph-map-pin mt-1 text-ink text-lg" aria-hidden="true"></i>
+                  <span>
+                    <strong class="text-ink font-semibold">Head Office:</strong> 4th Floor, Trinity Towers, Near Jairam Glass, Tidke Colony, Nashik, Maharashtra 422002
                   </span>
-                  <div>
-                    <h4 class="text-sm font-bold text-ink sm:text-base">Head Office Address</h4>
-                    <p class="text-sm text-text-muted sm:text-base">
-                      4th Floor, Trinity Towers, Near Jairam Glass, Tidke Colony, Nashik, Maharashtra 422002
-                    </p>
-                  </div>
                 </div>
-
-                <div class="flex items-start gap-4">
-                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-muted text-ink">
-                    <i class="ph-bold ph-phone-call text-xl" aria-hidden="true"></i>
+                <div class="flex items-center gap-3">
+                  <i class="ph-bold ph-phone text-ink text-lg" aria-hidden="true"></i>
+                  <span>
+                    <strong class="text-ink font-semibold">Telephone:</strong> <a href="tel:+918055253666" class="hover:text-ink underline decoration-border">+91 8055253666</a> (Mon – Sat, 9:30 AM – 7:30 PM)
                   </span>
-                  <div>
-                    <h4 class="text-sm font-bold text-ink sm:text-base">Direct Concierge Helpline</h4>
-                    <p class="text-sm text-text-muted sm:text-base">
-                      <a href="tel:+918055253666" class="font-semibold text-ink underline decoration-border hover:decoration-ink">+91 8055253666</a>
-                      <span class="mx-2 text-border">|</span>
-                      Mon – Sat, 9:30 AM – 7:30 PM
-                    </p>
-                  </div>
                 </div>
-
-                <div class="flex items-start gap-4">
-                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-muted text-ink">
-                    <i class="ph-bold ph-envelope text-xl" aria-hidden="true"></i>
+                <div class="flex items-center gap-3">
+                  <i class="ph-bold ph-envelope text-ink text-lg" aria-hidden="true"></i>
+                  <span>
+                    <strong class="text-ink font-semibold">Official Email:</strong> <a href="mailto:contact@centuryholidays.in" class="hover:text-ink underline decoration-border">contact@centuryholidays.in</a>
                   </span>
-                  <div>
-                    <h4 class="text-sm font-bold text-ink sm:text-base">Official Inquiries</h4>
-                    <p class="text-sm text-text-muted sm:text-base">
-                      <a href="mailto:contact@centuryholidays.in" class="font-semibold text-ink underline decoration-border hover:decoration-ink">contact@centuryholidays.in</a>
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Trust Badges & Accreditations Column -->
-            <div class="flex flex-col justify-between border-t border-border bg-surface-muted/60 p-8 sm:p-12 lg:col-span-5 lg:border-l lg:border-t-0">
-              <div>
-                <h3 class="font-display text-xl font-bold text-ink sm:text-2xl">Agency Certifications</h3>
-                <p class="mt-2 text-sm text-text-muted">Registered tourism enterprise adhering to national safety standards.</p>
-
-                <div class="mt-6 space-y-4">
-                  <div class="flex items-center gap-3 rounded-xl border border-border bg-surface p-3.5 shadow-xs">
-                    <i class="ph-fill ph-seal-check text-2xl text-green-600" aria-hidden="true"></i>
-                    <div>
-                      <p class="text-sm font-bold text-ink">Govt. Registered Agency</p>
-                      <p class="text-xs text-text-muted">Compliant with all state tourism mandates</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-center gap-3 rounded-xl border border-border bg-surface p-3.5 shadow-xs">
-                    <i class="ph-fill ph-mountains text-2xl text-sky-600" aria-hidden="true"></i>
-                    <div>
-                      <p class="text-sm font-bold text-ink">Certified Mountain Safety</p>
-                      <p class="text-xs text-text-muted">High-altitude medical & oxygen protocols</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-center gap-3 rounded-xl border border-border bg-surface p-3.5 shadow-xs">
-                    <i class="ph-fill ph-shield-check text-2xl text-amber-600" aria-hidden="true"></i>
-                    <div>
-                      <p class="text-sm font-bold text-ink">100% Financial Transparency</p>
-                      <p class="text-xs text-text-muted">Clear GST invoicing, zero hidden levies</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-8 rounded-xl bg-surface p-4 border border-border">
-                <p class="text-xs font-semibold uppercase tracking-wider text-ink-muted">Quick Planning Tip</p>
-                <p class="mt-1 text-xs text-text-muted">Planning a group or corporate tour? Schedule a 15-minute consultation with our senior itinerary planner.</p>
-                <a href="/contact.html" class="mt-3 inline-flex items-center gap-1 text-xs font-bold text-ink hover:text-[#b0a905]">
-                  Schedule Consultation <i class="ph-bold ph-arrow-right"></i>
-                </a>
-              </div>
+            <div class="flex flex-col items-start lg:items-end lg:col-span-4 border-t border-border pt-6 lg:border-t-0 lg:border-l lg:pl-8 lg:pt-0">
+              <span class="text-xs font-bold uppercase tracking-wider text-ink-muted">Have Inquiries?</span>
+              <p class="mt-1 text-xs text-text-muted lg:text-right">Speak directly with our senior travel managers.</p>
+              <a
+                href="/contact.html"
+                class="mt-4 inline-flex items-center gap-2 rounded-full bg-[#F0EA1B] px-6 py-2.5 text-sm font-bold text-gray-950 transition-colors hover:bg-[#e4de16]"
+              >
+                Contact Agency <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
+              </a>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Closing High-Impact CTA Banner -->
-    <section class="border-t border-border bg-[#15140F] py-20 text-white sm:py-24">
-      <div class="container-page text-center">
-        <div data-reveal class="mx-auto max-w-3xl">
-          <span class="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#F0EA1B]">
-            Start Your Adventure
-          </span>
-          <h2 class="mt-6 font-display text-4xl leading-tight sm:text-5xl sm:leading-tight lg:text-6xl">
-            Ready to Architect Your Dream Journey?
-          </h2>
-          <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-300 sm:text-lg">
-            Speak directly with our dedicated destination experts today. We'll design a customized itinerary tailored specifically to your group, your budget, and your preferred pace.
-          </p>
-
-          <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="/book.html"
-              class="inline-flex items-center gap-2 rounded-full bg-[#F0EA1B] px-8 py-4 text-base font-bold text-gray-950 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#e4de16]"
-            >
-              Start Planning Your Trip <i class="ph-bold ph-arrow-right text-lg" aria-hidden="true"></i>
-            </a>
-            <a
-              href="https://wa.me/918055253666?text=Hi%20Century%20Holidays,%20I%20would%20like%20to%20plan%20a%20trip!"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-base font-bold text-white transition-colors duration-200 hover:bg-white/10"
-            >
-              <i class="ph-bold ph-whatsapp-logo text-xl text-green-400" aria-hidden="true"></i>
-              WhatsApp Our Experts
-            </a>
           </div>
         </div>
       </div>
