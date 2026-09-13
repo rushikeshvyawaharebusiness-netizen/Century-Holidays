@@ -1,0 +1,19 @@
+# robots.txt for https://centuryholidays.in
+#
+# Tells search engines which parts of the site they may crawl, and where the
+# sitemap is. This file is published exactly as written, at
+# https://centuryholidays.in/robots.txt, on the next deploy — so it is safe
+# to edit directly on GitHub.
+#
+# IF THE DOMAIN EVER CHANGES: update the Sitemap line at the bottom, and
+# `site:` in astro.config.mjs.
+#
+# DO NOT add "Disallow" lines for the Book, Contact, Privacy or Terms pages
+# to hide them from Google. They are already hidden with a noindex tag (set
+# in src/data/site.ts). Blocking them here would stop Google from reading
+# that tag, and they could stay listed in search results.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://centuryholidays.in/sitemap.xml

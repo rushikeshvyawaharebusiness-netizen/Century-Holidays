@@ -3,8 +3,9 @@
   SITE + SEO CONTROL PANEL
   ============================================================================
   Almost everything Google reads about this website is set in this one file.
-  Edit here and it updates across every page, the sitemap and robots.txt at
-  the same time — you should not need to touch the page files for SEO.
+  Edit here and it updates across every page and the sitemap at the same
+  time — you should not need to touch the page files for SEO.
+  (robots.txt is the exception: it is a plain file at public/robots.txt.)
 
   WHAT TO EDIT FOR WHAT:
     - Page titles / descriptions in Google results ...... PAGES (bottom)
@@ -16,9 +17,9 @@
 
   IMPORTANT — YOUR LIVE DOMAIN:
   The website address itself is NOT set here. It lives in `astro.config.mjs`
-  as `site:`. Everything below (canonical links, sitemap, robots.txt, social
-  previews) is built from that one value, so when you move to your real
-  domain, change it in that file only.
+  as `site:`. Canonical links, the sitemap and social previews are built from
+  that one value. The only other place it is written is the Sitemap line in
+  public/robots.txt — if the domain changes, update both.
   ============================================================================
 */
 

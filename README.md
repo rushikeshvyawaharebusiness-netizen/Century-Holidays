@@ -16,6 +16,7 @@ files with no server to maintain.
 | **Phone number, email, WhatsApp, social links** | `src/data/contact.ts` |
 | **Google titles & descriptions, keywords, sitemap** | `src/data/site.ts` |
 | **Hide a page from Google / from sitelinks** | `src/data/site.ts` → set `index: false` |
+| **robots.txt** — what search engines may crawl | `public/robots.txt` |
 | **Business address, opening hours, cities served** | `src/data/site.ts` |
 | **Trip packages** — names, prices, durations, photos | `src/data/trips.ts` |
 | **The top menu / logo / navigation** | `src/components/Navbar.astro` |
@@ -29,10 +30,10 @@ files with no server to maintain.
 | **Brand colours, fonts, shadows** | `src/styles/global.css` |
 | **The website's live address (domain)** | `astro.config.mjs` → `site:` |
 
-> **Changing the domain:** `site:` in `astro.config.mjs` is the single source of
-> truth. Canonical links, the sitemap, robots.txt and social-share previews are
-> all built from it. Change it there and everything follows — do not hard-code
-> the domain anywhere else.
+> **Changing the domain:** canonical links, the sitemap and social-share
+> previews are all built from `site:` in `astro.config.mjs`. The only other
+> place the domain is written is the `Sitemap:` line in `public/robots.txt`.
+> If the domain changes, update both — nowhere else needs touching.
 
 > **Shared sections:** Destinations, Trending Trips and Why Choose Us each appear
 > both on the homepage and on a page of their own. They are the same component
@@ -55,8 +56,7 @@ src/
 │   ├── contact.astro       Contact page          →  /contact.html   (hidden from Google)
 │   ├── privacy.astro       Privacy Policy        →  /privacy.html   (hidden from Google)
 │   ├── terms.astro         Terms & Conditions    →  /terms.html     (hidden from Google)
-│   ├── sitemap.xml.ts      Generates /sitemap.xml   (do not edit; see site.ts)
-│   └── robots.txt.ts       Generates /robots.txt    (do not edit; see site.ts)
+│   └── sitemap.xml.ts      Generates /sitemap.xml   (do not edit; see site.ts)
 │
 ├── layouts/
 │   └── BaseLayout.astro  The shared page shell: <head> tags, SEO, header,
@@ -96,7 +96,7 @@ src/
 │
 └── assets/images/    Photos used on the site (optimised at build time)
 
-public/               Files served exactly as-is: favicons, logo.svg, og-cover
+public/               Files served exactly as-is: robots.txt, favicons, logo.svg, og-cover
 scripts/              One-off tools that regenerate the favicons from logo.png
 ```
 
@@ -123,8 +123,10 @@ that file — it is written to be edited without touching any page.
   directly in Google results
 - `BreadcrumbList` on inner pages
 - Canonical URLs, Open Graph and Twitter card tags
-- `/sitemap.xml` and `/robots.txt`, generated at build time so they can never
-  go stale
+- `/sitemap.xml`, generated at build time from `src/data/site.ts` so it can
+  never go stale
+- `/robots.txt`, a plain file at `public/robots.txt` that allows all crawling
+  and points search engines at the sitemap
 
 **Sitelinks** (the sub-links under the main Google result)
 
