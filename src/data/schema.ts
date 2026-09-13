@@ -33,7 +33,7 @@ export function travelAgencySchema(site: URL | undefined) {
     slogan: BUSINESS.tagline,
     url: abs(site, '/'),
     logo: abs(site, '/logo.svg'),
-    image: abs(site, '/og-cover.png'),
+    image: abs(site, '/og-icon.png'),
     telephone: BUSINESS.phone,
     email: BUSINESS.email,
     priceRange: BUSINESS.priceRange,

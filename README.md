@@ -96,7 +96,7 @@ src/
 │
 └── assets/images/    Photos used on the site (optimised at build time)
 
-public/               Files served exactly as-is: robots.txt, favicons, logo.svg, og-cover
+public/               Files served exactly as-is: robots.txt, favicons, logo.svg, og-icon
 scripts/              One-off tools that regenerate the favicons from logo.png
 ```
 
@@ -173,17 +173,17 @@ it. Deploying means running `npm run build` and publishing `dist/`.
 
 ## Regenerating the logo and favicons
 
-`public/logo.svg`, the favicons and `og-cover.png` are generated from
-`src/assets/images/logo.png`:
+`public/logo.svg` is traced from `src/assets/images/logo.png`. The favicons and
+`og-icon.png` are drawn from `src/assets/images/logo-mark.png`:
 
 ```bash
 node scripts/trace-logo.mjs          # redraws public/logo.svg
-node scripts/build-brand-assets.mjs  # redraws favicons + og-cover
+node scripts/build-brand-assets.mjs  # redraws favicons + og-icon
 ```
 
-`og-cover.png` is the preview image shown when a link to the site is shared on
-WhatsApp, Facebook, LinkedIn or X. Its tagline is set near the bottom of
-`scripts/build-brand-assets.mjs` (keep it matching `BUSINESS.tagline` in
-`src/data/site.ts`). After replacing the image, bump `?v=` on `ogImageURL` in
-`src/layouts/BaseLayout.astro` — apps cache preview images by URL, and without
+`og-icon.png` is the small image shown when a link to the site is shared on
+WhatsApp, Facebook, LinkedIn or X: the favicon's compass disc on the site's dark
+ink colour. It is 256×256 on purpose — WhatsApp turns larger images into a big
+banner above the message. After replacing it, bump `?v=` on `ogImageURL` in
+`src/layouts/BaseLayout.astro`: apps cache preview images by URL, and without
 that they keep showing the old one.

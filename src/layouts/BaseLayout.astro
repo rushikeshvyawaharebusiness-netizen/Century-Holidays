@@ -48,11 +48,12 @@ const shareTitle = `${BUSINESS.name} | ${BUSINESS.tagline}`;
 
 const canonicalURL = new URL(path, Astro.site);
 /*
-  WhatsApp, Facebook and LinkedIn cache preview images by URL, sometimes for
-  weeks. Bump `?v=` whenever public/og-cover.png is replaced, so links that were
-  already shared pick up the new image instead of the cached old one.
+  Link-preview image: the favicon's compass disc, public/og-icon.png (generated
+  by scripts/build-brand-assets.mjs). WhatsApp, Facebook and LinkedIn cache
+  preview images by URL, sometimes for weeks, so bump `?v=` whenever the file
+  is replaced — otherwise links already shared keep showing the old image.
 */
-const ogImageURL = new URL('/og-cover.png?v=2', Astro.site);
+const ogImageURL = new URL('/og-icon.png?v=1', Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -92,7 +93,8 @@ const ogImageURL = new URL('/og-cover.png?v=2', Astro.site);
 
     {/*
       How a link looks when shared on Facebook, WhatsApp, LinkedIn. The title is
-      always the brand name and tagline; the description is this page's own.
+      always the brand name and tagline; the description is this page's own; the
+      image is the small favicon icon, not a wide banner.
     */}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={BUSINESS.name} />
@@ -101,12 +103,12 @@ const ogImageURL = new URL('/og-cover.png?v=2', Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
     <meta property="og:image:alt" content={shareTitle} />
 
-    {/* How the page looks when shared on X/Twitter. */}
-    <meta name="twitter:card" content="summary_large_image" />
+    {/* How the page looks when shared on X/Twitter. "summary" is the small square-image card. */}
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={shareTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
