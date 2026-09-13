@@ -48,12 +48,13 @@ const shareTitle = `${BUSINESS.name} | ${BUSINESS.tagline}`;
 
 const canonicalURL = new URL(path, Astro.site);
 /*
-  Link-preview image: the favicon's compass disc, public/og-icon.png (generated
+  Link-preview image: the black compass "C" on a brand-yellow square,
+  public/og-icon.png (generated
   by scripts/build-brand-assets.mjs). WhatsApp, Facebook and LinkedIn cache
   preview images by URL, sometimes for weeks, so bump `?v=` whenever the file
   is replaced — otherwise links already shared keep showing the old image.
 */
-const ogImageURL = new URL('/og-icon.png?v=1', Astro.site);
+const ogImageURL = new URL('/og-icon.png?v=2', Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -94,7 +95,7 @@ const ogImageURL = new URL('/og-icon.png?v=1', Astro.site);
     {/*
       How a link looks when shared on Facebook, WhatsApp, LinkedIn. The title is
       always the brand name and tagline; the description is this page's own; the
-      image is the small favicon icon, not a wide banner.
+      image is the compass logo on yellow, shown small — not a wide banner.
     */}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={BUSINESS.name} />

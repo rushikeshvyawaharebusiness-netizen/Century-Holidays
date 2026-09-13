@@ -182,8 +182,8 @@ node scripts/build-brand-assets.mjs  # redraws favicons + og-icon
 ```
 
 `og-icon.png` is the small image shown when a link to the site is shared on
-WhatsApp, Facebook, LinkedIn or X: the favicon's compass disc on the site's dark
-ink colour. It is 256×256 on purpose — WhatsApp turns larger images into a big
+WhatsApp, Facebook, LinkedIn or X: the black compass "C" on a brand-yellow
+square. It is 256×256 on purpose — WhatsApp turns larger images into a big
 banner above the message. After replacing it, bump `?v=` on `ogImageURL` in
 `src/layouts/BaseLayout.astro`: apps cache preview images by URL, and without
 that they keep showing the old one.

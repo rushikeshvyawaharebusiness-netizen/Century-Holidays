@@ -62,21 +62,24 @@ await sharp(await icon(180, 'square')).toFile('public/apple-touch-icon.png');
 // --- Link-preview icon --------------------------------------------------------
 /*
   The image WhatsApp, Facebook, LinkedIn and X show when a link to the site is
-  shared: the favicon's yellow compass disc, centred on the site's ink colour.
+  shared: the approved social logo — the black compass "C" on a full-bleed
+  brand-yellow square.
 
-  Why not favicon.png itself: its corners are transparent, and WhatsApp
-  re-encodes preview thumbnails as JPEG, which has no transparency, so the
-  corners would come out as solid black or white blocks. An opaque square
-  avoids that.
+  Opaque on purpose: WhatsApp re-encodes preview thumbnails as JPEG, which has
+  no transparency, so a transparent background would turn black or white.
 
   Why 256px: WhatsApp shows preview images roughly 300px wide or larger as a
   big banner above the message. Staying below that keeps it a small icon beside
   the text, while clearing Facebook's 200px minimum.
 */
 const OG_ICON = 256;
-const DISC = 216;
-await sharp({ create: { width: OG_ICON, height: OG_ICON, channels: 3, background: INK } })
-  .composite([{ input: await icon(DISC), left: (OG_ICON - DISC) / 2, top: (OG_ICON - DISC) / 2 }])
+// The mark fills about two-thirds of the square, matching the approved artwork.
+const OG_GLYPH = Math.round(OG_ICON * 0.66);
+const BLACK = { r: 0, g: 0, b: 0, alpha: 1 };
+const ogGlyph = await recolour(MARK, OG_GLYPH, BLACK);
+const ogOffset = Math.round((OG_ICON - OG_GLYPH) / 2);
+await sharp({ create: { width: OG_ICON, height: OG_ICON, channels: 3, background: BRAND_HEX } })
+  .composite([{ input: ogGlyph, left: ogOffset, top: ogOffset }])
   .png()
   .toFile('public/og-icon.png');
 
