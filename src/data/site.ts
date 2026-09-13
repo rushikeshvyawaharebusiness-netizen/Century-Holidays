@@ -113,7 +113,7 @@ export interface PageSeo {
 
 export const PAGES: Record<string, PageSeo> = {
   '/': {
-    title: 'Century Holidays | Travel Agency in Nashik, Pune & Mumbai',
+    title: 'Century Holidays | Crafting Memories for Every Century',
     description:
       'Century Holidays is a trusted travel agency in Nashik serving Pune and Mumbai. Custom tour packages, group treks and international holidays. Call +91 7066187551.',
     priority: 1.0,
