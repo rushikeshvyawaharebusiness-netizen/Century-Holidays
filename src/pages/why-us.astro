@@ -1,0 +1,33 @@
+---
+/*
+  /why-us.html — why travellers choose Century Holidays.
+
+  Built from two shared components the homepage also uses, so the two never
+  drift apart:
+    - WhyUsSection         the four trust pillars (its heading is this page's <h1>)
+    - SpecialitiesSection  "Book with Confidence": booking terms and guarantees
+
+  To change this page's Google title and description, edit PAGES in
+  src/data/site.ts.
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhyUsSection from '../components/WhyUsSection.astro';
+import SpecialitiesSection from '../components/SpecialitiesSection.astro';
+import { breadcrumbSchema } from '../data/schema';
+
+/* Breadcrumb trail, so Google shows "Home > Why Choose Century Holidays" instead of a raw URL. */
+const structuredData = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: 'Why Choose Century Holidays', path: '/why-us.html' },
+  ]),
+];
+---
+
+<BaseLayout path="/why-us.html" structuredData={structuredData}>
+  {/* pt-20 clears the fixed 80px header, which overlays the top of every page. */}
+  <main id="main-content" class="pt-20">
+    <WhyUsSection as="h1" />
+    <SpecialitiesSection />
+  </main>
+</BaseLayout>

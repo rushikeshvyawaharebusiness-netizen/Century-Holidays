@@ -1,0 +1,68 @@
+---
+/*
+  "Trending Trips" — the most popular packages.
+
+  Used in two places, so an edit here updates both:
+    - the homepage, as an auto-scrolling row (heading is an <h2>)
+    - /trending.html, as a static grid (heading is the page's <h1>), so a
+      visitor arriving from Google sees every trip at once instead of waiting
+      for them to scroll past
+
+  The trips shown come from `trending` in src/data/trips.ts.
+*/
+import MarqueeTrack from './MarqueeTrack.astro';
+import TripCard from './TripCard.astro';
+import { trending } from '../data/trips';
+
+interface Props {
+  /** 'h1' when this section is the whole page, 'h2' when it sits inside one. */
+  as?: 'h1' | 'h2';
+  /** Intro line under the heading. */
+  description?: string;
+  /** 'marquee' scrolls sideways (homepage); 'grid' shows every card at once. */
+  layout?: 'marquee' | 'grid';
+}
+
+const {
+  as: Heading = 'h2',
+  description = 'Handpicked destinations for your next unforgettable journey.',
+  layout = 'marquee',
+} = Astro.props;
+---
+
+<section id="trending" class="bg-paper py-20 sm:py-28">
+  <div class="container-page">
+    <div data-reveal class="mb-14 flex flex-col items-center text-center">
+      <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Discover The Best</span>
+      <Heading class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">Trending Trips</Heading>
+      <p class="mt-4 max-w-xl text-lg text-text-muted">
+        {description}
+      </p>
+    </div>
+  </div>
+
+  {layout === 'marquee' ? (
+    <MarqueeTrack reverse>
+      {trending.map((trip) => <TripCard trip={trip} />)}
+    </MarqueeTrack>
+  ) : (
+    <div class="container-page">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-8 xl:gap-10 gap-y-10 sm:gap-y-12 justify-items-center">
+        {trending.map((trip) => (
+          <div class="w-full flex justify-center px-1.5">
+            <TripCard trip={trip} />
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="container-page mt-14 flex justify-center">
+    <a
+      href="/book.html"
+      class="inline-flex items-center gap-2 rounded-full border-2 border-border px-7 py-3.5 text-base font-bold text-ink transition-colors hover:border-brand hover:bg-brand"
+    >
+      Plan Your Trip
+    </a>
+  </div>
+</section>

@@ -2,6 +2,16 @@
 // WhyUsSection.astro
 // "Why Choose Century Holidays?" - 4 Trust Pillars with Bespoke Vector Craft
 // 100% Theme Harmonized: #F0EA1B Brand Yellow, #15140F Dark Ink, Fraunces Serif
+//
+// Used on the homepage (heading is an <h2>) and as the main content of
+// /why-us.html (heading becomes the page's <h1>), so edits here update both.
+
+interface Props {
+  /** 'h1' when this section is the whole page, 'h2' when it sits inside one. */
+  as?: 'h1' | 'h2';
+}
+
+const { as: Heading = 'h2' } = Astro.props;
 ---
 
 <section id="why-us" class="relative overflow-hidden bg-paper py-16 sm:py-24 border-t border-border">
@@ -16,9 +26,9 @@
         <i class="ph-fill ph-sparkle text-brand text-sm" aria-hidden="true"></i>
         The Century Advantage
       </span>
-      <h2 class="mt-3.5 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight">
+      <Heading class="mt-3.5 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight">
         Why Choose Century Holidays?
-      </h2>
+      </Heading>
       <p class="mt-4 text-base sm:text-lg text-text-muted leading-relaxed max-w-2xl mx-auto">
         We make travel seamless, transparent, and genuinely memorable. Here is how we turn your bucket list into a smooth, stress-free reality.
       </p>

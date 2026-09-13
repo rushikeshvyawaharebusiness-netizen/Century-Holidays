@@ -25,6 +25,9 @@ export const GET: APIRoute = ({ site }) => {
   const lastmod = new Date().toISOString().split('T')[0];
 
   const urls = Object.entries(PAGES)
+    // Pages marked `index: false` carry a noindex tag. Listing them here would
+    // contradict that, and Search Console reports it as an error.
+    .filter(([, seo]) => seo.index !== false)
     .map(([path, seo]) => {
       const loc = new URL(path, site).href;
       return `  <url>

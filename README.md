@@ -15,11 +15,15 @@ files with no server to maintain.
 | --- | --- |
 | **Phone number, email, WhatsApp, social links** | `src/data/contact.ts` |
 | **Google titles & descriptions, keywords, sitemap** | `src/data/site.ts` |
+| **Hide a page from Google / from sitelinks** | `src/data/site.ts` → set `index: false` |
 | **Business address, opening hours, cities served** | `src/data/site.ts` |
 | **Trip packages** — names, prices, durations, photos | `src/data/trips.ts` |
 | **The top menu / logo / navigation** | `src/components/Navbar.astro` |
 | **The menu that slides in on phones** | `src/components/MobileNav.astro` |
 | **The footer** — links, newsletter, contact block | `src/components/Footer.astro` |
+| **The "Explore Destinations" grid** (homepage + its own page) | `src/components/DestinationsSection.astro` |
+| **The "Trending Trips" section** (homepage + its own page) | `src/components/TrendingSection.astro` |
+| **"Why Choose Century Holidays"** (homepage + its own page) | `src/components/WhyUsSection.astro` |
 | **Homepage text, sections and their order** | `src/pages/index.astro` |
 | **FAQ questions and answers** | `src/pages/index.astro` (the `faqs` list at the top) |
 | **Brand colours, fonts, shadows** | `src/styles/global.css` |
@@ -30,6 +34,11 @@ files with no server to maintain.
 > all built from it. Change it there and everything follows — do not hard-code
 > the domain anywhere else.
 
+> **Shared sections:** Destinations, Trending Trips and Why Choose Us each appear
+> both on the homepage and on a page of their own. They are the same component
+> in both places, so one edit updates both — there is no second copy to keep
+> in sync.
+
 ---
 
 ## Project structure
@@ -37,39 +46,44 @@ files with no server to maintain.
 ```
 src/
 ├── pages/            One file = one page on the website
-│   ├── index.astro       Homepage           →  /
-│   ├── about.astro       About Us           →  /about.html
-│   ├── book.astro        Booking form       →  /book.html
-│   ├── contact.astro     Contact page       →  /contact.html
-│   ├── privacy.astro     Privacy Policy     →  /privacy.html
-│   ├── terms.astro       Terms & Conditions →  /terms.html
-│   ├── sitemap.xml.ts    Generates /sitemap.xml   (do not edit; see site.ts)
-│   └── robots.txt.ts     Generates /robots.txt    (do not edit; see site.ts)
+│   ├── index.astro         Homepage              →  /
+│   ├── about.astro         About Us              →  /about.html
+│   ├── destinations.astro  Explore Destinations  →  /destinations.html
+│   ├── trending.astro      Trending Trips        →  /trending.html
+│   ├── why-us.astro        Why Choose Us         →  /why-us.html
+│   ├── book.astro          Booking form          →  /book.html      (hidden from Google)
+│   ├── contact.astro       Contact page          →  /contact.html   (hidden from Google)
+│   ├── privacy.astro       Privacy Policy        →  /privacy.html   (hidden from Google)
+│   ├── terms.astro         Terms & Conditions    →  /terms.html     (hidden from Google)
+│   ├── sitemap.xml.ts      Generates /sitemap.xml   (do not edit; see site.ts)
+│   └── robots.txt.ts       Generates /robots.txt    (do not edit; see site.ts)
 │
 ├── layouts/
 │   └── BaseLayout.astro  The shared page shell: <head> tags, SEO, header,
 │                         footer and floating contact buttons. Every page
 │                         wraps itself in this, so a change here shows on
-│                         all six pages at once.
+│                         every page at once.
 │
 ├── components/       Reusable blocks. Each file is one visual piece.
-│   ├── Navbar.astro             Top header bar (logo, menu, phone, search)
-│   ├── MobileNav.astro          Slide-in menu on phones
-│   ├── Footer.astro             Footer
-│   ├── TripCard.astro           One destination card
-│   ├── DestinationCircles.astro Round destination thumbnails row
-│   ├── PosterSlider.astro       "Early Bird Sale" offer carousel
-│   ├── SideScrollingBanners.astro  Wide banner carousel
-│   ├── SpecialitiesSection.astro   "Book with Confidence" list
-│   ├── WhyUsSection.astro       "Why Choose Century Holidays"
-│   ├── CategoryCard.astro       "Real Experiences" photo cards
-│   ├── MarqueeTrack.astro       Auto-scrolling row wrapper
-│   ├── FaqItem.astro            One expandable FAQ row
-│   ├── FormField.astro          One labelled form input
-│   ├── PageHero.astro           Page title banner on inner pages
-│   ├── QuickContact.astro       Floating call + WhatsApp buttons
-│   ├── TravelerPopupModal.astro Enquiry popup
-│   └── icons/                   Small inline SVG icons
+│   ├── Navbar.astro               Top header bar (logo, menu, phone, search)
+│   ├── MobileNav.astro            Slide-in menu on phones
+│   ├── Footer.astro               Footer
+│   ├── DestinationsSection.astro  "Explore Destinations" filterable grid
+│   ├── TrendingSection.astro      "Trending Trips" (scrolling row or grid)
+│   ├── WhyUsSection.astro         "Why Choose Century Holidays"
+│   ├── SpecialitiesSection.astro  "Book with Confidence" list
+│   ├── TripCard.astro             One destination card
+│   ├── DestinationCircles.astro   Round destination thumbnails row
+│   ├── PosterSlider.astro         "Early Bird Sale" offer carousel
+│   ├── SideScrollingBanners.astro Wide banner carousel
+│   ├── CategoryCard.astro         "Real Experiences" photo cards
+│   ├── MarqueeTrack.astro         Auto-scrolling row wrapper
+│   ├── FaqItem.astro              One expandable FAQ row
+│   ├── FormField.astro            One labelled form input
+│   ├── PageHero.astro             Page title banner on inner pages
+│   ├── QuickContact.astro         Floating call + WhatsApp buttons
+│   ├── TravelerPopupModal.astro   Enquiry popup
+│   └── icons/                     Small inline SVG icons
 │
 ├── data/             Content and settings, kept out of the markup
 │   ├── site.ts           SEO control panel + business details  ← most edits
@@ -111,6 +125,25 @@ that file — it is written to be edited without touching any page.
 - Canonical URLs, Open Graph and Twitter card tags
 - `/sitemap.xml` and `/robots.txt`, generated at build time so they can never
   go stale
+
+**Sitelinks** (the sub-links under the main Google result)
+
+Google chooses sitelinks automatically; no code or setting can force a
+particular page in. What the site controls is which pages are *eligible*.
+Only these are indexable, so only these can be picked:
+
+- About Us — `/about.html`
+- Explore Destinations — `/destinations.html`
+- Trending Trips — `/trending.html`
+- Why Choose Century Holidays — `/why-us.html`
+
+Book, Contact, Privacy and Terms carry a `noindex` tag and are left out of the
+sitemap, so they drop out of Google over time and cannot appear as sitelinks.
+They still work normally for visitors. To change which pages are eligible,
+flip `index` for that page in `src/data/site.ts`.
+
+Google takes days to weeks to re-crawl and update sitelinks after a deploy.
+Requesting indexing for the new pages in Search Console speeds it up.
 
 **After deploying,** submit the sitemap once in
 [Google Search Console](https://search.google.com/search-console)

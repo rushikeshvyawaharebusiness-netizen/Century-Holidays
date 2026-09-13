@@ -1,0 +1,33 @@
+---
+/*
+  /trending.html — the most popular trips.
+
+  Uses the shared TrendingSection component, the same one the homepage uses,
+  shown here as a static grid rather than the homepage's scrolling row. To
+  change which trips are trending, edit `trending` in src/data/trips.ts. To
+  change this page's Google title and description, edit PAGES in
+  src/data/site.ts.
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TrendingSection from '../components/TrendingSection.astro';
+import { breadcrumbSchema } from '../data/schema';
+
+/* Breadcrumb trail, so Google shows "Home > Trending Trips" instead of a raw URL. */
+const structuredData = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: 'Trending Trips', path: '/trending.html' },
+  ]),
+];
+---
+
+<BaseLayout path="/trending.html" structuredData={structuredData}>
+  {/* pt-20 clears the fixed 80px header, which overlays the top of every page. */}
+  <main id="main-content" class="pt-20">
+    <TrendingSection
+      as="h1"
+      layout="grid"
+      description="The trips travellers are booking most with Century Holidays right now — hand-picked packages for travellers from Nashik, Pune and Mumbai."
+    />
+  </main>
+</BaseLayout>

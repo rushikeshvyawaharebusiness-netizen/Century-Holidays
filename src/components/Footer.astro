@@ -7,11 +7,17 @@ interface Props {
 
 const { newsletterHeading = 'Join the Club' } = Astro.props;
 
+/*
+  These point at real pages rather than homepage #anchors on purpose: Google
+  builds the sitelinks under a search result from pages linked across the
+  whole site, and it rarely picks #section links. This footer is on every page.
+*/
 const exploreLinks = [
   { label: 'Home', href: '/#home' },
   { label: 'About Us', href: '/about.html' },
-  { label: 'Destinations', href: '/#destinations' },
-  { label: 'Why Choose Us', href: '/#why-us' },
+  { label: 'Destinations', href: '/destinations.html' },
+  { label: 'Trending Trips', href: '/trending.html' },
+  { label: 'Why Choose Us', href: '/why-us.html' },
   { label: 'Contact Us', href: '/contact.html' },
 ];
 

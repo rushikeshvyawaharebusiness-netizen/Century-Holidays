@@ -59,7 +59,16 @@ const ogImageURL = new URL('/og-cover.png', Astro.site);
       SEO basics. Titles and descriptions come from PAGES in src/data/site.ts —
       edit them there, not here.
     */}
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    {/*
+      Pages marked `index: false` in src/data/site.ts (Terms, Privacy, Contact,
+      Book) are kept out of Google entirely, so they can never be picked as
+      sitelinks under the main result. `follow` still lets Google follow the
+      links on them. Every other page is indexable.
+    */}
+    <meta
+      name="robots"
+      content={seo.index === false ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'}
+    />
     <meta name="keywords" content={ALL_KEYWORDS} />
     <meta name="author" content={BUSINESS.name} />
 

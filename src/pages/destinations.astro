@@ -1,0 +1,34 @@
+---
+/*
+  /destinations.html — every trip package on one page.
+
+  The grid itself is the shared DestinationsSection component, the same one the
+  homepage uses, so the two never drift apart. To change the trips, edit
+  src/data/trips.ts. To change this page's Google title and description, edit
+  PAGES in src/data/site.ts.
+*/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DestinationsSection from '../components/DestinationsSection.astro';
+import DestinationCircles from '../components/DestinationCircles.astro';
+import { breadcrumbSchema } from '../data/schema';
+
+/* Breadcrumb trail, so Google shows "Home > Explore Destinations" instead of a raw URL. */
+const structuredData = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: 'Explore Destinations', path: '/destinations.html' },
+  ]),
+];
+---
+
+<BaseLayout path="/destinations.html" structuredData={structuredData}>
+  {/* pt-20 clears the fixed 80px header, which overlays the top of every page. */}
+  <main id="main-content" class="pt-20">
+    <DestinationsSection
+      as="h1"
+      description="Tour packages from Century Holidays, a travel agency in Nashik planning trips for travellers from Nashik, Pune and Mumbai — international holidays, Himalayan treks and weekend getaways."
+    />
+
+    <DestinationCircles />
+  </main>
+</BaseLayout>

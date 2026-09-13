@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MarqueeTrack from '../components/MarqueeTrack.astro';
-import TripCard from '../components/TripCard.astro';
 import CategoryCard from '../components/CategoryCard.astro';
 import WhyUsSection from '../components/WhyUsSection.astro';
 import FaqItem from '../components/FaqItem.astro';
@@ -16,9 +15,10 @@ import customer5 from '../assets/images/customer5.jpg';
 import SideScrollingBanners from '../components/SideScrollingBanners.astro';
 import DestinationCircles from '../components/DestinationCircles.astro';
 import SpecialitiesSection from '../components/SpecialitiesSection.astro';
+import DestinationsSection from '../components/DestinationsSection.astro';
+import TrendingSection from '../components/TrendingSection.astro';
 import GoogleIcon from '../components/icons/GoogleIcon.astro';
 import InstagramIcon from '../components/icons/InstagramIcon.astro';
-import { destinations, trending } from '../data/trips';
 import { SOCIAL, whatsappLink } from '../data/contact';
 import { faqSchema } from '../data/schema';
 
@@ -195,115 +195,13 @@ const structuredData = [faqSchema(faqs)];
     </header>
 
     <!-- Destinations (Image 2 Style Cards) -->
-    <section id="destinations" class="bg-surface py-16 sm:py-24">
-      <div class="container-page">
-        <div data-reveal class="mb-10 flex flex-col items-center text-center">
-          <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Curated Adventures</span>
-          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">Explore Destinations</h2>
-          <p class="mt-4 max-w-xl text-lg text-text-muted">
-            Discover our hand-picked international tours and weekend escapes — pure adventure, authentic moments.
-          </p>
-
-          <!-- Destination Filter Tabs (Image 1 Style Pill Filter) -->
-          <div class="mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-3" id="destination-filter-tabs">
-            <button
-              type="button"
-              class="dest-filter-pill active rounded-full px-5 py-2 text-sm font-bold transition-all duration-200 bg-brand text-ink shadow-sm"
-              data-filter="all"
-            >
-              All Adventures
-            </button>
-            <button
-              type="button"
-              class="dest-filter-pill rounded-full border border-border bg-surface-muted px-5 py-2 text-sm font-bold transition-all duration-200 text-ink-muted hover:bg-border hover:text-ink"
-              data-filter="international"
-            >
-              International Escapes
-            </button>
-            <button
-              type="button"
-              class="dest-filter-pill rounded-full border border-border bg-surface-muted px-5 py-2 text-sm font-bold transition-all duration-200 text-ink-muted hover:bg-border hover:text-ink"
-              data-filter="domestic"
-            >
-              Domestic Destinations
-            </button>
-          </div>
-        </div>
-
-        {/* 8-Card Responsive Grid Matching Image 2 with generous spacing */}
-        <div
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-8 xl:gap-10 gap-y-10 sm:gap-y-12 justify-items-center"
-          id="destination-cards-grid"
-        >
-          {destinations.map((trip) => (
-            <div class="dest-card-item w-full flex justify-center px-1.5" data-scope={trip.scope}>
-              <TripCard trip={trip} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <script>
-      function initDestFilters() {
-        const pills = document.querySelectorAll<HTMLButtonElement>('.dest-filter-pill');
-        const cards = document.querySelectorAll<HTMLElement>('.dest-card-item');
-
-        pills.forEach((pill) => {
-          pill.addEventListener('click', () => {
-            pills.forEach((p) => {
-              p.classList.remove('active', 'bg-brand', 'text-ink', 'shadow-sm');
-              p.classList.add('border', 'border-border', 'bg-surface-muted', 'text-ink-muted');
-            });
-
-            pill.classList.add('active', 'bg-brand', 'text-ink', 'shadow-sm');
-            pill.classList.remove('border', 'border-border', 'bg-surface-muted', 'text-ink-muted');
-
-            const filter = pill.getAttribute('data-filter');
-            cards.forEach((card) => {
-              const scope = card.getAttribute('data-scope');
-              if (filter === 'all' || scope === filter) {
-                card.style.display = 'flex';
-              } else {
-                card.style.display = 'none';
-              }
-            });
-          });
-        });
-      }
-
-      initDestFilters();
-      document.addEventListener('astro:page-load', initDestFilters);
-    </script>
+    <DestinationsSection />
 
     <!-- 2 to 3 Side Scrolling Banners (Website Theme Typography) -->
     <SideScrollingBanners />
 
     <!-- Trending -->
-    <section id="trending" class="bg-paper py-20 sm:py-28">
-      <div class="container-page">
-        <div data-reveal class="mb-14 flex flex-col items-center text-center">
-          <span class="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-ink-muted">Discover The Best</span>
-          <h2 class="text-balance font-display text-4xl text-ink sm:text-5xl lg:text-6xl">Trending Trips</h2>
-          <p class="mt-4 max-w-xl text-lg text-text-muted">
-            Handpicked destinations for your next unforgettable journey.
-          </p>
-        </div>
-      </div>
-
-      <MarqueeTrack reverse>
-        {trending.map((trip) => <TripCard trip={trip} />)}
-      </MarqueeTrack>
-
-      <div class="container-page mt-14 flex justify-center">
-        <a
-          href="/book.html"
-          class="inline-flex items-center gap-2 rounded-full border-2 border-border px-7 py-3.5 text-base font-bold text-ink transition-colors hover:border-brand hover:bg-brand"
-        >
-          Plan Your Trip
-        </a>
-      </div>
-    </section>
+    <TrendingSection />
 
 
     <!-- Popular Destination Quick Browse (16 Authentic Circles Matching Image) -->
