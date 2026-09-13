@@ -180,3 +180,10 @@ it. Deploying means running `npm run build` and publishing `dist/`.
 node scripts/trace-logo.mjs          # redraws public/logo.svg
 node scripts/build-brand-assets.mjs  # redraws favicons + og-cover
 ```
+
+`og-cover.png` is the preview image shown when a link to the site is shared on
+WhatsApp, Facebook, LinkedIn or X. Its tagline is set near the bottom of
+`scripts/build-brand-assets.mjs` (keep it matching `BUSINESS.tagline` in
+`src/data/site.ts`). After replacing the image, bump `?v=` on `ogImageURL` in
+`src/layouts/BaseLayout.astro` — apps cache preview images by URL, and without
+that they keep showing the old one.

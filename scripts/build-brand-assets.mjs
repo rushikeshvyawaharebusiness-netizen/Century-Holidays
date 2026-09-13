@@ -84,22 +84,34 @@ const backdrop = Buffer.from(
   </svg>`,
 );
 
+/*
+  Tagline under the logo. Keep it in sync with BUSINESS.tagline in
+  src/data/site.ts — this script cannot import that TypeScript file directly.
+  Brand yellow at 46px so it stays readable when WhatsApp or Facebook shrink the
+  preview to a thumbnail: at 30px it dropped to roughly 9px on a phone.
+*/
+const TAGLINE = 'Crafting Memories for Every Century';
+const TAGLINE_BOX_H = 70;
+const GAP = 34;
+// Centre the logo and tagline as one group, rather than nudging each by eye.
+const groupTop = Math.round((OG_H - (logoMeta.height + GAP + TAGLINE_BOX_H)) / 2);
+
 await sharp(backdrop)
   .composite([
     {
       input: whiteLockup,
       left: Math.round((OG_W - logoWidth) / 2),
-      top: Math.round((OG_H - logoMeta.height) / 2) - 20,
+      top: groupTop,
     },
     {
       input: Buffer.from(
-        `<svg width="${OG_W}" height="60" xmlns="http://www.w3.org/2000/svg">
-          <text x="${OG_W / 2}" y="42" text-anchor="middle" font-family="Outfit, Segoe UI, sans-serif"
-                font-size="30" font-weight="600" fill="#c9c8bc">Creating memories for every Century</text>
+        `<svg width="${OG_W}" height="${TAGLINE_BOX_H}" xmlns="http://www.w3.org/2000/svg">
+          <text x="${OG_W / 2}" y="52" text-anchor="middle" font-family="Outfit, Segoe UI, sans-serif"
+                font-size="46" font-weight="600" fill="${BRAND_HEX}">${TAGLINE}</text>
         </svg>`,
       ),
       left: 0,
-      top: Math.round((OG_H + logoMeta.height) / 2) + 20,
+      top: groupTop + logoMeta.height + GAP,
     },
   ])
   .png()

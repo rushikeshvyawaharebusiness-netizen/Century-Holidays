@@ -33,7 +33,11 @@ import { EMAIL, PHONE_E164, SOCIAL } from './contact';
 --------------------------------------------------------------------------- */
 export const BUSINESS = {
   name: 'Century Holidays',
-  tagline: 'Crafting memories for every century',
+  /**
+   * Brand tagline. Also forms the title of the link preview whenever any page
+   * is shared (WhatsApp, Facebook, LinkedIn, X): "Century Holidays | <tagline>".
+   */
+  tagline: 'Crafting Memories for Every Century',
   /** Short description reused in structured data and social previews. */
   summary:
     'Century Holidays is a travel agency based in Nashik, Maharashtra, planning custom holiday packages, group treks and international tours for travellers from Nashik, Pune and Mumbai.',
