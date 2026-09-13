@@ -37,7 +37,6 @@
 
   --animate-marquee: marquee 42s linear infinite;
   --animate-marquee-reverse: marquee-reverse 48s linear infinite;
-  --animate-float: float 7s ease-in-out infinite;
 }
 
 @layer base {
@@ -90,13 +89,6 @@
   padding-inline: 1.5rem;
 }
 
-@utility glass-panel {
-  background: color-mix(in srgb, var(--color-surface) 70%, transparent);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid color-mix(in srgb, var(--color-surface) 80%, transparent);
-}
-
 /* Scroll-reveal: progressive enhancement — only activates once the "js" class
    lands on <html> (set synchronously in BaseLayout), so content stays visible
    by default if JavaScript fails to run. */
@@ -124,9 +116,4 @@
 @keyframes marquee-reverse {
   from { transform: translateX(-50%); }
   to { transform: translateX(0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
 }

@@ -30,8 +30,17 @@ const searchTrips = allTrips();
     variant === 'transparent' ? 'bg-transparent' : 'bg-surface/95 shadow-[0_1px_0_rgba(21,20,15,0.06)] backdrop-blur',
   ]}
 >
-  <div class="container-page flex h-20 items-center justify-between gap-4">
-    <a href={isHome ? '#home' : '/'} class="flex w-48 shrink-0 items-center sm:w-56 lg:w-60" aria-label="Century Holidays home">
+  {/*
+    Explicit gutters instead of `container-page`: at 1.5rem the 192px logo plus the three
+    44px controls overflow any viewport under ~390px. Same 1.5rem from sm up, so alignment
+    with the rest of the page is unchanged on every width that already fitted.
+  */}
+  <div class="mx-auto flex h-20 w-full max-w-[1280px] items-center justify-between gap-2 px-4 sm:gap-4 sm:px-6">
+    <a
+      href={isHome ? '#home' : '/'}
+      class="flex w-32 shrink-0 items-center min-[360px]:w-40 sm:w-48 md:w-56 lg:w-60"
+      aria-label="Century Holidays home"
+    >
       {/*
         Vector, not raster: the slot inside the R is only ~3.5px tall at header size, and
         any resampled bitmap turns it into a grey smudge (which also made the compass C
@@ -78,7 +87,7 @@ const searchTrips = allTrips();
       })}
     </nav>
 
-    <div class="flex items-center gap-3 sm:gap-4">
+    <div class="flex items-center gap-2 sm:gap-3 md:gap-4">
       <a
         href="/book.html"
         class="navbar-cta hidden rounded-full bg-brand px-6 py-2.5 text-sm font-bold text-ink shadow-card transition duration-300 hover:-translate-y-0.5 hover:shadow-card-hover sm:inline-flex"

@@ -4,35 +4,49 @@ Century Holidays is a high-end, modern travel website designed for adventure see
 
 ## 🚀 Key Features
 
-- **Premium Light Theme**: Modern, high-contrast aesthetic with golden accents.
+- **Premium Theme**: Editorial serif + grotesk pairing on a brand yellow (`#F0EA1B`) and deep charcoal palette.
 - **Fully Responsive**: Optimized for desktop, tablets, and smartphones.
-- **Speed Optimized**: Under-the-hood improvements including lazy loading and deferred assets.
+- **Speed Optimized**: Astro's image pipeline automatically resizes/compresses every photo to modern formats (WebP) and lazy-loads off-screen images.
 - **Dedicated Booking System**: Custom multi-step booking form for detailed traveler inquiries.
-- **SEO Ready**: Optimized meta tags and semantic HTML for better search engine ranking.
+- **SEO Ready**: Optimized meta tags, JSON-LD structured data, and semantic HTML for better search engine ranking.
 
 ## 🛠️ Technology Stack
 
-- **HTML5/CSS3**: Clean, semantic structure with custom CSS variables.
-- **Vanilla JavaScript**: Lightweight interactions without heavy dependencies.
+- **[Astro](https://astro.build)**: Static site generator — pages are `.astro` components, built to plain HTML/CSS/JS with no client-side framework runtime.
+- **[Tailwind CSS v4](https://tailwindcss.com)**: Utility-first styling via `@tailwindcss/vite`, brand palette defined as CSS `@theme` tokens in `src/styles/global.css`.
 - **Phosphor Icons**: Crisp, modern iconography.
-- **Google Fonts**: Custom typography (Montserrat, Outfit, Playfair Display).
+- **Google Fonts**: Fraunces (display serif) + Outfit (sans-serif body/UI).
 
 ## 📂 Project Structure
 
-- `index.html`: Main landing page with featured destinations.
-- `about.html`: Brand story and passion for travel.
-- `contact.html`: Direct inquiry and location details.
-- `book.html`: Granular booking application.
-- `styles.css`: Centralized design system and responsive media queries.
-- `app.js`: Interactive navigation and form logic.
+- `src/pages/` — one file per route: `index.astro`, `about.astro`, `contact.astro`, `book.astro`, `privacy.astro`, `terms.astro`.
+- `src/layouts/BaseLayout.astro` — shared `<head>`, SEO meta, Navbar + Footer wiring.
+- `src/components/` — Navbar, MobileNav, Footer, TripCard, MarqueeTrack, CategoryCard, FeatureCard, FaqItem, FormField, PageHero.
+- `src/data/trips.ts` — the destination/trending trip package data (names, prices, dates).
+- `src/styles/global.css` — Tailwind import + brand theme tokens.
+- `src/assets/images/` — source photos, imported and optimized via `astro:assets`.
+- `public/` — files served byte-for-byte as-is: `robots.txt`, `sitemap.xml`, favicon.
+- `astro.config.mjs` — sets `build: { format: 'file' }` so routes build to `about.html`, `contact.html`, etc. (not `about/index.html`), preserving the site's existing URLs.
+
+## 🧞 Commands
+
+Run from the project root in a terminal:
+
+| Command             | Action                                             |
+| :------------------ | :-------------------------------------------------- |
+| `npm install`        | Install dependencies                                |
+| `npm run dev`         | Start local dev server at `localhost:4321`          |
+| `npm run build`       | Build the production site to `./dist/`              |
+| `npm run preview`     | Preview the production build locally                |
+| `npx astro check`    | Type-check all `.astro` files                       |
 
 ## 📦 How to Deploy
 
-### GitHub Pages (Recommended)
-1. Push this project to a new GitHub repository.
-2. Go to **Settings > Pages**.
-3. Select the `main` branch and `/ (root)` folder.
-4. Your site will be live at `https://[username].github.io/[repo-name]/`
+### Vercel (Recommended)
+Vercel auto-detects the Astro framework preset. Build command `astro build`, output directory `dist` — no extra configuration needed. Every push to `master` deploys automatically.
+
+### GitHub Pages
+Unlike the previous plain-HTML version of this site, GitHub Pages can no longer serve the repository directly — Astro requires a build step first. Use the official [Astro GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/) to add a GitHub Actions workflow that runs `astro build` and publishes `dist/` to Pages.
 
 ## 📄 License
 
@@ -44,11 +58,13 @@ Your website is now safely stored on GitHub: [new-century-holidays-website](http
 
 ### How to Edit Your Website
 1.  **Clone/Download**: Access your code from any machine via GitHub.
-2.  **Make Changes**: Edit HTML, CSS, or JS files.
-3.  **Save & Sync**:
+2.  **Install dependencies**: `npm install` (first time only, or after pulling dependency changes).
+3.  **Make Changes**: Edit `.astro` files in `src/pages`/`src/components`, or update copy in `src/data/trips.ts`.
+4.  **Preview locally**: `npm run dev`, then open `http://localhost:4321`.
+5.  **Save & Sync**:
     ```bash
     git add .
     git commit -m "Your update description"
     git push origin master
     ```
-4.  **Auto-Deploy**: Link your GitHub repo to [Vercel](https://vercel.com) for automatic live updates every time you save!
+6.  **Auto-Deploy**: Vercel rebuilds and deploys automatically on every push.

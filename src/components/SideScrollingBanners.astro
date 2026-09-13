@@ -65,9 +65,25 @@ const slides = [
         class="side-slider-track flex transition-transform duration-500 ease-out"
         id="side-slider-track"
       >
+        {/*
+          Slide sizing, all three parts of one problem — the slide not matching its viewport:
+
+          w-full, not min-w-full: min-width is only a floor, so with shrink-0 the slide grew
+          to its 544px max-content width and the headline was clipped on any screen narrower
+          than that. w-full pins each slide to the track width.
+
+          Under sm the height is content-driven rather than a 16/9 ratio: once the slide was
+          the right width, that ratio left only ~153px at 320px wide and clipped the headline
+          off the top instead.
+
+          md:min-h-[256px] is the same clipping at the other end — 2560/642 is so wide that
+          between 768px and ~1030px it left less height than the text needed. Past that the
+          ratio is already taller than the floor, so xl:min-h-0 hands control back to it and
+          wide screens render exactly as before.
+        */}
         {slides.map((slide, idx) => (
           <div
-            class="slide-box relative min-w-full shrink-0 aspect-[16/9] sm:aspect-[21/8] md:aspect-[2560/642] overflow-hidden"
+            class="slide-box relative w-full shrink-0 min-h-[200px] sm:min-h-0 sm:aspect-[21/8] md:aspect-[2560/642] md:min-h-[256px] xl:min-h-0 overflow-hidden"
             role="group"
             aria-roledescription="slide"
             aria-label={`${idx + 1} of ${slides.length}: ${slide.titleLine1} ${slide.titleLine2}`}
@@ -77,6 +93,7 @@ const slides = [
               src={slide.image}
               alt={slide.alt}
               class="absolute inset-0 h-full w-full object-cover object-center"
+              width={768}
               widths={[768, 1280, 1920, 2560]}
               sizes="(min-width: 1280px) 1232px, 100vw"
               quality={95}
@@ -126,7 +143,7 @@ const slides = [
       <button
         type="button"
         id="side-prev"
-        class="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/80 text-ink backdrop-blur-md transition-all hover:bg-brand hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink shadow-md opacity-80 group-hover:opacity-100"
+        class="absolute left-3 top-1/2 -translate-y-1/2 z-20 hidden md:flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/80 text-ink backdrop-blur-md transition-all hover:bg-brand hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink shadow-md opacity-80 group-hover:opacity-100"
         aria-label="Previous slide"
       >
         <i class="ph-bold ph-caret-left text-xl sm:text-2xl" aria-hidden="true"></i>
@@ -134,7 +151,7 @@ const slides = [
       <button
         type="button"
         id="side-next"
-        class="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/80 text-ink backdrop-blur-md transition-all hover:bg-brand hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink shadow-md opacity-80 group-hover:opacity-100"
+        class="absolute right-3 top-1/2 -translate-y-1/2 z-20 hidden md:flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/80 text-ink backdrop-blur-md transition-all hover:bg-brand hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink shadow-md opacity-80 group-hover:opacity-100"
         aria-label="Next slide"
       >
         <i class="ph-bold ph-caret-right text-xl sm:text-2xl" aria-hidden="true"></i>
@@ -163,6 +180,21 @@ const slides = [
     </div>
   </div>
 </section>
+
+<style>
+  /* The dots are the touch control for this carousel (the arrows only appear from md up),
+     but they paint as 10px pills. Extend the hit area to 44px tall with a transparent
+     pseudo-element so the target is thumb-sized without changing how the dot looks.
+     The 4px inline growth stays inside the 10px flex gap, so neighbours never overlap. */
+  .side-dot {
+    position: relative;
+  }
+  .side-dot::before {
+    content: '';
+    position: absolute;
+    inset: -17px -4px;
+  }
+</style>
 
 <script>
   function initSideSlider() {

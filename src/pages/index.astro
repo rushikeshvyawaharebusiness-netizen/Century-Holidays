@@ -7,8 +7,6 @@ import CategoryCard from '../components/CategoryCard.astro';
 import WhyUsSection from '../components/WhyUsSection.astro';
 import FaqItem from '../components/FaqItem.astro';
 import PosterSlider from '../components/PosterSlider.astro';
-// Previous hero background — kept in assets, swap the import below to revert:
-// import heroImage from '../assets/images/background.jpg';
 import heroImage from '../assets/images/hero-valley.jpg';
 import customer1 from '../assets/images/customer1.jpg';
 import customer2 from '../assets/images/customer2.jpg';
@@ -144,6 +142,7 @@ const structuredData = {
           src={heroImage}
           alt="Travellers overlooking a Himalayan valley from their tour vehicle"
           class="h-full w-full scale-150 object-cover object-[68%_88%] sm:scale-125 sm:object-[65%_75%] lg:scale-110 lg:object-[62%_100%]"
+          width={768}
           widths={[768, 1280, 1920]}
           sizes="100vw"
           priority
@@ -299,6 +298,9 @@ const structuredData = {
       document.addEventListener('astro:page-load', initDestFilters);
     </script>
 
+    <!-- 2 to 3 Side Scrolling Banners (Website Theme Typography) -->
+    <SideScrollingBanners />
+
     <!-- Trending -->
     <section id="trending" class="bg-paper py-20 sm:py-28">
       <div class="container-page">
@@ -325,9 +327,6 @@ const structuredData = {
       </div>
     </section>
 
-
-    <!-- 2 to 3 Side Scrolling Banners (Website Theme Typography) -->
-    <SideScrollingBanners />
 
     <!-- Popular Destination Quick Browse (16 Authentic Circles Matching Image) -->
     <DestinationCircles />

@@ -26,6 +26,9 @@ import { whatsappLink } from '../data/contact';
               src={bgCoast}
               alt="Aerial Tropical Coastline Road"
               class="absolute inset-0 h-full w-full object-cover object-center"
+              width={768}
+              widths={[768, 1280, 1920]}
+              sizes="100vw"
               quality={90}
             />
             {/* Subtle Gradient Overlays */}
@@ -79,7 +82,9 @@ import { whatsappLink } from '../data/contact';
                       src={imgAlmaty}
                       alt="Almaty Ascension Cathedral"
                       class="h-full w-full object-cover object-center"
+                      width={120}
                       widths={[120, 240]}
+                      sizes="(min-width: 1024px) 112px, (min-width: 768px) 96px, 80px"
                       quality={85}
                     />
                   </div>
@@ -98,7 +103,9 @@ import { whatsappLink } from '../data/contact';
                       src={imgBali}
                       alt="Bali Kelingking Beach"
                       class="h-full w-full object-cover object-center"
+                      width={120}
                       widths={[120, 240]}
+                      sizes="(min-width: 1024px) 112px, (min-width: 768px) 96px, 80px"
                       quality={85}
                     />
                   </div>
@@ -117,7 +124,9 @@ import { whatsappLink } from '../data/contact';
                       src={imgSriLanka}
                       alt="Sri Lanka Nine Arch Bridge Train"
                       class="h-full w-full object-cover object-center"
+                      width={120}
                       widths={[120, 240]}
+                      sizes="(min-width: 1024px) 112px, (min-width: 768px) 96px, 80px"
                       quality={85}
                     />
                   </div>
@@ -136,6 +145,9 @@ import { whatsappLink } from '../data/contact';
               src={bgZamna}
               alt="Zamna Festival Bali Music Stage"
               class="absolute inset-0 h-full w-full object-cover object-center"
+              width={768}
+              widths={[768, 1280, 1920]}
+              sizes="100vw"
               quality={90}
             />
             {/* Gradient Darkening Overlay */}
@@ -177,7 +189,7 @@ import { whatsappLink } from '../data/contact';
           type="button"
           id="poster-prev-btn"
           aria-label="Previous Slide"
-          class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-xs border border-white/20 transition-all duration-200 hover:bg-white hover:text-ink shadow-md cursor-pointer"
+          class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 hidden lg:flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-xs border border-white/20 transition-all duration-200 hover:bg-white hover:text-ink shadow-md cursor-pointer"
         >
           <i class="ph-bold ph-caret-left text-lg sm:text-xl" aria-hidden="true"></i>
         </button>
@@ -185,7 +197,7 @@ import { whatsappLink } from '../data/contact';
           type="button"
           id="poster-next-btn"
           aria-label="Next Slide"
-          class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-xs border border-white/20 transition-all duration-200 hover:bg-white hover:text-ink shadow-md cursor-pointer"
+          class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 hidden lg:flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-xs border border-white/20 transition-all duration-200 hover:bg-white hover:text-ink shadow-md cursor-pointer"
         >
           <i class="ph-bold ph-caret-right text-lg sm:text-xl" aria-hidden="true"></i>
         </button>
@@ -209,6 +221,21 @@ import { whatsappLink } from '../data/contact';
     </div>
   </div>
 </section>
+
+<style>
+  /* Same reasoning as the banner carousel: these 8px dots are the touch control now that
+     the arrows only show from lg up. Grow the hit area to 32px without moving the dot.
+     Kept tighter than the banner dots because this row sits inside the slide, so a taller
+     target would start swallowing taps meant for the slide content above it. */
+  .poster-dot {
+    position: relative;
+  }
+  .poster-dot::before {
+    content: '';
+    position: absolute;
+    inset: -12px -4px;
+  }
+</style>
 
 <script>
   function initPosterSlider() {
@@ -270,6 +297,21 @@ import { whatsappLink } from '../data/contact';
 
     container?.addEventListener('mouseenter', stopAuto);
     container?.addEventListener('mouseleave', startAuto);
+
+    // Touch swipe: the prev/next arrows are hidden under sm because they sat on top of the
+    // slide headline, so swipe is how touch users move between slides (the dots still work).
+    let touchStartX = 0;
+
+    container?.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopAuto();
+    }, { passive: true });
+
+    container?.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 40) goToSlide(currentIndex + (diff > 0 ? 1 : -1));
+      startAuto();
+    }, { passive: true });
 
     startAuto();
   }

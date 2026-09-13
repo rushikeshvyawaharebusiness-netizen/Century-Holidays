@@ -18,13 +18,18 @@ const { message } = Astro.props;
     <i class="ph-fill ph-phone" aria-hidden="true"></i>
   </a>
 
+  {/*
+    Icon-only under sm: at full width this pill is 191px and sat on top of the hero trust
+    strip on every phone size. From sm up it expands back to the labelled pill.
+  */}
   <a
     href={whatsappLink(message)}
     target="_blank"
     rel="noopener"
-    class="inline-flex items-center gap-2 rounded-full bg-ink py-3.5 pl-4 pr-5 text-sm font-bold text-text-inverse shadow-panel transition-transform duration-200 hover:-translate-y-0.5"
+    aria-label="Chat with an expert on WhatsApp"
+    class="inline-flex h-12 w-12 items-center justify-center gap-2 rounded-full bg-ink text-sm font-bold text-text-inverse shadow-panel transition-transform duration-200 hover:-translate-y-0.5 sm:h-auto sm:w-auto sm:py-3.5 sm:pl-4 sm:pr-5"
   >
     <i class="ph-fill ph-whatsapp-logo text-xl text-brand" aria-hidden="true"></i>
-    <span>Chat with an expert</span>
+    <span class="hidden sm:inline">Chat with an expert</span>
   </a>
 </div>
