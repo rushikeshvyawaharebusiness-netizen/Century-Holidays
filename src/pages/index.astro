@@ -19,7 +19,8 @@ import SpecialitiesSection from '../components/SpecialitiesSection.astro';
 import GoogleIcon from '../components/icons/GoogleIcon.astro';
 import InstagramIcon from '../components/icons/InstagramIcon.astro';
 import { destinations, trending } from '../data/trips';
-import { PHONE_E164, SOCIAL, whatsappLink } from '../data/contact';
+import { SOCIAL, whatsappLink } from '../data/contact';
+import { faqSchema } from '../data/schema';
 
 const categories = [
   { image: customer1, alt: 'Century Holidays Happy Traveler - Trekking Adventure Experience', title: 'Happy Travelers', description: 'Unforgettable moments captured on our trips.' },
@@ -96,39 +97,16 @@ const faqs = [
 const initialFaqs = faqs.slice(0, 10);
 const extraFaqs = faqs.slice(10);
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'TravelAgency',
-  name: 'Century Holidays',
-  image: 'https://new-century-holidays-website.vercel.app/logo.png',
-  url: 'https://new-century-holidays-website.vercel.app/',
-  telephone: PHONE_E164,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '4th floor, Trinity Towers, near Jairam Glass, Tidke Colony',
-    addressLocality: 'Nashik',
-    addressRegion: 'Maharashtra',
-    postalCode: '422002',
-    addressCountry: 'IN',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 19.9975,
-    longitude: 73.7898,
-  },
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    opens: '09:00',
-    closes: '20:00',
-  },
-  sameAs: [SOCIAL.facebook, SOCIAL.instagram, 'https://twitter.com/centuryholidays'],
-};
+/*
+  The business details that used to be hard-coded here now live in
+  src/data/site.ts and are published on every page by BaseLayout. This page
+  only adds what is unique to it: the FAQ rich result built from the list
+  above, so the questions can appear directly in Google.
+*/
+const structuredData = [faqSchema(faqs)];
 ---
 
 <BaseLayout
-  title="Century Holidays - Best Travel Agency for Adventure & Custom Tours"
-  description="Century Holidays is your premier travel partner for curated adventure treks, customized tours, and unforgettable travel experiences. Based in Nashik, we offer premium holiday packages worldwide. Creating memories for every Century."
   path="/"
   navVariant="transparent"
   newsletterHeading="Join the Century Club"

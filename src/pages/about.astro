@@ -32,12 +32,20 @@ const certifications = [
       'Direct commercial agreements with certified vehicle fleets, seasoned mountain drivers with verified safety records, and inspected boutique hotels and homestays.',
   },
 ];
+import { breadcrumbSchema } from '../data/schema';
+
+/* Breadcrumb trail, so Google shows "Home > About Us" instead of a raw URL. */
+const structuredData = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: "About Us", path: '/about.html' },
+  ]),
+];
 ---
 
 <BaseLayout
-  title="Our Story & Agency Certifications - Century Holidays"
-  description="Discover the story behind Century Holidays, an accredited travel company based in Nashik. Learn about our founding, philosophy, and official agency certifications."
   path="/about.html"
+  structuredData={structuredData}
 >
   <main id="main-content" class="bg-paper text-ink">
     <!-- Header Section -->

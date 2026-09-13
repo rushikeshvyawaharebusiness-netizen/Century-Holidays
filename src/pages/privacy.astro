@@ -2,12 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { EMAIL, PHONE_DISPLAY } from '../data/contact';
+import { breadcrumbSchema } from '../data/schema';
+
+/* Breadcrumb trail, so Google shows "Home > Privacy Policy" instead of a raw URL. */
+const structuredData = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: "Privacy Policy", path: '/privacy.html' },
+  ]),
+];
 ---
 
 <BaseLayout
-  title="Privacy Policy | Century Holidays - Data Protection"
-  description="Read the Privacy Policy of Century Holidays. We are committed to protecting your data while creating memories for every Century."
   path="/privacy.html"
+  structuredData={structuredData}
 >
   <main id="main-content">
     <PageHero title="Privacy" highlight="Policy" subtitle="Last updated: March 2026" />

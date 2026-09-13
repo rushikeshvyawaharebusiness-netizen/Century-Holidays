@@ -4,27 +4,39 @@ import Footer from '../components/Footer.astro';
 import QuickContact from '../components/QuickContact.astro';
 import TravelerPopupModal from '../components/TravelerPopupModal.astro';
 import '../styles/global.css';
+import { ALL_KEYWORDS, BUSINESS, seoFor } from '../data/site';
+import { travelAgencySchema, webSiteSchema } from '../data/schema';
 
 interface Props {
-  title: string;
-  description: string;
+  /** URL of this page, e.g. "/about.html". Its SEO is looked up from src/data/site.ts. */
   path: string;
+  /** Optional one-off overrides. Normally leave these out and edit site.ts instead. */
+  title?: string;
+  description?: string;
   navVariant?: 'transparent' | 'solid';
   newsletterHeading?: string;
-  structuredData?: Record<string, unknown>;
+  /** Extra schema.org blocks for this page (FAQ, breadcrumbs). */
+  structuredData?: Record<string, unknown>[];
   /** Pre-filled WhatsApp message for the floating contact widget. */
   quickContactMessage?: string;
 }
 
 const {
-  title,
-  description,
   path,
   navVariant = 'solid',
   newsletterHeading = 'Join the Club',
-  structuredData,
+  structuredData = [],
   quickContactMessage,
 } = Astro.props;
+
+/*
+  Page titles and descriptions live in src/data/site.ts so that all of the
+  site's SEO copy can be reviewed and edited in one place. A page may still
+  override them by passing `title`/`description` directly.
+*/
+const seo = seoFor(path);
+const title = Astro.props.title ?? seo.title;
+const description = Astro.props.description ?? seo.description;
 
 const canonicalURL = new URL(path, Astro.site);
 const ogImageURL = new URL('/og-cover.png', Astro.site);
@@ -43,15 +55,54 @@ const ogImageURL = new URL('/og-cover.png', Astro.site);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#15140f" />
 
+    {/*
+      SEO basics. Titles and descriptions come from PAGES in src/data/site.ts —
+      edit them there, not here.
+    */}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="keywords" content={ALL_KEYWORDS} />
+    <meta name="author" content={BUSINESS.name} />
+
+    {/* Local-search signals for the Nashik / Pune / Mumbai terms. */}
+    <meta name="geo.region" content="IN-MH" />
+    <meta name="geo.placename" content={BUSINESS.address.city} />
+    <meta name="geo.position" content={`${BUSINESS.geo.latitude};${BUSINESS.geo.longitude}`} />
+
+    {/* How the page looks when shared on Facebook, WhatsApp, LinkedIn. */}
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={BUSINESS.name} />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${BUSINESS.name} — ${BUSINESS.tagline}`} />
 
-    {structuredData && (
-      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
-    )}
+    {/* How the page looks when shared on X/Twitter. */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {/*
+      Structured data. The business + website entities go on every page; a page
+      can pass extra blocks (FAQ, breadcrumbs) through the `structuredData` prop.
+    */}
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(travelAgencySchema(Astro.site))}
+      is:inline
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(webSiteSchema(Astro.site))}
+      is:inline
+    />
+    {structuredData.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} is:inline />
+    ))}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

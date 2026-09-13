@@ -10,12 +10,20 @@ const socialLinks = [
   { icon: 'ph-fill ph-twitter-logo', label: 'Twitter' },
   { icon: 'ph-fill ph-whatsapp-logo', label: 'WhatsApp' },
 ];
+import { breadcrumbSchema } from '../data/schema';
+
+/* Breadcrumb trail, so Google shows "Home > Contact Us" instead of a raw URL. */
+const structuredData = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: "Contact Us", path: '/contact.html' },
+  ]),
+];
 ---
 
 <BaseLayout
-  title="Contact Century Holidays - Plan Your Adventure with Travel Experts"
-  description="Get in touch with Century Holidays for personalized travel itineraries, group tours, and expert travel advice. We are here to help you plan your next great adventure."
   path="/contact.html"
+  structuredData={structuredData}
 >
   <main id="main-content">
     <PageHero

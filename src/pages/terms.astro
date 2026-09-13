@@ -1,15 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import { breadcrumbSchema } from '../data/schema';
+
+/* Breadcrumb trail, so Google shows "Home > Terms & Conditions" instead of a raw URL. */
+const structuredData = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: "Terms & Conditions", path: '/terms.html' },
+  ]),
+];
 ---
 
 <BaseLayout
-  title="Terms & Conditions | Century Holidays - Booking Agreement"
-  description="Review the Terms and Conditions for booking with Century Holidays. Creating memories for every Century. Read our booking agreement and travel policies carefully before planning your journey."
   path="/terms.html"
+  structuredData={structuredData}
 >
   <main id="main-content">
-    <PageHero title="Terms &amp;" highlight="Conditions" subtitle="Last updated: March 2026" />
+    {/* Plain "&" — Astro escapes it once. Writing "&amp;" here double-escaped it,
+        so the heading rendered the literal text "Terms &amp; Conditions". */}
+    <PageHero title="Terms &" highlight="Conditions" subtitle="Last updated: March 2026" />
 
     <section class="py-20 sm:py-24">
       <div class="container-page">

@@ -13,12 +13,20 @@ const destinationOptions = [
   { value: 'other-international', label: 'Another international destination' },
   { value: 'custom', label: 'I want a fully custom trip' },
 ];
+import { breadcrumbSchema } from '../data/schema';
+
+/* Breadcrumb trail, so Google shows "Home > Book Your Trip" instead of a raw URL. */
+const structuredData = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: "Book Your Trip", path: '/book.html' },
+  ]),
+];
 ---
 
 <BaseLayout
-  title="Book Your Trip | Century Holidays - Start Your Adventure"
-  description="Start your next adventure with Century Holidays. Book customized treks, tours, and travel experiences. Creating memories for every Century."
   path="/book.html"
+  structuredData={structuredData}
 >
   <main id="main-content">
     <PageHero
