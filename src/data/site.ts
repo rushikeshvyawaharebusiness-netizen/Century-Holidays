@@ -84,6 +84,8 @@ export const AREAS_SERVED = ['Nashik', 'Pune', 'Mumbai', 'Maharashtra', 'India']
 export const KEYWORDS = {
   primary: 'Century Holidays',
   secondary: [
+    'Century Holidays Nashik',
+    'Century Holidays tour packages',
     'travel agency in Nashik',
     'travel company in Nashik',
     'travel agency in Mumbai',
@@ -132,7 +134,7 @@ export interface PageSeo {
 export const PAGES: Record<string, PageSeo> = {
   /* ---- Indexed: these are the only pages Google can show as sitelinks ---- */
   '/': {
-    title: 'Century Holidays | Crafting Memories for Every Century',
+    title: 'Century Holidays | Tour Packages & Travel Agency in Nashik',
     description:
       'Century Holidays is a trusted travel agency in Nashik serving Pune and Mumbai. Custom tour packages, group treks and international holidays. Call +91 7066187551.',
     priority: 1.0,

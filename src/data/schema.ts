@@ -80,6 +80,28 @@ export function webSiteSchema(site: URL | undefined) {
 }
 
 /**
+ * Describes the page itself and links it to the business and website above, so
+ * every page reinforces the one "Century Holidays" entity instead of standing
+ * alone. Title and description come from PAGES in site.ts.
+ */
+export function webPageSchema(
+  site: URL | undefined,
+  page: { path: string; title: string; description: string },
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${abs(site, page.path)}#webpage`,
+    url: abs(site, page.path),
+    name: page.title,
+    description: page.description,
+    inLanguage: 'en-IN',
+    isPartOf: { '@id': `${abs(site, '/')}#website` },
+    about: { '@id': `${abs(site, '/')}#organization` },
+  };
+}
+
+/**
  * Turns the homepage FAQ list into FAQ rich results — the expandable
  * questions that can appear directly under your link in Google.
  */

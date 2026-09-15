@@ -1,0 +1,283 @@
+---
+/*
+  AboutCenturyHolidays.astro — the long-form "About Century Holidays" copy on
+  the homepage (about 1,000 words).
+
+  Its main job is search: it gives Google a clear, detailed, plain-text account
+  of what Century Holidays is, what it offers and which cities it serves —
+  things the rest of the homepage only says inside cards, sliders and images.
+
+  Keep it accurate. Every claim here should match the About, Why Us and Terms
+  pages and the homepage FAQ; if a policy or package changes, update it here too.
+
+  The copy is deliberately NOT wrapped in data-reveal, so it is always visible,
+  including to crawlers that never scroll.
+*/
+import { PHONE_DISPLAY, PHONE_HREF, bookingLink, whatsappLink } from '../data/contact';
+
+const facts = [
+  { icon: 'ph-calendar-check', label: 'Founded', value: '2018, in Nashik' },
+  { icon: 'ph-map-pin', label: 'Head Office', value: 'Trinity Towers, Tidke Colony, Nashik' },
+  { icon: 'ph-users-three', label: 'Serving', value: 'Nashik, Pune, Mumbai & travellers across India' },
+  { icon: 'ph-compass', label: 'Trips', value: 'International tours, treks, yatras & weekend getaways' },
+  { icon: 'ph-wallet', label: 'Booking', value: '30% advance or zero-cost EMI' },
+];
+
+const packages = [
+  {
+    icon: 'ph-airplane-tilt',
+    title: 'International Holidays',
+    text: 'Island hopping in Phuket and Krabi, temples and rice terraces in Bali, Ha Long Bay in Vietnam, desert safaris in Dubai, the tea country of Sri Lanka, the monasteries of Bhutan, the mountains around Almaty and the cafés of Paris.',
+  },
+  {
+    icon: 'ph-mountains',
+    title: 'Himalayan Adventures',
+    text: 'Road trips through Manali and Kasol, the high desert of Spiti Valley and Chandra Taal, and the Hampta Pass trek, one of the most rewarding Himalayan crossings for first-time trekkers.',
+  },
+  {
+    icon: 'ph-hands-praying',
+    title: 'Spiritual Yatras',
+    text: 'The complete Char Dham Yatra and the Do Dham Yatra to Kedarnath, planned with comfortable stays, sensible daily distances and a pace that suits every age group.',
+  },
+  {
+    icon: 'ph-tree-evergreen',
+    title: 'Nature Retreats & Getaways',
+    text: 'The waterfalls and living root bridges of Meghalaya, plus short breaks in the Western Ghats, Lonavala and Igatpuri for travellers who only have a long weekend.',
+  },
+];
+
+const heading = 'text-balance font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl';
+const link = 'font-semibold text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink';
+---
+
+<section
+  id="about-century-holidays"
+  aria-labelledby="about-century-holidays-heading"
+  class="border-t border-border bg-surface py-20 sm:py-28"
+>
+  <div class="container-page">
+    <div class="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+      <span class="inline-flex items-center gap-1.5 rounded-full border border-border bg-paper px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-ink-muted shadow-xs">
+        <i class="ph-fill ph-compass text-sm text-ink" aria-hidden="true"></i>
+        About Century Holidays
+      </span>
+      <h2
+        id="about-century-holidays-heading"
+        class="mt-3.5 text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl"
+      >
+        Century Holidays: Travel Planned by People Who Know the Way
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-text-muted sm:text-lg">
+        Century Holidays is a travel agency in Nashik, Maharashtra, that plans custom holiday packages, Himalayan
+        group treks, spiritual yatras and international tours for travellers from Nashik, Pune, Mumbai and across
+        India.
+      </p>
+    </div>
+
+    <div class="grid gap-10 lg:grid-cols-12 lg:gap-16">
+      {/* At a glance — sticks beside the copy on large screens */}
+      <aside class="lg:col-span-4" aria-label="Century Holidays at a glance">
+        <div class="rounded-3xl border border-border bg-paper p-6 shadow-xs sm:p-7 lg:sticky lg:top-28">
+          <p class="font-display text-xl font-bold text-ink">At a Glance</p>
+          <dl class="mt-5 divide-y divide-border">
+            {facts.map((fact) => (
+              <div class="py-3.5 first:pt-0 last:pb-0">
+                <dt class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-ink-muted">
+                  <i class:list={['ph-bold text-base text-ink', fact.icon]} aria-hidden="true"></i>
+                  {fact.label}
+                </dt>
+                <dd class="mt-1 pl-6 text-sm font-semibold leading-snug text-ink">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <div class="mt-6 flex flex-col gap-3">
+            <a
+              href={bookingLink()}
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-card-hover"
+            >
+              Plan My Trip <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a
+              href={PHONE_HREF}
+              class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink px-6 py-3 text-sm font-bold text-ink transition-colors hover:bg-ink hover:text-text-inverse"
+            >
+              <i class="ph-bold ph-phone" aria-hidden="true"></i> Call <span class="whitespace-nowrap">{PHONE_DISPLAY}</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <div class="lg:col-span-8">
+        <div class="max-w-3xl space-y-14 text-base leading-relaxed text-text-muted sm:text-lg">
+          <div>
+            <h3 class={heading}>Who We Are</h3>
+            <div class="mt-4 space-y-4 text-pretty">
+              <p>
+                Century Holidays was founded in Nashik in 2018 with a simple idea: planning a holiday should feel
+                personal again. A booking portal can sell you a hotel room, but it cannot tell you when the road to
+                Spiti closes for winter, which Bali stay is worth the upgrade, or how to pace a Char Dham Yatra for
+                your parents. That kind of advice comes from people who plan these journeys again and again.
+              </p>
+              <p>
+                Over the years we have built direct partnerships with certified local guides, experienced mountain
+                drivers and inspected hotels, resorts and homestays across India and abroad. Working with on-ground
+                partners directly, without layers of middlemen, keeps our prices fair and our quality consistent, and
+                it means that when something needs sorting out on a trip, we can sort it out quickly.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class={heading}>Holiday Packages for Every Kind of Traveller</h3>
+            <p class="mt-4 text-pretty">
+              Whether you want a relaxed beach holiday, a high-altitude adventure or a meaningful pilgrimage, Century
+              Holidays has a package built for it, and every itinerary can be adjusted to your dates, budget and
+              travel style.
+            </p>
+            <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+              {packages.map((pkg) => (
+                <li class="rounded-2xl border border-border bg-paper p-5">
+                  <p class="flex items-center gap-2.5 font-sans text-base font-bold text-ink">
+                    <i class:list={['ph-bold text-xl', pkg.icon]} aria-hidden="true"></i>
+                    {pkg.title}
+                  </p>
+                  <p class="mt-2 text-pretty text-sm leading-relaxed sm:text-base">{pkg.text}</p>
+                </li>
+              ))}
+            </ul>
+            <p class="mt-6 text-pretty">
+              Browse every current package on our <a href="/destinations.html" class={link}>Explore Destinations</a>{' '}
+              page, or see what other travellers are booking right now on <a href="/trending.html" class={link}>Trending Trips</a>.
+            </p>
+          </div>
+
+          <div>
+            <h3 class={heading}>Group Treks, Solo Travel &amp; Safety</h3>
+            <div class="mt-4 space-y-4 text-pretty">
+              <p>
+                Group departures are at the heart of Century Holidays. More than half of the people on our group trips
+                join solo, and many go home with friends for life. Every group is led by a trained trip captain who
+                takes care of check-ins, transfers and the plan for each day, so all you have to do is enjoy the
+                journey.
+              </p>
+              <p>
+                On high-altitude routes such as Ladakh, Spiti and our Himalayan treks, safety comes first. We follow
+                proper acclimatisation schedules, carry portable oxygen, first-aid kits and pulse oximeters, and trek
+                with certified mountain guides. Road transfers are in well-maintained private vehicles with licensed,
+                experienced drivers.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class={heading}>Custom Trips for Families, Couples &amp; Private Groups</h3>
+            <p class="mt-4 text-pretty">
+              Not every holiday fits a fixed departure. For honeymoons, family vacations and friends travelling
+              together, our travel specialists design a private itinerary from scratch. Tell us your dates, preferred
+              pace, hotel category and budget, and we will suggest a route, recommend stays from comfortable three-star
+              hotels to five-star resorts, and refine the plan with you until it feels right. Nothing is final until
+              you are happy with it.
+            </p>
+          </div>
+
+          <div>
+            <h3 class={heading}>How Booking with Century Holidays Works</h3>
+            <ol class="mt-6 space-y-5">
+              <li class="flex gap-4">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-text-inverse tabular-nums" aria-hidden="true">1</span>
+                <p class="min-w-0 text-pretty">
+                  <strong class="font-semibold text-ink">Tell us about your trip.</strong> Fill in the{' '}
+                  <a href={bookingLink()} class={link}>booking form</a>, message us on{' '}
+                  <a href={whatsappLink()} target="_blank" rel="noopener" class={link}>WhatsApp</a> or call{' '}
+                  <a href={PHONE_HREF} class:list={[link, 'whitespace-nowrap']}>{PHONE_DISPLAY}</a>, and share where
+                  you want to go, when and with whom.
+                </p>
+              </li>
+              <li class="flex gap-4">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-text-inverse tabular-nums" aria-hidden="true">2</span>
+                <p class="min-w-0 text-pretty">
+                  <strong class="font-semibold text-ink">Get a clear itinerary and quote.</strong> We send a day-wise
+                  plan with itemised pricing, so you know exactly what is included.
+                </p>
+              </li>
+              <li class="flex gap-4">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-text-inverse tabular-nums" aria-hidden="true">3</span>
+                <p class="min-w-0 text-pretty">
+                  <strong class="font-semibold text-ink">Confirm with a 30% advance.</strong> Pay 30% to secure your
+                  spot, or choose zero-cost EMI. We accept UPI, credit and debit cards, net banking and bank transfers,
+                  with a GST invoice for every payment.
+                </p>
+              </li>
+              <li class="flex gap-4">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-text-inverse tabular-nums" aria-hidden="true">4</span>
+                <p class="min-w-0 text-pretty">
+                  <strong class="font-semibold text-ink">Travel with support at every step.</strong> We help with
+                  flights, visas and travel insurance. 3 to 5 days before departure you receive your vouchers, packing
+                  checklist and trip captain’s number in a WhatsApp briefing group, and our support desk is available
+                  24/7 while you travel.
+                </p>
+              </li>
+            </ol>
+            <p class="mt-6 text-pretty">
+              Our cancellation and rescheduling policy is published upfront in our{' '}
+              <a href="/terms.html" class={link}>Terms &amp; Conditions</a>, so there are no surprises later.
+            </p>
+          </div>
+
+          <div>
+            <h3 class={heading}>A Travel Agency for Nashik, Pune &amp; Mumbai</h3>
+            <div class="mt-4 space-y-4 text-pretty">
+              <p>
+                Century Holidays is proud to be a Nashik company. Our office on the 4th floor of Trinity Towers, Tidke
+                Colony, is open to anyone who would rather plan a trip face to face. Many of our travellers also come
+                from Pune and Mumbai, and we plan departures, pickups and weekend getaways with those cities in mind.
+              </p>
+              <p>
+                Wherever you live, planning works the same way: over WhatsApp or a phone call, with one point of
+                contact from your first enquiry until you are back home.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 class={heading}>Why Travellers Trust Century Holidays</h3>
+            <p class="mt-4 text-pretty">
+              Transparent, itemised pricing with no hidden on-ground charges. Vetted partners and inspected stays.
+              Flexible rescheduling options. A trip captain on the ground and a support team that answers at any hour.
+              These are the reasons travellers come back to Century Holidays trip after trip, and recommend us to their
+              friends and family. Read more about <a href="/why-us.html" class={link}>why travellers choose Century Holidays</a>,
+              or <a href="/about.html" class={link}>our story</a>.
+            </p>
+          </div>
+
+          <div class="rounded-3xl bg-ink p-7 sm:p-10">
+            <h3 class="text-balance font-display text-2xl font-bold tracking-tight text-text-inverse sm:text-3xl">
+              Start Planning Your Next Holiday
+            </h3>
+            <p class="mt-4 text-pretty text-text-inverse-muted">
+              Your next journey could be a weekend in the Sahyadris, a family holiday in Bali or a trek across a
+              Himalayan pass. Whatever you have in mind, the Century Holidays team is ready to help you plan it. Send
+              us a message and we will get back to you with ideas, dates and a clear quote.
+            </p>
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a
+                href={whatsappLink()}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5"
+              >
+                <i class="ph-fill ph-whatsapp-logo text-base" aria-hidden="true"></i> Chat on WhatsApp
+              </a>
+              <a
+                href={bookingLink()}
+                class="inline-flex items-center gap-2 rounded-full border-2 border-text-inverse/30 px-6 py-3 text-sm font-bold text-text-inverse transition-colors hover:border-brand hover:bg-brand hover:text-ink"
+              >
+                Book Your Trip
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

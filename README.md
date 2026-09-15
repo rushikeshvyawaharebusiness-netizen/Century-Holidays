@@ -122,7 +122,12 @@ that file — it is written to be edited without touching any page.
 - `FAQPage` structured data on the homepage, so the questions can appear
   directly in Google results
 - `BreadcrumbList` on inner pages
-- Canonical URLs, Open Graph and Twitter card tags
+- `WebPage` structured data on every page, linked to the business and website
+- Canonical URLs, Open Graph and Twitter card tags (with image type and alt text)
+- "Century Holidays" in the homepage `<h1>`
+- A ~1,000-word "About Century Holidays" section on the homepage,
+  `src/components/AboutCenturyHolidays.astro`, linking to the inner pages.
+  Keep its facts in step with the About, Why Us and Terms pages and the FAQ
 - `/sitemap.xml`, generated at build time from `src/data/site.ts` so it can
   never go stale
 - `/robots.txt`, a plain file at `public/robots.txt` that allows all crawling
